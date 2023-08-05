@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "HarmonyOS";
+    src: url("../fonts/HarmonyOS-Sans.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
 body{
     background-color: #F8F8F8;
+    font-family: 'HarmonyOS', '微软雅黑', "Microsoft Yahei";
 }

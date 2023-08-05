@@ -22,9 +22,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <?php $this->need('header.php'); ?>
 
     <!--中间内容区-->
-    <div class="container">
-        <div>
-            <div class="col-mb-12 col-8" id="main" role="main">
+    <div class="container grid grid-cols-12 gap-6">
+        <div class="col-span-9 bg-white">
+            <div class="">
                 <?php while ($this->next()) : ?>
                     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
                         <h2 class="post-title" itemprop="name headline">
@@ -50,7 +50,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
             </div><!-- end #main-->
         </div>
 
-        <?php $this->need('sidebar.php'); ?>
+        <div class="col-span-3 bg-white">
+            <?php $this->need('sidebar.php'); ?>
+        </div>
     </div>
     <!--footer部分-->
     <?php $this->need('footer.php'); ?>

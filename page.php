@@ -1,4 +1,10 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<!DOCTYPE HTML>
+<html>
+
+<?php $this->need('components/head.php'); ?>
+
+<body>
 <?php $this->need('header.php'); ?>
 
 <div class="col-mb-12 col-8" id="main" role="main">
@@ -16,3 +22,6 @@
 
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>
+</body>
+
+</html>
