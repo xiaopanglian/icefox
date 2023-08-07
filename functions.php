@@ -29,16 +29,15 @@ function themeConfig($form)
     $form->addInput($sidebarBlock->multiMode());
 }
 
-/*
+
 function themeFields($layout)
 {
-    $logoUrl = new \Typecho\Widget\Helper\Form\Element\Text(
-        'logoUrl',
+    $friendPicture = new \Typecho\Widget\Helper\Form\Element\Text(
+        'friend_pictures',
         null,
         null,
-        _t('站点LOGO地址'),
-        _t('在这里填入一个图片URL地址, 以在网站标题前加上一个LOGO')
+        _t('朋友圈图片'),
+        _t('<span style="color:red;">在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果是视频，只能上传一个）</span>')
     );
-    $layout->addItem($logoUrl);
+    $layout->addItem($friendPicture);
 }
-*/

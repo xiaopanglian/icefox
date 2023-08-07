@@ -12,7 +12,26 @@
     <!-- 使用url函数转换相关路径 -->
     <link rel="stylesheet" href="<?php $this->options->themeUrl('dist/style.css'); ?>">
     <script src="<?php $this->options->themeUrl('dist/icefox.iife.js') ?>"></script>
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- 通过自有函数输出HTML头部信息 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            content: ['**/*.php'],
+            theme: {
+                extend: {},
+                container: {
+                    center: true,
+                },
+                screens: {
+                    'sm': '640px',
+                    'md': '640px',
+                    'lg': '640px',
+                    'xl': '640px',
+                    '2xl': '640px'
+                }
+            }
+        }
+    </script>
 <!--    --><?php //$this->header(); ?>
 </head>
