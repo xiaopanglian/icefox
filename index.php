@@ -27,7 +27,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
         <?php while ($this->next()) : ?>
             <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
                 <div class="w-32 flex justify-end pr-5">
-                    <img src="https://thirdqq.qlogo.cn/g?b=sdk&k=Es6IjMFlFdc9iaY9libgfO1A&kti=ZJwwhAAAAAI&s=100&t=1679467530" alt="" class="w-[64px] h-[64px] rounded-lg"/>
+                    <img src="http://localhost:8008/usr/uploads/2023/08/2728746032.png" alt="" class="w-[64px] h-[64px] rounded-lg"/>
                 </div>
                 <div class="w-11/12">
                     <!--作者-->
@@ -55,8 +55,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 /*
                                  * 1张图片
                                  */
-                                echo '<div class="grid grid-cols-3">';
-                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-sm max-h-[16rem] object-cover">';
+                                echo '<div class="grid grid-cols-1">';
+                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-full max-h-48 object-cover">';
                                 echo '</div>';
                             } else if ($imgCount > 1) {
                                 /*
@@ -64,7 +64,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                  */
                                 echo '<div class=""><div class="grid grid-cols-10 gap-1">';
                                 foreach ($pictures as $img) {
-                                    echo '<div class="col-span-3"><img src="' . $img . '" alt="" class="icefox-img w-full h-auto object-cover"></div>';
+                                    echo '<div class="col-span-3"><img src="' . $img . '" alt="" class="icefox-img w-full h-0 object-cover"></div>';
                                 }
                                 echo '</div>';
                             }
@@ -74,9 +74,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
                     <!--时间-->
                     <div class="flex flex-row justify-between mt-3">
-<!--                        <time datetime="--><?php //$this->date('c'); ?><!--" itemprop="datePublished" class="">--><?php //$this->date('m.d'); ?><!--</time>-->
+
                         <div class="font-light text-gray-500 text-sm">
-                            1小时前
+                            <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished" class=""><?php $this->dateWord(); ?></time>
                         </div>
                         <div>
                             <div class="comment-btn w-10 bg-[#F7F7F7] mr-5 flex justify-center rounded-sm cursor-pointer">

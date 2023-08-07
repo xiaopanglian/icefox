@@ -32,7 +32,7 @@ function themeConfig($form)
 
 function themeFields($layout)
 {
-    $friendPicture = new \Typecho\Widget\Helper\Form\Element\Text(
+    $friendPicture = new \Typecho\Widget\Helper\Form\Element\Textarea(
         'friend_pictures',
         null,
         null,
