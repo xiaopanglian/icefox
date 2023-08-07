@@ -25,11 +25,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <!--中间内容区-->
     <div class="mt-6">
         <?php while ($this->next()) : ?>
-            <article class="grid grid-cols-12 border-b borer-b-2 border-gray-200 pt-5 pb-5">
-                <div class="col-span-2 flex justify-end pr-5">
-                    <img src="https://thirdqq.qlogo.cn/g?b=sdk&k=Es6IjMFlFdc9iaY9libgfO1A&kti=ZJwwhAAAAAI&s=100&t=1679467530" alt="" class="w-[48px] h-[48px] rounded sm"/>
+            <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
+                <div class="w-32 flex justify-end pr-5">
+                    <img src="https://thirdqq.qlogo.cn/g?b=sdk&k=Es6IjMFlFdc9iaY9libgfO1A&kti=ZJwwhAAAAAI&s=100&t=1679467530" alt="" class="w-[64px] h-[64px] rounded-lg"/>
                 </div>
-                <div class="col-span-10">
+                <div class="w-11/12">
                     <!--作者-->
                     <div>
                         <span class="text-[#576b95]"><?php $this->author(); ?></span>
@@ -43,7 +43,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                     </div>
 
                     <!--图片-->
-                    <div>
+                    <div class="w-11/12">
                         <?php
                         if ($this->fields->friend_pictures) {
                             $pictures = explode(',', $this->fields->friend_pictures);
@@ -56,15 +56,15 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                  * 1张图片
                                  */
                                 echo '<div class="grid grid-cols-3">';
-                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-sm max-h-[320px] object-cover">';
+                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-sm max-h-[16rem] object-cover">';
                                 echo '</div>';
                             } else if ($imgCount > 1) {
                                 /*
                                  * 2、3、4、5、、7、8、9张
                                  */
-                                echo '<div class="w-[480px]"><div class="grid grid-cols-3 gap-1">';
+                                echo '<div class=""><div class="grid grid-cols-10 gap-1">';
                                 foreach ($pictures as $img) {
-                                    echo '<img src="' . $img . '" alt="" class="col-span-1 w-[160px] h-[160px] object-cover">';
+                                    echo '<div class="col-span-3"><img src="' . $img . '" alt="" class="icefox-img w-full h-auto object-cover"></div>';
                                 }
                                 echo '</div>';
                             }

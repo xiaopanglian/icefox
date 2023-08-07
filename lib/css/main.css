@@ -16,6 +16,16 @@ body {
     color: #f59e0b;
 }
 
-pre > code{
+pre > code {
     text-wrap: wrap;
+}
+
+.icefox-picture-height {
+    height: calc((100% - 2px) / 3);
+}
+
+.icefox-img {
+    ax-height: 100%;
+    ax-width: 100%;
+    width:auto;
 }
