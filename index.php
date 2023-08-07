@@ -18,44 +18,41 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 <body>
 
-    <!--header部分-->
-    <?php $this->need('header.php'); ?>
+<!--header部分-->
+<?php $this->need('header.php'); ?>
 
-    <!--中间内容区-->
-    <div class="container grid grid-cols-12 gap-6">
-        <div class="col-span-9 bg-white">
-            <div class="">
-                <?php while ($this->next()) : ?>
-                    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-                        <h2 class="post-title" itemprop="name headline">
-                            <a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a>
-                        </h2>
-                        <ul class="post-meta">
-                            <li itemprop="author" itemscope itemtype="http://schema.org/Person"><?php _e('作者: '); ?><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></li>
-                            <li><?php _e('时间: '); ?>
-                                <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
-                            </li>
-                            <li><?php _e('分类: '); ?><?php $this->category(','); ?></li>
-                            <li itemprop="interactionCount">
-                                <a itemprop="discussionUrl" href="<?php $this->permalink() ?>#comments"><?php $this->commentsNum('评论', '1 条评论', '%d 条评论'); ?></a>
-                            </li>
-                        </ul>
-                        <div class="post-content" itemprop="articleBody">
-                            <!-- <?php $this->content('- 阅读剩余部分 -'); ?> -->
-                        </div>
-                    </article>
-                <?php endwhile; ?>
+<!--中间内容区-->
+<div class="container grid grid-cols-12 gap-20">
+    <div class="col-span-8">
+        <div class="">
+            <?php while ($this->next()) : ?>
+                <article class="" itemscope itemtype="http://schema.org/BlogPosting">
+                    <h2 class="text-xl mt-6 mb-2" itemprop="name headline">
+                        <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished" class="underline text-[#f59e0b]"><?php $this->date('m.d'); ?></time>
 
-                <?php $this->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
-            </div><!-- end #main-->
-        </div>
+                        <a itemprop="url" href="<?php $this->permalink() ?>" class="hover:text-[#f59e0b]"><?php $this->title() ?></a>
+                    </h2>
+                    <div class="text-sm pt-2 pb-4 text-slate-600" itemprop="articleBody">
+                        <span class="bg-[#f59e0b] text-white pl-1 pr-1 mr-1"><?php $this->category(','); ?></span><?php $this->description(); ?>
+                    </div>
+<!--                    <ul class="flex flex-row gap-2 text-sm h-8 items-center">-->
+<!--                        <li>-->
+<!---->
+<!--                        </li>-->
+<!--                    </ul>-->
+                </article>
+            <?php endwhile; ?>
 
-        <div class="col-span-3 bg-white">
-            <?php $this->need('sidebar.php'); ?>
-        </div>
+            <?php $this->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
+        </div><!-- end #main-->
     </div>
-    <!--footer部分-->
-    <?php $this->need('footer.php'); ?>
+
+    <div class="col-span-4">
+        <?php $this->need('sidebar.php'); ?>
+    </div>
+</div>
+<!--footer部分-->
+<?php $this->need('footer.php'); ?>
 </body>
 
 </html>

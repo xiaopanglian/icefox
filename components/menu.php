@@ -1,5 +1,5 @@
 <nav class="h-16 flex items-center gap-5">
-    <a class="<?php if ($this->is('index')) : ?> text-blue-300 <?php endif; ?> text-xl" href="<?php $this->options->siteUrl(); ?>">
+    <a class="<?php if ($this->is('index')) : ?> text-[#f59e0b] <?php endif; ?> text-xl" href="<?php $this->options->siteUrl(); ?>">
         <?php _e('首页'); ?>
     </a>
     <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>

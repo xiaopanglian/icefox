@@ -1,11 +1,28 @@
-@font-face {
-    font-family: "HarmonyOS";
-    src: url("../fonts/HarmonyOS-Sans.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: "HarmonyOS";*/
+/*    src: url("../fonts/HarmonyOS-Sans.woff2") format("woff2");*/
+/*    font-weight: 600;*/
+/*    font-style: normal;*/
+/*}*/
 
-body{
+body {
     background-color: #F8F8F8;
     font-family: 'HarmonyOS', '微软雅黑', "Microsoft Yahei";
+}
+
+.page-navigator {
+    display: flex;
+    flex-direction: row;
+}
+
+.page-navigator li {
+    margin: 0 .5rem;
+}
+
+.page-navigator .current, .page-navigator .current a {
+    color: #f59e0b;
+}
+
+pre > code{
+    text-wrap: wrap;
 }
