@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Icefox theme for Typecho
+ * 仿微信朋友圈主题 Icefox
  *
- * @package Icefox Theme
+ * @package Icefox
  * @author XiaoPangLian
- * @version 0.1
- * @link http://typecho.org
+ * @version 0.0.1Beta
+ * @link http://0ru.cn
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
