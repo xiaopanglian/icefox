@@ -12,9 +12,11 @@
     <!-- 使用url函数转换相关路径 -->
     <link rel="stylesheet" href="<?php $this->options->themeUrl('dist/style.css'); ?>">
     <script src="<?php $this->options->themeUrl('dist/icefox.iife.js') ?>"></script>
+    <!--方便开发添加tailwindcss外链CDN-->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 通过自有函数输出HTML头部信息 -->
     <script>
+        // 方便开发添加的配置。正式发布后需要删除
         tailwind.config = {
             darkMode: 'class',
             content: ['**/*.php'],
