@@ -1,13 +1,17 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <header class="container pb-8">
     <div class="">
-        <img src="http://localhost:8008/usr/uploads/2023/08/3063883109.jpg" alt="top img" class="w-full object-cover" style="height: calc(100vh / 3) ;"/>
+        <?php if ($this->options->backgroundImageUrl): ?>
+            <img src="<?php $this->options->backgroundImageUrl(); ?>" alt="top img" class="w-full object-cover" style="height: calc(100vh / 3) ;"/>
+        <?php else: ?>
+            <img src="http://localhost:8008/usr/uploads/2023/08/3063883109.jpg" alt="top img" class="w-full object-cover" style="height: calc(100vh / 3) ;"/>
+        <?php endif; ?>
     </div>
 
     <div class="relative w-full">
         <div class="absolute right-0 bottom-[-16px] flex flex-row h-[64px] items-center w-full justify-end pr-8">
-            <div class="text-white pr-5"><?php $this->options->title() ?></div>
-            <img src="http://localhost:8008/usr/uploads/2023/08/2728746032.png" alt="logo" class="w-[64px] h-[64px] rounded-lg"/>
+            <div class="text-white pr-5"><?php $this->options->nickName() ?></div>
+            <img src="<?php $this->options->avatarUrl(); ?>" alt="logo" class="w-[64px] h-[64px] rounded-lg object-cover"/>
         </div>
     </div>
 

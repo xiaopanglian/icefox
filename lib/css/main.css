@@ -20,12 +20,29 @@ pre > code {
     text-wrap: wrap;
 }
 
-.icefox-picture-height {
-    height: calc((100% - 2px) / 3);
+
+.jgg-container {
+    background-color: #fff;
+    width: 100%;
+    /*padding-bottom: 100%;*/
+    padding-left: 0.5%;
+    padding-top: 0.5%;
 }
 
-.icefox-img {
-    ax-height: 100%;
-    ax-width: 100%;
-    width:auto;
+.jgg-container .jgg-box {
+    width: 31%;
+    padding-bottom: 31%;
+    border: 1% solid #fff;
+    background-color: mediumpurple;
+    border-radius: 3%;
+    float: left;
+    margin: 1%;
+    position: relative;   /*父元素给相对定位*/
+
+}
+
+.jgg-container .jgg-box .content {
+    position: absolute;    /*子元素给绝对定位*/
+    width: 100%;
+    height: 100%;
 }
