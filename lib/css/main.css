@@ -46,3 +46,7 @@ pre > code {
     width: 100%;
     height: 100%;
 }
+
+article .content a{
+    text-decoration: underline;
+}

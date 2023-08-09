@@ -37,7 +37,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
                     <!--内容-->
                     <div class="mt-3 mb-3">
-                        <div class="text-[#1b1b1b]">
+                        <div class="text-[#1b1b1b] content">
                             <?php $this->content(); ?>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                  * 1张图片
                                  */
                                 echo '<div class="grid grid-cols-1">';
-                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-full max-h-48 object-cover">';
+                                echo '<img src="' . $this->fields->friend_pictures . '" alt="" class="max-w-full max-h-48 object-cover cursor-pointer preview-image">';
                                 echo '</div>';
                             } else if ($imgCount > 1) {
                                 /*
@@ -64,7 +64,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                  */
                                 echo '<div class="jgg-container">';
                                 foreach ($pictures as $img) {
-                                    echo '<div class="jgg-box"><div class="content"><img src="' . $img . '" alt="" class="w-full h-full object-cover"></div></div>';
+                                    echo '<div class="jgg-box"><div class="content"><img src="' . $img . '" alt="" class="w-full h-full object-cover cursor-pointer preview-image"></div></div>';
                                 }
                                 echo '</div>';
                             }
@@ -111,12 +111,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 </div>
             </article>
         <?php endwhile; ?>
-<!--        <div class="flex justify-center">-->
-<!--            下一页-->
-<!--        </div>-->
+        <!--        <div class="flex justify-center">-->
+        <!--            下一页-->
+        <!--        </div>-->
     </div>
     <!--footer部分-->
     <?php //$this->need('footer.php'); ?>
+    <?php $this->need('components/preview.php'); ?>
 </div>
 </body>
 
