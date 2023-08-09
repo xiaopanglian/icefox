@@ -13,5 +13,8 @@
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.7"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
   }
 }

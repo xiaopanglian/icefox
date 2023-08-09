@@ -73,13 +73,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                     </div>
 
                     <!--时间-->
-                    <div class="flex flex-row justify-between mt-3">
+                    <div class="flex flex-row justify-between mt-3 mr-5">
 
                         <div class="font-light text-gray-500 text-sm">
                             <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished" class=""><?php $this->dateWord(); ?></time>
                         </div>
                         <div class="relative">
-                            <div class="comment-btn bg-[#F7F7F7] mr-5 flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint">
+                            <div class="comment-btn bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint">
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" viewBox="0 0 512 512" width="20" height="20" class="ml-2 mr-2">
                                     <g>
                                         <circle r="50" cy="255" cx="355" fill="#576b95"/>
@@ -88,7 +88,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 </svg>
                             </div>
                             <div class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip hidden">
-                                <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2">
+                                <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full"
                                          width="18" height="18" viewBox="0 0 512 512"
                                     >
@@ -97,7 +97,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                     <span class="text-white ml-1 mr-1">赞</span>
                                 </div>
                                 |
-                                <div class="flex flex-row justify-center items-center ml-5 mr-5">
+                                <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full"
                                          width="18" height="18" viewBox="0 0 512 512"
                                     >
@@ -105,6 +105,33 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                     </svg>
                                     <span class="text-white whitespace-nowrap ml-1 mr-1">评论</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--互动区-->
+                    <div class="bg-[#F7F7F7] mr-5 mt-5 pt-2 pb-2 pl-4 pr-4">
+                        <div class="flex flex-row items-center text-[#576b95] border-b border-[#F2F2F2] mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full"
+                                 width="18" height="18" viewBox="0 0 512 512"
+                            >
+                                <path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="#576b95" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                            </svg>
+                            <span class="ml-1">6位访客</span>
+                        </div>
+                        <?php $this->need('components/comments.php'); ?>
+                        <div class="mt-3">
+                            <div>
+                                <span class="text-[#576b95]">德华</span><span>: 小伙子，你这主题还不错哦</span>
+                            </div>
+                            <div>
+                                <span class="text-[#576b95]">杰伦</span><span>: 哎哟不错哦</span>
+                            </div>
+                            <div>
+                                <span class="text-[#576b95]">爱因斯坦</span><span>: 你这主题非常符合我的相对论</span>
+                            </div>
+                            <div>
+                                <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>
                             </div>
                         </div>
                     </div>
