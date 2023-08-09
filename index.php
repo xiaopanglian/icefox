@@ -111,12 +111,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 </div>
             </article>
         <?php endwhile; ?>
-        <div class="flex justify-center">
-            下一页
-        </div>
+<!--        <div class="flex justify-center">-->
+<!--            下一页-->
+<!--        </div>-->
     </div>
     <!--footer部分-->
-    <?php $this->need('footer.php'); ?>
+    <?php //$this->need('footer.php'); ?>
 </div>
 </body>
 
