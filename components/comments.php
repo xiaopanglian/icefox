@@ -1,8 +1,10 @@
 <div class="border border-[#07c160] rounded-lg p-2 bg-white">
-    <div data-action="<?php $this->commentUrl() ?>" class="url-<?php $this->respondId(); ?>">
+    <div data-action="<?php Helper::options()->index('/comment') ?>" class="url-<?php $this->respondId(); ?>">
         <label>
-            <input class="w-full h-full rounded-lg outline-none resize-none text-<?php $this->respondId(); ?>" name="text" />
+            <input class="w-full h-full rounded-lg outline-none resize-none text-<?php $this->respondId(); ?>" name="text"/>
         </label>
+        <?php $security = $this->widget("Widget_Security"); ?>
+        <input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getRequestUrl()); ?>" class="_<?php $this->respondId(); ?>"/>
         <div class="flex justify-between items-center">
             <div>
                 1

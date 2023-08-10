@@ -63,27 +63,21 @@ function themeFields($layout)
 }
 
 // 主题初始化
-function themeInit($self)
+function themeInit($archive)
 {
-    if ($self->request->getPathInfo() == 'comment') {
-        echo 'hhh';
-        CommentFriend($self);
+    if ($archive->request->getPathInfo() == '/comment') {
+        ajaxComment($archive);
     }
-    if ($self->request->is('/comment')) {
-        echo '1111';
-    }
-
-    if ($self->request->is('comment')) {
-        echo '2222';
-    }
-
 }
 
-function CommentFriend($self)
+function CommentFriend($archive)
 {
-    $self->response->setStatus(200);
+    $archive->response->setStatus(200);
 
-    $self->response->throwJson('异常了');
+    //返回一个jsonv数据state数据
+    $archive->response->throwJson(array(
+        "state" => 200,
+    ));
 }
 
 /**
@@ -99,13 +93,16 @@ function ajaxComment($archive)
     $db = Typecho_Db::get();
     // Security 验证不通过时会直接跳转，所以需要自己进行判断
     // 需要开启反垃圾保护，此时将不验证来源
-    if ($archive->request->get('_') != Helper::security()->getToken($archive->request->getReferer())) {
+    $security = $archive->widget("Widget_Security");
+    if ($archive->request->get('_') != $security->getToken($archive->request->getReferer())) {
         $archive->response->throwJson(array('status' => 0, 'msg' => _t('非法请求')));
     }
     /** 评论关闭 */
-    if (!$archive->allow('comment')) {
-        $archive->response->throwJson(array('status' => 0, 'msg' => _t('评论已关闭')));
-    }
+//    print_r($archive);
+//    print_r('----------------------');
+//    if (!$archive->allow('comment')) {
+//        $archive->response->throwJson(array('status' => 0, 'msg' => _t('评论已关闭'), 'comment' => $archive));
+//    }
     /** 检查ip评论间隔 */
     if (!$user->pass('editor', true) && $archive->authorId != $user->uid &&
         $options->commentsPostIntervalEnable) {
@@ -122,7 +119,7 @@ function ajaxComment($archive)
     }
 
     $comment = array(
-        'cid' => $archive->cid,
+        'cid' => $archive->request->cid,
         'created' => $options->gmtTime,
         'agent' => $archive->request->getAgent(),
         'ip' => $archive->request->getIp(),
@@ -131,6 +128,7 @@ function ajaxComment($archive)
         'status' => !$archive->allow('edit') && $options->commentsRequireModeration ? 'waiting' : 'approved'
     );
 
+    print_r($comment);
     /** 判断父节点 */
     if ($parentId = $archive->request->filter('int')->get('parent')) {
         if ($options->commentsThreaded && ($parent = $db->fetchRow($db->select('coid', 'cid')->from('table.comments')
@@ -140,6 +138,7 @@ function ajaxComment($archive)
             $archive->response->throwJson(array('status' => 0, 'msg' => _t('父级评论不存在')));
         }
     }
+
     $feedback = Typecho_Widget::widget('Widget_Feedback');
     //检验格式
     $validator = new Typecho_Validate();
@@ -147,6 +146,7 @@ function ajaxComment($archive)
     $validator->addRule('author', 'xssCheck', _t('请不要在用户名中使用特殊字符'));
     $validator->addRule('author', array($feedback, 'requireUserLogin'), _t('您所使用的用户名已经被注册,请登录后再次提交'));
     $validator->addRule('author', 'maxLength', _t('用户名最多包含200个字符'), 200);
+
 
     if ($options->commentsRequireMail && !$user->hasLogin()) {
         $validator->addRule('mail', 'required', _t('必须填写电子邮箱地址'));
@@ -164,6 +164,7 @@ function ajaxComment($archive)
     $validator->addRule('text', 'required', _t('必须填写评论内容'));
 
     $comment['text'] = $archive->request->text;
+
 
     /** 对一般匿名访问者,将用户数据保存一个月 */
     if (!$user->hasLogin()) {
@@ -211,30 +212,57 @@ function ajaxComment($archive)
     if (!$commentId) {
         $archive->response->throwJson(array('status' => 0, 'msg' => _t('评论失败')));
     }
+
     Typecho_Cookie::delete('__typecho_remember_text');
+
+
     $db->fetchRow($feedback->select()->where('coid = ?', $commentId)
         ->limit(1), array($feedback, 'push'));
+
     // 返回评论数据
-    $data = array(
-        'cid' => $feedback->cid,
-        'coid' => $feedback->coid,
-        'parent' => $feedback->parent,
-        'mail' => $feedback->mail,
-        'url' => $feedback->url,
-        'ip' => $feedback->ip,
-        'agent' => $feedback->agent,
-        'author' => $feedback->author,
-        'authorId' => $feedback->authorId,
-        'permalink' => $feedback->permalink,
-        'created' => $feedback->created,
-        'datetime' => $feedback->date->format('Y-m-d H:i:s'),
-        'status' => $feedback->status,
-    );
+//    $data = array(
+//        //'cid' => $feedback->cid,
+//        'cid' => 57,
+//        'coid' => $feedback->coid,
+//        'parent' => $feedback->parent,
+//        'mail' => $feedback->mail,
+//        'url' => $feedback->url,
+//        'ip' => $feedback->ip,
+//        'agent' => $feedback->agent,
+//        'author' => $feedback->author,
+//        'authorId' => $feedback->authorId,
+//        'permalink' => $feedback->permalink,
+//        'created' => $feedback->created,
+//        'datetime' => $feedback->date->format('Y-m-d H:i:s'),
+//        'status' => $feedback->status,
+//    );
     // 评论内容
     ob_start();
-    $feedback->content();
-    $data['content'] = ob_get_clean();
+//    $feedback->content();
+    //$data['content'] = ob_get_clean();
 
-    $data['avatar'] = Typecho_Common::gravatarUrl($data['mail'], 48, Helper::options()->commentsAvatarRating, NULL, $archive->request->isSecure());
-    $archive->response->throwJson(array('status' => 1, 'comment' => $data));
+    //$data['avatar'] = Typecho_Common::gravatarUrl($data['mail'], 48, Helper::options()->commentsAvatarRating, NULL, $archive->request->isSecure());
+
+    $archive->response->throwJson(array('status' => 1));
+}
+
+// 获取评论信息
+function articleComment($article_id) {
+    $db = Typecho_Db::get();
+    $query= $db->select('author','text','url', 'coid')->from('table.comments')->where('cid = ?', $article_id)->limit(6);
+    $result = $db->fetchAll($query);
+
+    $query= $db->select('author','text','url')->from('table.comments')->where('cid = ?', $article_id);
+    $counter = $db->fetchAll($query);
+
+    if (sizeof($counter) != '0') {
+        echo '<div class="comment-item" style="border-bottom: 1px solid #e1e1e1;"> 共有<a>'. sizeof($counter) .'</a>条评论 </div>';
+    }
+
+    foreach ($result as $val){
+        echo '
+        <div class="comment-item">
+            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">'. get_commentReply_at($val['coid']) .' ' . $val['text'] . '</span>
+        </div>';
+    }
 }
