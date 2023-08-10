@@ -1,13 +1,16 @@
 <div class="border border-[#07c160] rounded-lg p-2 bg-white">
     <div data-action="<?php Helper::options()->index('/comment') ?>" class="url-<?php $this->respondId(); ?>">
         <label>
-            <input class="w-full h-full rounded-lg outline-none resize-none text-<?php $this->respondId(); ?>" name="text"/>
+            <input class="w-full h-full rounded-lg outline-none resize-none text-<?php $this->respondId(); ?>" placeholder="评论" name="text"/>
         </label>
         <?php $security = $this->widget("Widget_Security"); ?>
         <input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getRequestUrl()); ?>" class="_<?php $this->respondId(); ?>"/>
-        <div class="flex justify-between items-center">
-            <div>
-                1
+        <input type="hidden" name="cid" value="<?php echo $this->cid; ?>" class="cid-<?php $this->respondId(); ?>" />
+        <div class="flex justify-between items-start">
+            <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1">
+                <input placeholder="*昵称" class="border outline-none" />
+                <input placeholder="*邮箱" class="border outline-none" />
+                <input placeholder="*网址" class="border outline-none" />
             </div>
             <div class="flex flex-row items-center justify-end">
                 <span>

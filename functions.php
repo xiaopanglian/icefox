@@ -266,3 +266,18 @@ function articleComment($article_id) {
         </div>';
     }
 }
+//评论添加回复@标记
+function get_commentReply_at($coid)
+{
+    $db   = Typecho_Db::get();
+    $prow = $db->fetchRow($db->select('parent')->from('table.comments')
+        ->where('coid = ? AND status = ?', $coid, 'approved'));
+    $parent = $prow['parent'];
+    if ($parent != "0") {
+        $arow = $db->fetchRow($db->select('author')->from('table.comments')
+            ->where('coid = ? AND status = ?', $parent, 'approved'));
+        $author = $arow['author'];
+        $href   = '@' . $author . ': ';
+        return $href;
+    }
+}

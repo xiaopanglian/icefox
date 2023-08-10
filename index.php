@@ -133,6 +133,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <div>
                                 <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>
                             </div>
+
+                            <?php articleComment( $this->cid ) ?>
                         </div>
                     </div>
                 </div>
