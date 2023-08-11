@@ -8,9 +8,9 @@
         <input type="hidden" name="cid" value="<?php echo $this->cid; ?>" class="cid-<?php $this->respondId(); ?>" />
         <div class="flex justify-between items-start">
             <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1">
-                <input placeholder="*昵称" class="border outline-none" />
-                <input placeholder="*邮箱" class="border outline-none" />
-                <input placeholder="*网址" class="border outline-none" />
+                <label><input placeholder="*昵称" class="border outline-none name-<?php $this->respondId(); ?>" /></label>
+                <label><input placeholder="*邮箱" class="border outline-none mail-<?php $this->respondId(); ?>" /></label>
+                <label><input placeholder="*网址" class="border outline-none user-url-<?php $this->respondId(); ?>" /></label>
             </div>
             <div class="flex flex-row items-center justify-end">
                 <span>

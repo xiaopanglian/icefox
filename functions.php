@@ -70,16 +70,6 @@ function themeInit($archive)
     }
 }
 
-function CommentFriend($archive)
-{
-    $archive->response->setStatus(200);
-
-    //返回一个jsonv数据state数据
-    $archive->response->throwJson(array(
-        "state" => 200,
-    ));
-}
-
 /**
  * ajaxComment
  * 实现Ajax评论的方法(实现feedback中的comment功能)
@@ -88,6 +78,8 @@ function CommentFriend($archive)
  */
 function ajaxComment($archive)
 {
+    $archive->response->setStatus(200);
+
     $options = Helper::options();
     $user = Typecho_Widget::widget('Widget_User');
     $db = Typecho_Db::get();
@@ -128,7 +120,6 @@ function ajaxComment($archive)
         'status' => !$archive->allow('edit') && $options->commentsRequireModeration ? 'waiting' : 'approved'
     );
 
-    print_r($comment);
     /** 判断父节点 */
     if ($parentId = $archive->request->filter('int')->get('parent')) {
         if ($options->commentsThreaded && ($parent = $db->fetchRow($db->select('coid', 'cid')->from('table.comments')
@@ -158,13 +149,13 @@ function ajaxComment($archive)
     if ($options->commentsRequireUrl && !$user->hasLogin()) {
         $validator->addRule('url', 'required', _t('必须填写个人主页'));
     }
+    $validator->addRule('url', 'required', _t('必须填写个人主页地址'));
     $validator->addRule('url', 'url', _t('个人主页地址格式错误'));
     $validator->addRule('url', 'maxLength', _t('个人主页地址最多包含200个字符'), 200);
 
     $validator->addRule('text', 'required', _t('必须填写评论内容'));
 
     $comment['text'] = $archive->request->text;
-
 
     /** 对一般匿名访问者,将用户数据保存一个月 */
     if (!$user->hasLogin()) {
@@ -247,29 +238,31 @@ function ajaxComment($archive)
 }
 
 // 获取评论信息
-function articleComment($article_id) {
+function articleComment($article_id)
+{
     $db = Typecho_Db::get();
-    $query= $db->select('author','text','url', 'coid')->from('table.comments')->where('cid = ?', $article_id)->limit(6);
+    $query = $db->select('author', 'text', 'url', 'coid')->from('table.comments')->where('cid = ?', $article_id);
     $result = $db->fetchAll($query);
 
-    $query= $db->select('author','text','url')->from('table.comments')->where('cid = ?', $article_id);
+    $query = $db->select('author', 'text', 'url')->from('table.comments')->where('cid = ?', $article_id);
     $counter = $db->fetchAll($query);
 
     if (sizeof($counter) != '0') {
-        echo '<div class="comment-item" style="border-bottom: 1px solid #e1e1e1;"> 共有<a>'. sizeof($counter) .'</a>条评论 </div>';
+        echo '<div class="comment-item" style="border-bottom: 1px solid #e1e1e1;"> 共有<a>' . sizeof($counter) . '</a>条评论 </div>';
     }
 
-    foreach ($result as $val){
+    foreach ($result as $val) {
         echo '
         <div class="comment-item">
-            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">'. get_commentReply_at($val['coid']) .' ' . $val['text'] . '</span>
+            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">' . get_commentReply_at($val['coid']) . ' ' . $val['text'] . '</span>
         </div>';
     }
 }
+
 //评论添加回复@标记
 function get_commentReply_at($coid)
 {
-    $db   = Typecho_Db::get();
+    $db = Typecho_Db::get();
     $prow = $db->fetchRow($db->select('parent')->from('table.comments')
         ->where('coid = ? AND status = ?', $coid, 'approved'));
     $parent = $prow['parent'];
@@ -277,7 +270,7 @@ function get_commentReply_at($coid)
         $arow = $db->fetchRow($db->select('author')->from('table.comments')
             ->where('coid = ? AND status = ?', $parent, 'approved'));
         $author = $arow['author'];
-        $href   = '@' . $author . ': ';
+        $href = '@' . $author . ': ';
         return $href;
     }
 }
