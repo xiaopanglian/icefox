@@ -247,15 +247,14 @@ function articleComment($article_id)
     $query = $db->select('author', 'text', 'url')->from('table.comments')->where('cid = ?', $article_id);
     $counter = $db->fetchAll($query);
 
-    if (sizeof($counter) != '0') {
-        echo '<div class="comment-item" style="border-bottom: 1px solid #e1e1e1;"> 共有<a>' . sizeof($counter) . '</a>条评论 </div>';
-    }
-
     foreach ($result as $val) {
-        echo '
-        <div class="comment-item">
-            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">' . get_commentReply_at($val['coid']) . ' ' . $val['text'] . '</span>
-        </div>';
+//        echo '
+//        <div class="comment-item">
+//            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">' . get_commentReply_at($val['coid']) . ' ' . $val['text'] . '</span>
+//        </div>';
+        echo ' <div>
+                   <a href="' . $val['url'] . '"><span class="text-[#576b95]">'.$val['author'].'</span></a><span>: ' . $val['text'] . '</span>
+              </div>';
     }
 }
 

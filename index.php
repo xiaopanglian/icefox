@@ -121,18 +121,18 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         </div>
                         <?php $this->need('components/comments.php'); ?>
                         <div class="mt-3">
-                            <div>
-                                <span class="text-[#576b95]">德华</span><span>: 小伙子，你这主题还不错哦</span>
-                            </div>
-                            <div>
-                                <span class="text-[#576b95]">杰伦</span><span>: 哎哟不错哦</span>
-                            </div>
-                            <div>
-                                <span class="text-[#576b95]">爱因斯坦</span><span>: 你这主题非常符合我的相对论</span>
-                            </div>
-                            <div>
-                                <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>
-                            </div>
+<!--                            <div>-->
+<!--                                <a href="/"><span class="text-[#576b95]">德华</span></a><span>: 小伙子，你这主题还不错哦</span>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <span class="text-[#576b95]">杰伦</span><span>: 哎哟不错哦</span>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <span class="text-[#576b95]">爱因斯坦</span><span>: 你这主题非常符合我的相对论</span>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>-->
+<!--                            </div>-->
 
                             <?php articleComment( $this->cid ) ?>
                         </div>
