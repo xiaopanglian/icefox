@@ -97,7 +97,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                     <span class="text-white ml-1 mr-1">赞</span>
                                 </div>
                                 |
-                                <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer">
+                                <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId="<?php $this->respondId(); ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full"
                                          width="18" height="18" viewBox="0 0 512 512"
                                     >
