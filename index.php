@@ -79,7 +79,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished" class=""><?php $this->dateWord(); ?></time>
                         </div>
                         <div class="relative">
-                            <div class="comment-btn bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint">
+                            <div class="bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint">
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" viewBox="0 0 512 512" width="20" height="20" class="ml-2 mr-2">
                                     <g>
                                         <circle r="50" cy="255" cx="355" fill="#576b95"/>
@@ -120,7 +120,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                             <span class="ml-1">6位访客</span>
                         </div>
                         <?php $this->need('components/comments.php'); ?>
-                        <div class="mt-3">
+                        <div class="mt-3 comment-list-<?php $this->respondId(); ?>">
 <!--                            <div>-->
 <!--                                <a href="/"><span class="text-[#576b95]">德华</span></a><span>: 小伙子，你这主题还不错哦</span>-->
 <!--                            </div>-->

@@ -206,27 +206,26 @@ function ajaxComment($archive)
 
     Typecho_Cookie::delete('__typecho_remember_text');
 
-
     $db->fetchRow($feedback->select()->where('coid = ?', $commentId)
         ->limit(1), array($feedback, 'push'));
 
     // 返回评论数据
-//    $data = array(
-//        //'cid' => $feedback->cid,
-//        'cid' => 57,
-//        'coid' => $feedback->coid,
-//        'parent' => $feedback->parent,
-//        'mail' => $feedback->mail,
-//        'url' => $feedback->url,
-//        'ip' => $feedback->ip,
-//        'agent' => $feedback->agent,
-//        'author' => $feedback->author,
-//        'authorId' => $feedback->authorId,
-//        'permalink' => $feedback->permalink,
-//        'created' => $feedback->created,
-//        'datetime' => $feedback->date->format('Y-m-d H:i:s'),
-//        'status' => $feedback->status,
-//    );
+    $data = array(
+        //'cid' => $feedback->cid,
+        'cid' => $archive->request->cid,
+        'coid' => $feedback->coid,
+        'parent' => $feedback->parent,
+        'mail' => $feedback->mail,
+        'url' => $feedback->url,
+        'ip' => $feedback->ip,
+        'agent' => $feedback->agent,
+        'author' => $feedback->author,
+        'authorId' => $feedback->authorId,
+        'permalink' => $feedback->permalink,
+        'created' => $feedback->created,
+        'datetime' => $feedback->date->format('Y-m-d H:i:s'),
+        'status' => $feedback->status,
+    );
     // 评论内容
     ob_start();
 //    $feedback->content();
@@ -234,7 +233,7 @@ function ajaxComment($archive)
 
     //$data['avatar'] = Typecho_Common::gravatarUrl($data['mail'], 48, Helper::options()->commentsAvatarRating, NULL, $archive->request->isSecure());
 
-    $archive->response->throwJson(array('status' => 1));
+    $archive->response->throwJson(array('status' => 1, 'data' => $data));
 }
 
 // 获取评论信息
@@ -253,7 +252,7 @@ function articleComment($article_id)
 //            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">' . get_commentReply_at($val['coid']) . ' ' . $val['text'] . '</span>
 //        </div>';
         echo ' <div>
-                   <a href="' . $val['url'] . '"><span class="text-[#576b95]">'.$val['author'].'</span></a><span>: ' . $val['text'] . '</span>
+                   <a href="' . $val['url'] . '"><span class="text-[#576b95]">' . $val['author'] . '</span></a><span>: ' . $val['text'] . '</span>
               </div>';
     }
 }
