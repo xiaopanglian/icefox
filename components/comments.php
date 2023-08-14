@@ -7,10 +7,14 @@
         <input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getRequestUrl()); ?>" class="_<?php $this->respondId(); ?>"/>
         <input type="hidden" name="cid" value="<?php echo $this->cid; ?>" class="cid-<?php $this->respondId(); ?>" />
         <div class="flex justify-between items-start">
-            <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1">
+            <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1 not-exists-<?php $this->respondId(); ?>">
                 <label><input placeholder="*昵称" class="border outline-none name-<?php $this->respondId(); ?>" /></label>
                 <label><input placeholder="*邮箱" class="border outline-none mail-<?php $this->respondId(); ?>" /></label>
                 <label><input placeholder="*网址" class="border outline-none user-url-<?php $this->respondId(); ?>" /></label>
+            </div>
+            <div class="exists-<?php $this->respondId(); ?>">
+                <span class="hidden-name-<?php $this->respondId(); ?>"></span>
+                <span>编辑</span>
             </div>
             <div class="flex flex-row items-center justify-end">
                 <span>

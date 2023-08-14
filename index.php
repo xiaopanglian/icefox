@@ -4,8 +4,8 @@
  * 仿微信朋友圈主题 Icefox
  *
  * @package Icefox
- * @author XiaoPangLian
- * @version 0.0.1Beta
+ * @author 小胖脸
+ * @version 0.1.0
  * @link http://0ru.cn
  */
 
@@ -17,8 +17,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 <?php $this->need('components/head.php'); ?>
 
 <body>
-<!--http://localhost:8008/usr/uploads/2023/08/3063883109.jpg-->
-<div class="container bg-white">
+<div class="container bg-white pyq-container">
     <!--header部分-->
     <?php $this->need('header.php'); ?>
     <!--    时间<time datetime="--><?php //$this->date('c'); ?><!--" itemprop="datePublished" class="underline text-[#f59e0b]">--><?php //$this->date('m.d'); ?><!--</time>-->
@@ -97,7 +96,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                     <span class="text-white ml-1 mr-1">赞</span>
                                 </div>
                                 |
-                                <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId="<?php $this->respondId(); ?>">
+                                <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId="<?php $this->respondId(); ?>" data-id="<?php $this->cid(); ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full"
                                          width="18" height="18" viewBox="0 0 512 512"
                                     >
@@ -121,20 +120,20 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         </div>
                         <?php $this->need('components/comments.php'); ?>
                         <div class="mt-3 comment-list-<?php $this->respondId(); ?>">
-<!--                            <div>-->
-<!--                                <a href="/"><span class="text-[#576b95]">德华</span></a><span>: 小伙子，你这主题还不错哦</span>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <span class="text-[#576b95]">杰伦</span><span>: 哎哟不错哦</span>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <span class="text-[#576b95]">爱因斯坦</span><span>: 你这主题非常符合我的相对论</span>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>-->
-<!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <a href="/"><span class="text-[#576b95]">德华</span></a><span>: 小伙子，你这主题还不错哦</span>-->
+                            <!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <span class="text-[#576b95]">杰伦</span><span>: 哎哟不错哦</span>-->
+                            <!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <span class="text-[#576b95]">爱因斯坦</span><span>: 你这主题非常符合我的相对论</span>-->
+                            <!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <span class="text-[#576b95]">小胖脸</span><span>回复</span><span class="text-[#576b95]">爱因斯坦</span><span>: 那还是算了，我不太喜欢你的相对论，我还是喜欢绝对论。哈哈哈哈</span>-->
+                            <!--                            </div>-->
 
-                            <?php articleComment( $this->cid ) ?>
+                            <?php articleComment($this->cid) ?>
                         </div>
                     </div>
                 </div>
