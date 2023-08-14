@@ -121,9 +121,9 @@ function ajaxComment($archive)
     );
 
     /** 判断父节点 */
-    if ($parentId = $archive->request->filter('int')->get('parent')) {
+    if ($parentId = $archive->request->parent) {
         if ($options->commentsThreaded && ($parent = $db->fetchRow($db->select('coid', 'cid')->from('table.comments')
-                ->where('coid = ?', $parentId))) && $archive->cid == $parent['cid']) {
+                ->where('coid = ?', $archive->request->parent)->where('cid = ?', $archive->request->cid)))) {
             $comment['parent'] = $parentId;
         } else {
             $archive->response->throwJson(array('status' => 0, 'msg' => _t('父级评论不存在')));
@@ -240,35 +240,49 @@ function ajaxComment($archive)
 function articleComment($article_id)
 {
     $db = Typecho_Db::get();
-    $query = $db->select('author', 'text', 'url', 'coid')->from('table.comments')->where('cid = ?', $article_id);
+    $query = $db->select('author', 'text', 'url', 'coid', 'cid')->from('table.comments')->where('cid = ?', $article_id);
     $result = $db->fetchAll($query);
 
-    $query = $db->select('author', 'text', 'url')->from('table.comments')->where('cid = ?', $article_id);
-    $counter = $db->fetchAll($query);
+//    $query = $db->select('author', 'text', 'url')->from('table.comments')->where('cid = ?', $article_id);
+//    $counter = $db->fetchAll($query);
 
     foreach ($result as $val) {
-//        echo '
-//        <div class="comment-item">
-//            <a href="' . $val['url'] . '" target="_black">' . $val['author'] . '</a>： <span class="f-thide">' . get_commentReply_at($val['coid']) . ' ' . $val['text'] . '</span>
-//        </div>';
-        echo ' <div>
-                   <a href="' . $val['url'] . '"><span class="text-[#576b95]">' . $val['author'] . '</span></a><span>: ' . $val['text'] . '</span>
-              </div>';
+        $parent = get_commentReply_at($db, $val['coid']);
+        if ($parent) {
+            echo ' <div>
+                   <a href="' . $val['url'] . '"><span class="text-[#576b95]">' . $val['author'] . '</span></a>
+                   <span>回复</span><span class="text-[#576b95]">' . $parent["author"] . '</span>
+                   <span class="cursor-help comment-btn" data-name="' . $val['author'] . '" data-coid="' . $val['coid'] . '" data-respondId = "respond-post-' . $val['cid'] . '" data-id = "' . $val['coid'] . '">: ' . $val['text'] . ' </span >
+              </div > ';
+        } else {
+            echo ' <div >
+                   <a href="' . $val['url'] . '"><span class="text-[#576b95]" > ' . $val['author'] . ' </span ></a >
+                   <span class="cursor-help comment-btn" data-name="' . $val['author'] . '" data-coid="' . $val['coid'] . '" data-respondId = "respond-post-' . $val['cid'] . '" data-id = "' . $val['coid'] . '">: ' . $val['text'] . ' </span >
+              </div > ';
+        }
     }
 }
 
-//评论添加回复@标记
-function get_commentReply_at($coid)
+function articleCommentCount($article_id)
 {
     $db = Typecho_Db::get();
-    $prow = $db->fetchRow($db->select('parent')->from('table.comments')
-        ->where('coid = ? AND status = ?', $coid, 'approved'));
+
+    $query = $db->select('author', 'text', 'url')->from('table.comments')->where('cid = ?', $article_id);
+    $counter = count($db->fetchAll($query));
+
+    return array('count' => $counter);
+}
+
+//评论添加回复@标记
+function get_commentReply_at($db, $coid)
+{
+    $prow = $db->fetchRow($db->select('parent')->from('table.comments')->where('coid = ? and status = ?', $coid, 'approved'));
     $parent = $prow['parent'];
     if ($parent != "0") {
-        $arow = $db->fetchRow($db->select('author')->from('table.comments')
-            ->where('coid = ? AND status = ?', $parent, 'approved'));
+        $arow = $db->fetchRow($db->select('author,url')->from('table.comments')
+            ->where('coid = ? and status = ?', $parent, 'approved'));
         $author = $arow['author'];
-        $href = '@' . $author . ': ';
-        return $href;
+        $url = $arow['url'];
+        return array('author' => $author, 'url' => $url);
     }
 }
