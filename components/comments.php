@@ -13,8 +13,8 @@
                 <label><input placeholder="*网址" class="border outline-none user-url-<?php $this->respondId(); ?>" /></label>
             </div>
             <div class="exists-<?php $this->respondId(); ?>">
-                <span class="hidden-name-<?php $this->respondId(); ?>"></span>
-                <span>编辑</span>
+                <span class="text-gray-400 text-sm hidden-name-<?php $this->respondId(); ?>"></span>
+                <span class="cursor-pointer text-gray-400 text-sm comment-edit" data-respondId="<?php $this->respondId(); ?>">[编辑]</span>
             </div>
             <div class="flex flex-row items-center justify-end">
                 <span>
