@@ -67,6 +67,8 @@ function themeInit($archive)
 {
     if ($archive->request->getPathInfo() == '/comment') {
         ajaxComment($archive);
+    } else if ($archive->request->getPathInfo() == "/archive/list") {
+        getArticles($archive);
     }
 }
 
@@ -285,4 +287,23 @@ function get_commentReply_at($db, $coid)
         $url = $arow['url'];
         return array('author' => $author, 'url' => $url);
     }
+}
+
+/**
+ * 获取文章列表
+ */
+function getArticles($archive)
+{
+    $archive->response->setStatus(200);
+
+    $db = Typecho_Db::get();
+
+    $offset = $archive->request->offset;
+    $pageSize = $archive->options->pageSize;
+
+    $query = $db->select()->from('table.contents')->offset($offset)->limit($pageSize);
+
+    $result = $db->fetchAll($query);
+
+    $archive->response->throwJson(array('status' => 1, 'data' => $result));
 }
