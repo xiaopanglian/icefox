@@ -294,12 +294,13 @@ function get_commentReply_at($db, $coid)
  */
 function getArticles($archive)
 {
+    $db = Typecho_Db::get();
+    $options = Helper::options();
+
     $archive->response->setStatus(200);
 
-    $db = Typecho_Db::get();
-
     $offset = $archive->request->offset;
-    $pageSize = $archive->options->pageSize;
+    $pageSize = $options->pageSize;
 
     $query = $db->select()->from('table.contents')->offset($offset)->limit($pageSize);
 
