@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="container w-24">
+  <div class="container bg-white pyq-container">
     hello world
   </div>
   <header>
