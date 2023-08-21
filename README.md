@@ -1,24 +1,29 @@
-#### 主题是typecho系统仿微信朋友圈开发的，只是自己学习写的一个主题，有需要的下载使用就好了，开源免费。
-- 采用tailwindcss作为基础css框架开发
-- 使用vite进行编译
+# .
 
-#### 当前版本：0.1.1
+This template should help get you started developing with Vue 3 in Vite.
 
-交流QQ群：527838299
+## Recommended IDE Setup
 
-已开发功能列表：
-- [x] 朋友圈顶部背景图设置
-- [x] 用户头像设置
-- [x] 用户昵称设置
-- [x] 添加文章设置朋友圈图片
-- [x] 朋友圈图片点击放大查看
-- [x] 评论功能
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-拟定待开发功能列表：
-- [ ] 下拉翻页
-- [ ] 点赞功能
-- [ ] 文字过多收缩查看全部
-- [ ] 消息详情页
-- [ ] 文章归档页
+## Customize configuration
 
-主题开发中...
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```

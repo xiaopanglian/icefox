@@ -1,20 +1,17 @@
 {
-  "name": "icefox-template",
-  "version": "0.0.1",
-  "description": "",
+  "name": "icefox",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "build": "vite build"
-  },
-  "author": "XiaoPangLian",
-  "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.23",
-    "prettier": "^2.8.8",
-    "tailwindcss": "^3.3.3",
-    "vite": "^4.4.7"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0"
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.1",
+    "vite": "^4.4.9"
   }
 }
