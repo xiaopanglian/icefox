@@ -1,4 +1,6 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 #app {
   max-width: 1280px;
@@ -6,6 +8,8 @@
   padding: 2rem;
 
   font-weight: normal;
+
+  background-color: #f6f6f6;
 }
 
 a,
