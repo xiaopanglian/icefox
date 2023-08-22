@@ -1,21 +1,13 @@
 <script setup>
+import Header from './components/Header.vue'
 
 </script>
 
 <template>
-  <div class="container bg-white pyq-container">
-    hello world
-  </div>
-  <header>
-    <div class="wrapper">
-      hello world
-    </div>
-  </header>
-
-  <main>
-
+  <main class="container bg-white pyq-container">
+    <Header></Header>
+    <RouterView></RouterView>
   </main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
