@@ -1,8 +1,7 @@
 <template>
   <div v-infinite-scroll="loadMore">
-
+    <Archive v-for="item in list" :data="item"></Archive>
   </div>
-  <Archive v-for="item in list" :data="item"></Archive>
 </template>
 
 <script setup>

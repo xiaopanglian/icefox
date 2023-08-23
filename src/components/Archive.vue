@@ -74,26 +74,24 @@
           <div class="border border-[#07c160] rounded-lg p-2 bg-white" v-if="showCommentFormField">
             <div data-action="" class="">
               <label>
-                <input class="w-full h-full rounded-lg outline-none resize-none " placeholder="评论" name="text"/>
+                <input class="w-full h-full rounded-lg outline-none resize-none " placeholder="评论" name="text" v-model="content"/>
               </label>
 
-              <input type="hidden" name="_" value="" class="_<?php $this->respondId(); ?>"/>
-              <input type="hidden" name="cid" value="" class=""/>
               <div class="flex justify-between items-start">
-                <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1 ">
-                  <label><input placeholder="*昵称" class="border outline-none "/></label>
-                  <label><input placeholder="*邮箱" class="border outline-none "/></label>
-                  <label><input placeholder="*网址" class="border outline-none "/></label>
+                <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1 " v-if="isShowUserInfoForm">
+                  <label><input placeholder="*昵称" class="border outline-none " v-model="nickname"/></label>
+                  <label><input placeholder="*邮箱" class="border outline-none " v-model="mail"/></label>
+                  <label><input placeholder="*网址" class="border outline-none " v-model="userAddress"/></label>
                 </div>
-                <div class="exists-<?php $this->respondId(); ?>">
-                  <span class="text-gray-400 text-sm "></span>
-                  <span class="cursor-pointer text-gray-400 text-sm comment-edit" data-respondId="">[编辑]</span>
+                <div class="exists-<?php $this->respondId(); ?>" v-if="!isShowUserInfoForm">
+                  <span class="text-gray-400 text-sm ">{{ nickname }}</span>
+                  <span class="cursor-pointer text-gray-400 text-sm comment-edit" @click="editUser">[编辑]</span>
                 </div>
                 <div class="flex flex-row items-center justify-end">
                 <span>
                     <IconSmiley></IconSmiley>
                 </span>
-                  <button class="bg-[#07c160] text-white pl-3 pr-3 pt-1 pb-1 ml-2 rounded-sm comment-submit" type="button" data-id="">提交</button>
+                  <button class="bg-[#07c160] text-white pl-3 pr-3 pt-1 pb-1 ml-2 rounded-sm comment-submit" type="button" @click="submitComment">提交</button>
                 </div>
               </div>
             </div>
@@ -110,12 +108,18 @@ import IconCommentMore from "@/components/icons/IconCommentMore.vue";
 import IconNice from "@/components/icons/IconNice.vue";
 import IconComment from "@/components/icons/IconComment.vue";
 import IconSmiley from "@/components/icons/IconSmiley.vue";
+import {ElMessage} from "element-plus";
+import axios from "axios";
+
+let ax = axios.create();
 
 const props = defineProps(['data']);
 
 const imgs = ref([]);
 const text = ref('')
 const url = ref('')
+
+const isShowUserInfoForm = ref(true)
 
 if (props.data) {
   if (props.data.fields && props.data.fields.friend_pictures) {
@@ -131,6 +135,86 @@ if (props.data) {
     text.value = props.data.text.replaceAll('<br>', '\r\n').replace(/<\/?.+?\/?>/g, '').replaceAll('\r\n', '<br>')
   }
 }
+
+getRecentComments();
+
+function getRecentComments() {
+  ax.get('http://localhost:8008/index.php/api/comments?cid=' + props.data.cid)
+      .then(data => {
+        console.log(data)
+      })
+      .catch((error => {
+      }))
+}
+
+/************评论表单参数***************/
+const content = ref('')
+const nickname = ref('')
+const mail = ref('')
+const userAddress = ref('')
+const mailRule = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+const userAddressRule = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i;
+
+/**
+ * 提交评论
+ */
+function submitComment() {
+  if (content.value === '') {
+    ElMessage.error('评论内容不能为空')
+    return;
+  }
+  if (nickname.value === '') {
+    ElMessage.error('昵称不能为空')
+    return;
+  }
+  if (mail.value === '') {
+    ElMessage.error('邮箱不能为空')
+    return;
+  }
+  if (!mailRule.test(mail.value)) {
+    ElMessage.error('邮箱格式不正确')
+    return;
+  }
+  if (userAddress.value === '') {
+    ElMessage.error('网址不能为空')
+    return;
+  }
+  if (!userAddressRule.test(userAddress.value)) {
+    ElMessage.error('网址格式不正确')
+    return;
+  }
+  const commentToken = ref('')
+  // 先调用详情获取token
+  ax.get('http://localhost:8008/index.php/api/post?cid=' + props.data.cid)
+      .then(data => {
+        commentToken.value = data.data.data.csrfToken;
+        // 提交评论
+        let commentParam = {
+          cid: props.data.cid,
+          text: content.value,
+          author: nickname.value,
+          mail: mail.value,
+          url: userAddress.value,
+          token: commentToken.value,
+          parent: 0
+        };
+        ax.post('http://localhost:8008/index.php/api/comment', commentParam)
+            .then(data => {
+              console.log(data)
+            })
+            .catch(error => {
+              console.log(error)
+            })
+      })
+      .catch(error => {
+      })
+
+}
+
+function editUser() {
+
+}
+
 const showCommentTipField = ref(false);
 
 /**
