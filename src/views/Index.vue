@@ -1,4 +1,7 @@
 <template>
+  <div v-infinite-scroll="loadMore">
+
+  </div>
   <Archive v-for="item in list" :data="item"></Archive>
 </template>
 
@@ -10,19 +13,31 @@ import {ref} from "vue";
 const list = ref([]);
 
 let ax = axios.create();
-const page = 1;
-const pageSize = 10;
+const page = ref(0);
+const pageSize = 5;
+const canLoad = ref(true)
 
-const param = {showContent: true, page, pageSize};
+const loadMore = () => {
+  if (canLoad.value === false) {
+    return;
+  }
+  page.value += 1;
+  const param = {showContent: true, page: page.value, pageSize};
+  ax.get('http://localhost:8008/index.php/api/posts', {params: param})
+      .then(data => {
+        data.data.data.dataSet.forEach(item => {
+          list.value.push(item);
+        })
 
-ax.get('http://localhost/index.php/api/posts', {params: param})
-    .then(data => {
-      list.value = data.data.data.dataSet;
-      console.log(data.data.data.dataSet)
+        ;
+        if (data.data.data.page >= data.data.data.pages) {
+          canLoad.value = false;
+        }
+      })
+      .catch(error => {
 
-      console.log(list)
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      })
+}
+
+
 </script>

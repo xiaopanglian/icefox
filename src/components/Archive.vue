@@ -114,18 +114,23 @@ import IconSmiley from "@/components/icons/IconSmiley.vue";
 const props = defineProps(['data']);
 
 const imgs = ref([]);
-if (props.data.fields.friend_pictures) {
-  imgs.value = props.data.fields.friend_pictures.value.split(',');
+const text = ref('')
+const url = ref('')
+
+if (props.data) {
+  if (props.data.fields && props.data.fields.friend_pictures) {
+    imgs.value = props.data.fields.friend_pictures.value.split(',');
+  }
+
+  if (imgs.value.length > 0) {
+    url.value = imgs.value[0]
+  }
+
+  // 文章内容。正则过滤html标签
+  if (props.data.text) {
+    text.value = props.data.text.replaceAll('<br>', '\r\n').replace(/<\/?.+?\/?>/g, '').replaceAll('\r\n', '<br>')
+  }
 }
-
-let url = ref('')
-if (imgs.value.length > 0) {
-  url = imgs.value[0]
-}
-
-// 文章内容。正则过滤html标签
-const text = props.data.text.replaceAll('<br>', '\r\n').replace(/<\/?.+?\/?>/g, '').replaceAll('\r\n', '<br>')
-
 const showCommentTipField = ref(false);
 
 /**
@@ -144,6 +149,7 @@ const showCommentFormField = ref(false)
 function showCommentForm() {
   showCommentFormField.value = !showCommentFormField.value;
   ShowCommentContainer();
+  showCommentTip();
 }
 
 const showCommentContainer = ref(false)
