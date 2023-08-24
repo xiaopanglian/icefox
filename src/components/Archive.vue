@@ -96,8 +96,17 @@
               </div>
             </div>
           </div>
+
+
+          <div v-for="comment in commentList">
+            <a :href="comment.url"><span class="text-[#576b95]">{{ comment.author }}</span></a>
+            <span v-if="comment.parent>0"><span>回复</span><span class="text-[#576b95]">李四</span></span>
+            <span class="cursor-help comment-btn">: {{ comment.text }} </span>
+          </div>
+
         </div>
       </div>
+
     </div>
   </article>
 </template>
@@ -132,16 +141,29 @@ if (props.data) {
 
   // 文章内容。正则过滤html标签
   if (props.data.text) {
-    text.value = props.data.text.replaceAll('<br>', '\r\n').replace(/<\/?.+?\/?>/g, '').replaceAll('\r\n', '<br>')
+    //text.value = props.data.text.replaceAll('<br>', '\r\n').replace(/<\/?.+?\/?>/g, '').replaceAll('\r\n', '<br>')
+    text.value = props.data.text;
   }
 }
 
 getRecentComments();
 
+const commentList = ref([])
+
 function getRecentComments() {
   ax.get('http://localhost:8008/index.php/api/comments?cid=' + props.data.cid)
       .then(data => {
-        console.log(data)
+        data.data.data.dataSet.forEach(item => {
+          commentList.value.push(item);
+        })
+        if (commentList.value.length > 0) {
+          hasComment.value = true;
+          ShowCommentContainer();
+        }
+        if(data.data.data.pages > data.data.data.page){
+          // 显示更多。跳转到文章详情
+          console.log('更多')
+        }
       })
       .catch((error => {
       }))
@@ -200,10 +222,11 @@ function submitComment() {
         };
         ax.post('http://localhost:8008/index.php/api/comment', commentParam)
             .then(data => {
-              console.log(data)
+              // 评论成功,拉取最新评论
+              getRecentComments();
             })
             .catch(error => {
-              console.log(error)
+              ShowCommentContainer();
             })
       })
       .catch(error => {
@@ -216,6 +239,7 @@ function editUser() {
 }
 
 const showCommentTipField = ref(false);
+const hasComment = ref(false)
 
 /**
  * 显示隐藏评论更多提示菜单
@@ -236,10 +260,14 @@ function showCommentForm() {
   showCommentTip();
 }
 
+/**
+ * 显示隐藏评论容器
+ * @constructor
+ */
 const showCommentContainer = ref(false)
 
 function ShowCommentContainer() {
-  if (showCommentFormField.value === true) {
+  if (showCommentFormField.value === true || hasComment.value === true) {
     showCommentContainer.value = true;
   } else {
     showCommentContainer.value = false;
