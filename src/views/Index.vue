@@ -1,40 +1,47 @@
 <template>
-  <div v-infinite-scroll="loadMore">
+  <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="disabled">
     <Archive v-for="item in list" :data="item"></Archive>
   </div>
-  <div>
-    加载中
+  <div class="flex justify-center">
+    {{ loadingText }}
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
 import Archive from "@/components/Archive.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const list = ref([]);
 
 let ax = axios.create();
 const page = ref(0);
+const pages = ref(10);
 const pageSize = 5;
-const canLoad = ref(true)
+const noMore = computed(() => page.value >= pages.value)
+const disabled = computed(() => loading.value || noMore.value)
+const loading = ref(false)
+const loadingText = ref('下拉加载更多')
 
-const loadMore = () => {
-  console.log('loadMore')
-  if (canLoad.value === false) {
-    console.log('none')
-    return;
-  }
+const loadMore = async () => {
+  loadingText.value = '加载中'
+  loading.value = true;
+
   page.value += 1;
   const param = {showContent: true, page: page.value, pageSize};
-  ax.get('http://localhost:8008/index.php/api/posts', {params: param})
+  await ax.get('http://localhost:8008/index.php/api/posts', {params: param})
       .then(data => {
         data.data.data.dataSet.forEach(item => {
           list.value.push(item);
         });
 
-        if (data.data.data.page >= data.data.data.pages) {
-          canLoad.value = false;
+        pages.value = data.data.data.pages;
+
+        loadingText.value = '下拉加载更多'
+        loading.value = false;
+
+        if (noMore.value === true) {
+          loadingText.value = '没有更多数据'
         }
       })
       .catch(error => {

@@ -59,7 +59,7 @@
             <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn"
                  data-respondId="" data-id="">
               <IconComment></IconComment>
-              <span class="text-white whitespace-nowrap ml-1 mr-1" @click="showCommentForm">评论</span>
+              <span class="text-white whitespace-nowrap ml-1 mr-1" @click="showCommentForm(0, '')">评论</span>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <div class="border border-[#07c160] rounded-lg p-2 bg-white" v-if="showCommentFormField">
             <div data-action="" class="">
               <label>
-                <input class="w-full h-full rounded-lg outline-none resize-none " placeholder="评论" name="text" v-model="content"/>
+                <input class="w-full h-full rounded-lg outline-none resize-none " :placeholder="formPlaceHolder" name="text" v-model="content"/>
               </label>
 
               <div class="flex justify-between items-start">
@@ -97,13 +97,20 @@
             </div>
           </div>
 
-
           <div v-for="comment in commentList">
-            <a :href="comment.url"><span class="text-[#576b95]">{{ comment.author }}</span></a>
-            <span v-if="comment.parent>0"><span>回复</span><span class="text-[#576b95]">李四</span></span>
-            <span class="cursor-help comment-btn">: {{ comment.text }} </span>
+            <div>
+              <a :href="comment.url"><span class="text-[#576b95]">{{ comment.author }}</span></a>
+              <span class="cursor-help comment-btn" @click="showCommentForm(comment.coid, comment.author, true)">: {{ comment.text }} </span>
+            </div>
+            <div v-for="children in comment.children">
+              <a :href="children.url"><span class="text-[#576b95]">{{ children.author }}</span></a>
+              <span><span>回复</span><span class="text-[#576b95]">{{ comment.author }}</span></span>
+              <span class="cursor-help comment-btn" @click="showCommentForm(children.coid, children.author, true)">: {{ children.text }} </span>
+            </div>
           </div>
-
+          <div v-if="hasMoreComment">
+            <a href="/detail?cid=" class="text-[#576b95]">更多评论</a>
+          </div>
         </div>
       </div>
 
@@ -127,11 +134,13 @@ const props = defineProps(['data']);
 const imgs = ref([]);
 const text = ref('')
 const url = ref('')
+const formPlaceHolder = ref('评论');
+const hasMoreComment = ref(false)
 
 const isShowUserInfoForm = ref(true)
 
 if (props.data) {
-  if (props.data.fields && props.data.fields.friend_pictures) {
+  if (props.data.fields && props.data.fields.friend_pictures && props.data.fields.friend_pictures.value !== '') {
     imgs.value = props.data.fields.friend_pictures.value.split(',');
   }
 
@@ -160,9 +169,9 @@ function getRecentComments() {
           hasComment.value = true;
           ShowCommentContainer();
         }
-        if(data.data.data.pages > data.data.data.page){
+        if (data.data.data.pages > data.data.data.page) {
           // 显示更多。跳转到文章详情
-          console.log('更多')
+          // hasMoreComment.value = true;
         }
       })
       .catch((error => {
@@ -176,6 +185,8 @@ const mail = ref('')
 const userAddress = ref('')
 const mailRule = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
 const userAddressRule = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i;
+const parentCoid = ref(0);
+const parentText = ref('');
 
 /**
  * 提交评论
@@ -218,11 +229,12 @@ function submitComment() {
           mail: mail.value,
           url: userAddress.value,
           token: commentToken.value,
-          parent: 0
+          parent: parentCoid.value
         };
         ax.post('http://localhost:8008/index.php/api/comment', commentParam)
             .then(data => {
               // 评论成功,拉取最新评论
+              addUserInfo();
               getRecentComments();
             })
             .catch(error => {
@@ -234,8 +246,28 @@ function submitComment() {
 
 }
 
-function editUser() {
+function loadUserInfo() {
+  nickname.value = localStorage.getItem('nickname');
+  mail.value = localStorage.getItem('mail');
+  userAddress.value = localStorage.getItem('userAddress');
 
+  if (nickname.value && mail.value && userAddress.value) {
+    isShowUserInfoForm.value = false;
+  } else {
+    isShowUserInfoForm.value = true;
+  }
+}
+
+function addUserInfo() {
+  content.value = '';
+  localStorage.setItem('nickname', nickname.value);
+  localStorage.setItem('mail', mail.value);
+  localStorage.setItem('userAddress', userAddress.value);
+  isShowUserInfoForm.value = false;
+}
+
+function editUser() {
+  isShowUserInfoForm.value = true;
 }
 
 const showCommentTipField = ref(false);
@@ -254,10 +286,25 @@ function showCommentTip() {
  */
 const showCommentFormField = ref(false)
 
-function showCommentForm() {
-  showCommentFormField.value = !showCommentFormField.value;
-  ShowCommentContainer();
-  showCommentTip();
+function showCommentForm(coid, text, isShow) {
+  loadUserInfo();
+
+  parentCoid.value = coid;
+  parentText.value = text;
+  if (isShow === true) {
+    showCommentFormField.value = true;
+  } else {
+    showCommentFormField.value = !showCommentFormField.value;
+    ShowCommentContainer();
+    showCommentTip();
+  }
+
+  if (parentText.value !== '') {
+    formPlaceHolder.value = '@' + parentText.value;
+  } else {
+    formPlaceHolder.value = '评论'
+  }
+
 }
 
 /**
