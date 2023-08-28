@@ -1,11 +1,12 @@
 <?php
 /**
- * icefox-vue
+ * icefox-vue for typechoo theme
+ * 演示站点：http://0ru.cn
  *
- * @package icefox-vue
- * @author icefox-vue
- * @version 1.0
- * @link http://typecho.org
+ * @package icefox
+ * @author 小胖脸
+ * @version 0.2.2
+ * @link xiaopanglian.com
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
