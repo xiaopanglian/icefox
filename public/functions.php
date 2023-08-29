@@ -84,7 +84,7 @@ function getThemeOption($archive)
 
     $archive->response->setStatus(200);
 
-    $query = $db->select()->from('table.options')->where(' name = ?', 'theme:icefox-vue');
+    $query = $db->select()->from('table.options')->where(' name = ?', 'theme:icefox');
 
     $result = $db->fetchAll($query);
 

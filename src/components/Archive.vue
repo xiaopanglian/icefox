@@ -1,13 +1,13 @@
 <template>
   <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
     <div class="w-16 lg:w-32 flex justify-end pr-2 lg:pr-5">
-      <img src="http://0ru.cn/usr/uploads/2023/08/523224250.png" alt=""
+      <img :src="avatarUrl" alt="头像avatarUrl"
            class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover"/>
     </div>
     <div class="w-11/12 flex flex-col">
       <!--作者-->
       <div>
-        <span class="text-[#576b95]">小胖脸</span>
+        <span class="text-[#576b95]">{{ nickName }}</span>
       </div>
 
       <!--内容-->
@@ -139,6 +139,8 @@ const formPlaceHolder = ref('评论');
 const hasMoreComment = ref(false)
 
 const isShowUserInfoForm = ref(true)
+const nickName = localStorage.getItem('nickName')
+const avatarUrl = localStorage.getItem('avatarUrl')
 
 if (props.data) {
   if (props.data.fields && props.data.fields.friend_pictures && props.data.fields.friend_pictures.value !== '') {
