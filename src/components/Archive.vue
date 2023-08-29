@@ -165,6 +165,7 @@ const commentList = ref([])
 function getRecentComments() {
   ax.get(import.meta.env.VITE_HTTP + '/index.php/api/comments?cid=' + props.data.cid)
       .then(data => {
+        commentList.value = [];
         data.data.data.dataSet.forEach(item => {
           commentList.value.push(item);
         })
