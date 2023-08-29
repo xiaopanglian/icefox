@@ -1,11 +1,11 @@
 <?php
 /**
- * icefox-vue for typechoo theme
- * 演示站点：http://0ru.cn
+ * 仿微信朋友圈主题
+ * 演示站点： <a href="http://0ru.cn" target="_blank">http://0ru.cn</a>
  *
  * @package icefox
  * @author 小胖脸
- * @version 0.2.2
+ * @version 0.3.1
  * @link xiaopanglian.com
  */
 
@@ -18,8 +18,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
-    <script type="module" crossorigin src="usr/themes/icefox-vue/assets/index-fdb54cff.js"></script>
-    <link rel="stylesheet" href="usr/themes/icefox-vue/assets/index-6fe9954f.css">
+    <script type="module" crossorigin src="usr/themes/icefox/assets/index-fdb54cff.js"></script>
+    <link rel="stylesheet" href="usr/themes/icefox/assets/index-6fe9954f.css">
 </head>
 <body>
 <div id="app"></div>
