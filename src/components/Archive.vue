@@ -41,9 +41,9 @@
       <div class="flex flex-row justify-between mt-3 mr-5">
 
         <div class="font-light text-gray-500 text-sm">
-          <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished" class="">
-            1天前
-          </time>
+          <span itemprop="datePublished" class="">
+            {{ time.getFormatTime(props.data.created) }}
+          </span>
         </div>
         <div class="relative">
           <div class="bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint" @click="showCommentTip">
@@ -126,6 +126,7 @@ import IconComment from "@/components/icons/IconComment.vue";
 import IconSmiley from "@/components/icons/IconSmiley.vue";
 import {ElMessage} from "element-plus";
 import axios from "axios";
+import time from '@/assets/time'
 
 let ax = axios.create();
 
@@ -160,7 +161,7 @@ getRecentComments();
 const commentList = ref([])
 
 function getRecentComments() {
-  ax.get('http://localhost:8008/index.php/api/comments?cid=' + props.data.cid)
+  ax.get(import.meta.env.VITE_HTTP + '/index.php/api/comments?cid=' + props.data.cid)
       .then(data => {
         data.data.data.dataSet.forEach(item => {
           commentList.value.push(item);
@@ -218,7 +219,7 @@ function submitComment() {
   }
   const commentToken = ref('')
   // 先调用详情获取token
-  ax.get('http://localhost:8008/index.php/api/post?cid=' + props.data.cid)
+  ax.get(import.meta.env.VITE_HTTP + '/index.php/api/post?cid=' + props.data.cid)
       .then(data => {
         commentToken.value = data.data.data.csrfToken;
         // 提交评论
@@ -231,7 +232,7 @@ function submitComment() {
           token: commentToken.value,
           parent: parentCoid.value
         };
-        ax.post('http://localhost:8008/index.php/api/comment', commentParam)
+        ax.post(import.meta.env.VITE_HTTP + '/index.php/api/comment', commentParam)
             .then(data => {
               // 评论成功,拉取最新评论
               addUserInfo();

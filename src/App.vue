@@ -5,7 +5,9 @@ import Header from './components/Header.vue'
 
 <template>
   <main class="container bg-white pyq-container">
-    <Header></Header>
+    <Suspense>
+      <Header></Header>
+    </Suspense>
     <RouterView></RouterView>
   </main>
 </template>

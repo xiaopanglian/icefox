@@ -23,13 +23,15 @@ const disabled = computed(() => loading.value || noMore.value)
 const loading = ref(false)
 const loadingText = ref('下拉加载更多')
 
+
+
 const loadMore = async () => {
   loadingText.value = '加载中'
   loading.value = true;
 
   page.value += 1;
   const param = {showContent: true, page: page.value, pageSize};
-  await ax.get('http://localhost:8008/index.php/api/posts', {params: param})
+  await ax.get(import.meta.env.VITE_HTTP + '/index.php/api/posts', {params: param})
       .then(data => {
         data.data.data.dataSet.forEach(item => {
           list.value.push(item);
