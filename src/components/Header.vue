@@ -38,4 +38,14 @@ const getSettings = async () => {
 }
 await getSettings();
 
+const getThemeOption = async () =>{
+  await ax.get(import.meta.env.VITE_HTTP + '/index.php/themeOption')
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+      })
+}
+
+await getThemeOption();
 </script>
