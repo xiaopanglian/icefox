@@ -37,10 +37,9 @@ let Time = {
     getFormatTime: function (timestamp) {
         let now = this.getUnix(); //当前时间戳 毫秒级
         let time = timestamp * 1000; //转为毫秒，如果是毫秒可以去除转换
-        let today = this.getToDayUnix(); //今天0点时间戳
-        let year = this.getYearUnix(); // 今年0点时间戳
         //由于 timestamp 是秒，所以需要乘以1000
         let timer = (now - time) / 1000; //转换为秒级时间戳
+
         let tip = "";
         if (timer <= 0) {
             tip = "刚刚";
@@ -48,9 +47,9 @@ let Time = {
             tip = "刚刚";
         } else if (timer < 3600) {
             tip = Math.floor(timer / 60) + "分钟前";
-        } else if (timer >= 3600 && time - today >= 0) {
+        } else if (timer >= 3600 && timer < 86400) {
             tip = Math.floor(timer / 3600) + "小时前";
-        } else if (timer / 86400 <= 31) {
+        } else if (timer >= 86400 && timer / 86400 <= 31) {
             tip = Math.floor(timer / 86400) + "天前";
         } else {
             //要注意new Date(time) ，time 是毫秒级
