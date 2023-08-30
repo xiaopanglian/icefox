@@ -3,7 +3,7 @@ import PostView from '../views/Post.vue'
 
 const routes = [
     {path: '/', component: IndexView},
-    {path: '/archive', component: PostView},
+    {path: '/post', component: PostView},
 ]
 
 export default routes;

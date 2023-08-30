@@ -1,3 +1,6 @@
 <template>
-    详情
+    <Archive></Archive>
 </template>
+<script setup>
+import Archive from "@/components/Archive.vue";
+</script>

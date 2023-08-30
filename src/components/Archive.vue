@@ -109,7 +109,9 @@
             </div>
           </div>
           <div v-if="hasMoreComment">
-            <a href="/detail?cid=" class="text-[#576b95]">更多评论</a>
+            <router-link to="post">
+              <IconCommentMore></IconCommentMore>
+            </router-link>
           </div>
         </div>
       </div>
@@ -175,7 +177,7 @@ function getRecentComments() {
         }
         if (data.data.data.pages > data.data.data.page) {
           // 显示更多。跳转到文章详情
-          // hasMoreComment.value = true;
+          hasMoreComment.value = true;
         }
       })
       .catch((error => {
