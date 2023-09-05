@@ -69,24 +69,7 @@ function themeFields($layout)
 // 主题初始化
 function themeInit($archive)
 {
-    if ($archive->request->getPathInfo() == '/themeOption') {
-        getThemeOption($archive);
-    }
-}
-
-/**
- * 获取主题配置
- */
-function getThemeOption($archive)
-{
-    $db = Typecho_Db::get();
-    $options = Helper::options();
-
-    $archive->response->setStatus(200);
-
-    $query = $db->select()->from('table.options')->where(' name = ?', 'theme:icefox');
-
-    $result = $db->fetchAll($query);
-
-    $archive->response->throwJson(array('status' => 1, 'data' => $result));
+//    if ($archive->request->getPathInfo() == '/themeOption') {
+//        getThemeOption($archive);
+//    }
 }

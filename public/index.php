@@ -5,8 +5,8 @@
  *
  * @package icefox
  * @author 小胖脸
- * @version 0.3.1
- * @link xiaopanglian.com
+ * @version 0.3.3
+ * @link https://xiaopanglian.com
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
