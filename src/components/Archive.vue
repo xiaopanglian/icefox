@@ -1,8 +1,7 @@
 <template>
   <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
     <div class="w-16 lg:w-32 flex justify-end pr-2 lg:pr-5">
-      <img :src="avatarUrl" alt="头像avatarUrl"
-           class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover"/>
+      <img :src="avatarUrl" alt="头像avatarUrl" class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover" />
     </div>
     <div class="w-11/12 flex flex-col">
       <!--作者-->
@@ -21,7 +20,7 @@
       <div class="w-11/12">
         <div class="grid grid-cols-1" v-if="imgs.length === 1">
           <el-image :src="url" alt="" class="max-w-full max-h-48 object-cover cursor-pointer preview-image"
-                    :zoom-rate="1.2" :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true"/>
+            :zoom-rate="1.2" :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true" />
         </div>
 
 
@@ -29,8 +28,8 @@
 
           <div class="jgg-box" v-for="src in imgs">
             <div class="content">
-              <el-image :src="src" alt="" class="w-full h-full object-cover cursor-pointer preview-image"
-                        :zoom-rate="1.2" :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true"/>
+              <el-image :src="src" alt="" class="w-full h-full object-cover cursor-pointer preview-image" :zoom-rate="1.2"
+                :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true" />
             </div>
           </div>
 
@@ -46,18 +45,20 @@
           </span>
         </div>
         <div class="relative">
-          <div class="bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint" @click="showCommentTip">
+          <div class="bg-[#F7F7F7] flex justify-center rounded-sm cursor-pointer toggleCommentTip commentPoint"
+            @click="showCommentTip">
             <IconCommentMore></IconCommentMore>
           </div>
           <div
-              class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip" v-if="showCommentTipField">
+            class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip"
+            v-if="showCommentTipField">
             <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer">
               <IconNice></IconNice>
               <span class="text-white ml-1 mr-1">赞</span>
             </div>
             |
-            <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn"
-                 data-respondId="" data-id="">
+            <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId=""
+              data-id="">
               <IconComment></IconComment>
               <span class="text-white whitespace-nowrap ml-1 mr-1" @click="showCommentForm(0, '')">评论</span>
             </div>
@@ -74,24 +75,26 @@
           <div class="border border-[#07c160] rounded-lg p-2 bg-white" v-if="showCommentFormField">
             <div data-action="" class="">
               <label>
-                <input class="w-full h-full rounded-lg outline-none resize-none " :placeholder="formPlaceHolder" name="text" v-model="content"/>
+                <input class="w-full h-full rounded-lg outline-none resize-none " :placeholder="formPlaceHolder"
+                  name="text" v-model="content" />
               </label>
 
               <div class="flex justify-between items-start">
                 <div class="flex flex-col bg-[#F7F7F7] gap-1 p-1 " v-if="isShowUserInfoForm">
-                  <label><input placeholder="*昵称" class="border outline-none " v-model="nickname"/></label>
-                  <label><input placeholder="*邮箱" class="border outline-none " v-model="mail"/></label>
-                  <label><input placeholder="*网址" class="border outline-none " v-model="userAddress"/></label>
+                  <label><input placeholder="*昵称" class="border outline-none " v-model="nickname" /></label>
+                  <label><input placeholder="*邮箱" class="border outline-none " v-model="mail" /></label>
+                  <label><input placeholder="*网址" class="border outline-none " v-model="userAddress" /></label>
                 </div>
                 <div class="exists-<?php $this->respondId(); ?>" v-if="!isShowUserInfoForm">
                   <span class="text-gray-400 text-sm ">{{ nickname }}</span>
                   <span class="cursor-pointer text-gray-400 text-sm comment-edit" @click="editUser">[编辑]</span>
                 </div>
                 <div class="flex flex-row items-center justify-end">
-                <span>
+                  <span>
                     <IconSmiley></IconSmiley>
-                </span>
-                  <button class="bg-[#07c160] text-white pl-3 pr-3 pt-1 pb-1 ml-2 rounded-sm comment-submit" type="button" @click="submitComment">提交</button>
+                  </span>
+                  <button class="bg-[#07c160] text-white pl-3 pr-3 pt-1 pb-1 ml-2 rounded-sm comment-submit" type="button"
+                    @click="submitComment">提交</button>
                 </div>
               </div>
             </div>
@@ -100,12 +103,14 @@
           <div v-for="comment in commentList">
             <div>
               <a :href="comment.url"><span class="text-[#576b95]">{{ comment.author }}</span></a>
-              <span class="cursor-help comment-btn" @click="showCommentForm(comment.coid, comment.author, true)">: {{ comment.text }} </span>
+              <span class="cursor-help comment-btn" @click="showCommentForm(comment.coid, comment.author, true)">: {{
+                comment.text }} </span>
             </div>
             <div v-for="children in comment.children">
               <a :href="children.url"><span class="text-[#576b95]">{{ children.author }}</span></a>
               <span><span>回复</span><span class="text-[#576b95]">{{ comment.author }}</span></span>
-              <span class="cursor-help comment-btn" @click="showCommentForm(children.coid, children.author, true)">: {{ children.text }} </span>
+              <span class="cursor-help comment-btn" @click="showCommentForm(children.coid, children.author, true)">: {{
+                children.text }} </span>
             </div>
           </div>
           <div v-if="hasMoreComment">
@@ -121,18 +126,20 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import { ref } from "vue";
 import IconCommentMore from "@/components/icons/IconCommentMore.vue";
 import IconNice from "@/components/icons/IconNice.vue";
 import IconComment from "@/components/icons/IconComment.vue";
 import IconSmiley from "@/components/icons/IconSmiley.vue";
-import {ElMessage} from "element-plus";
+import { ElMessage } from "element-plus";
 import axios from "axios";
 import time from '@/assets/time'
 
 let ax = axios.create();
 
-const props = defineProps(['data']);
+const props = defineProps(['data', 'showAllComment']);
+console.log(props.showAllComment);
+const showAllComment = props.showAllComment;
 
 const imgs = ref([]);
 const text = ref('')
@@ -165,23 +172,27 @@ getRecentComments();
 const commentList = ref([])
 
 function getRecentComments() {
-  ax.get(import.meta.env.VITE_HTTP + '/index.php/api/comments?cid=' + props.data.cid)
-      .then(data => {
-        commentList.value = [];
-        data.data.data.dataSet.forEach(item => {
-          commentList.value.push(item);
-        })
-        if (commentList.value.length > 0) {
-          hasComment.value = true;
-          ShowCommentContainer();
-        }
-        if (data.data.data.pages > data.data.data.page) {
-          // 显示更多。跳转到文章详情
-          hasMoreComment.value = true;
-        }
+  const pageSize = ref(5);
+  if (showAllComment === true) {
+    pageSize.value = 999;
+  }
+  ax.get(import.meta.env.VITE_HTTP + '/index.php/api/comments?cid=' + props.data.cid + '&pageSize=' + pageSize.value)
+    .then(data => {
+      commentList.value = [];
+      data.data.data.dataSet.forEach(item => {
+        commentList.value.push(item);
       })
-      .catch((error => {
-      }))
+      if (commentList.value.length > 0) {
+        hasComment.value = true;
+        ShowCommentContainer();
+      }
+      if (data.data.data.pages > data.data.data.page) {
+        // 显示更多。跳转到文章详情
+        hasMoreComment.value = true;
+      }
+    })
+    .catch((error => {
+    }))
 }
 
 /************评论表单参数***************/
@@ -225,30 +236,30 @@ function submitComment() {
   const commentToken = ref('')
   // 先调用详情获取token
   ax.get(import.meta.env.VITE_HTTP + '/index.php/api/post?cid=' + props.data.cid)
-      .then(data => {
-        commentToken.value = data.data.data.csrfToken;
-        // 提交评论
-        let commentParam = {
-          cid: props.data.cid,
-          text: content.value,
-          author: nickname.value,
-          mail: mail.value,
-          url: userAddress.value,
-          token: commentToken.value,
-          parent: parentCoid.value
-        };
-        ax.post(import.meta.env.VITE_HTTP + '/index.php/api/comment', commentParam)
-            .then(data => {
-              // 评论成功,拉取最新评论
-              addUserInfo();
-              getRecentComments();
-            })
-            .catch(error => {
-              ShowCommentContainer();
-            })
-      })
-      .catch(error => {
-      })
+    .then(data => {
+      commentToken.value = data.data.data.csrfToken;
+      // 提交评论
+      let commentParam = {
+        cid: props.data.cid,
+        text: content.value,
+        author: nickname.value,
+        mail: mail.value,
+        url: userAddress.value,
+        token: commentToken.value,
+        parent: parentCoid.value
+      };
+      ax.post(import.meta.env.VITE_HTTP + '/index.php/api/comment', commentParam)
+        .then(data => {
+          // 评论成功,拉取最新评论
+          addUserInfo();
+          getRecentComments();
+        })
+        .catch(error => {
+          ShowCommentContainer();
+        })
+    })
+    .catch(error => {
+    })
 
 }
 

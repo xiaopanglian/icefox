@@ -48,7 +48,6 @@ const getThemeOption = async () => {
   await ax.get(import.meta.env.VITE_HTTP + '/index.php/api/themeOption')
       .then(data => {
         let themeIcefox = data.data.data;
-        console.log(themeIcefox)
 
         if (themeIcefox.length > 0) {
           let themeOption = themeIcefox[0].value;

@@ -1,6 +1,6 @@
 <template>
   <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="disabled">
-    <Archive v-for="item in list" :data="item"></Archive>
+    <Archive v-for="item in list" :data="item" :showAllComment="false"></Archive>
   </div>
   <div class="flex justify-center">
     {{ loadingText }}
