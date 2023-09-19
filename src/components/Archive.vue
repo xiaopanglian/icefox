@@ -52,7 +52,7 @@
           <div
             class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip"
             v-if="showCommentTipField">
-            <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer">
+            <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer" @click="clickGood">
               <IconNice></IconNice>
               <span class="text-white ml-1 mr-1">赞</span>
             </div>
@@ -138,7 +138,7 @@ import time from '@/assets/time'
 let ax = axios.create();
 
 const props = defineProps(['data', 'showAllComment']);
-console.log(props.showAllComment);
+
 const showAllComment = props.showAllComment;
 
 const imgs = ref([]);
@@ -336,5 +336,20 @@ function ShowCommentContainer() {
   } else {
     showCommentContainer.value = false;
   }
+}
+
+const clickGood = () => {
+  const nowCid = props.data.cid;
+  console.log('点赞');
+  console.log(nowCid);
+  const praiseParam = { cid: nowCid };
+  ax.post(import.meta.env.VITE_HTTP + '/index.php/api/praise', praiseParam)
+    .then(data => {
+      // 评论成功,拉取最新评论
+      console.log(data);
+    })
+    .catch(error => {
+
+    })
 }
 </script>
