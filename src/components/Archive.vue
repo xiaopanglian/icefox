@@ -54,7 +54,7 @@
             v-if="showCommentTipField">
             <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer" @click="clickGood">
               <IconNice></IconNice>
-              <span class="text-white ml-1 mr-1">赞</span>
+              <span class="text-white whitespace-nowrap ml-1 mr-1">点赞</span>
             </div>
             |
             <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId=""
@@ -72,6 +72,9 @@
                       ?> -->
       <div class="bg-[#F7F7F7] mr-5 mt-5 pt-2 pb-2 pl-4 pr-4" v-if="showCommentContainer">
         <div class="mt-3 ">
+          <div>
+            4个点赞
+          </div>
           <div class="border border-[#07c160] rounded-lg p-2 bg-white" v-if="showCommentFormField">
             <div data-action="" class="">
               <label>
@@ -340,13 +343,30 @@ function ShowCommentContainer() {
 
 const clickGood = () => {
   const nowCid = props.data.cid;
-  console.log('点赞');
-  console.log(nowCid);
-  const praiseParam = { cid: nowCid };
+  const isPraise = true;
+  // 如果已经点赞过，不再点赞
+  const praiseList = localStorage.getItem('praiseList');
+  // 如果praiseList包含这个cid，那么就是已点赞，当前进行取消点赞操作
+  var cidIndex = praiseList.indexOf(nowCid);
+  if (cidIndex === -1) {
+    // 没点赞，进行点赞
+    isPraise = true;
+  } else {
+    // 取消点赞
+    isPraise = false;
+  }
+  const praiseParam = { cid: nowCid, isPraise };
   ax.post(import.meta.env.VITE_HTTP + '/index.php/api/praise', praiseParam)
     .then(data => {
-      // 评论成功,拉取最新评论
-      console.log(data);
+      // 重新加载评论
+
+      // 点赞更新localstorage
+      if (isPraise === true) {
+        praiseList.push(nowCid);
+      } else {
+        praiseList.splice(cidIndex, 1);
+      }
+      localStorage.setItem('praiseList', praiseList);
     })
     .catch(error => {
 
