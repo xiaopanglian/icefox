@@ -255,6 +255,12 @@ class RestfulIcefox_Action extends Typecho_Widget implements Widget_Interface_Do
         $filterType = trim($this->getParams('filterType', ''));
         $filterSlug = trim($this->getParams('filterSlug', ''));
         $showContent = trim($this->getParams('showContent', '')) === 'true';
+        $db = $this->db;
+        if (!array_key_exists('agree', $db->fetchRow($db->select()->from('table.contents')))) {
+
+            $prefix = $db->getPrefix();
+            $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `agree` INT(30) DEFAULT 0;');
+        }
 
         if (in_array($filterType, array('category', 'tag', 'search'))) {
             if ($filterSlug == '') {
@@ -846,6 +852,7 @@ class RestfulIcefox_Action extends Typecho_Widget implements Widget_Interface_Do
 
         if (!empty($cid)) {
             $db = $this->db;
+
             $prefix = $db->getPrefix();
 
             if (!array_key_exists('agree', $db->fetchRow($db->select()->from('table.contents')))) {

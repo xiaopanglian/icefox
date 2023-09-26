@@ -9,7 +9,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
  *
  * @package Restful By Icefox
  * @author 小胖脸
- * @version 1.2.1
+ * @version 1.2.2
  * @link https://xiaopanglian.com
  */
 class RestfulIcefox_Plugin implements Typecho_Plugin_Interface
