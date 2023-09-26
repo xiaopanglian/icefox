@@ -7,10 +7,14 @@
 import axios from "axios";
 import Archive from "@/components/Archive.vue";
 import { reactive, ref } from "vue";
+import { useRoute } from 'vue-router';
+const route = useRoute()
+
+const cid = route.params?.id;
 
 const archiveData = reactive({})
 const param = {
-    cid: 64
+    cid: cid
 }
 const loadPost = async () => {
     let ax = axios.create();

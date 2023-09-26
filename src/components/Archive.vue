@@ -53,8 +53,10 @@
             class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip"
             v-if="showCommentTipField">
             <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer" @click="clickGood">
-              <IconNice></IconNice>
-              <span class="text-white whitespace-nowrap ml-1 mr-1">点赞</span>
+              <IconNice v-if="isPraise"></IconNice>
+              <span class="text-white whitespace-nowrap ml-1 mr-1" v-if="isPraise">点赞</span>
+              <IconLiked v-if="!isPraise"></IconLiked>
+              <span class="text-white whitespace-nowrap ml-1 mr-1" v-if="!isPraise">取消</span>
             </div>
             |
             <div class="flex flex-row justify-center items-center ml-5 mr-5 cursor-pointer comment-btn" data-respondId=""
@@ -72,8 +74,8 @@
                       ?> -->
       <div class="bg-[#F7F7F7] mr-5 mt-5 pt-2 pb-2 pl-4 pr-4" v-if="showCommentContainer">
         <div class="mt-3 ">
-          <div>
-            4个点赞
+          <div class="text-[#576b95] flex flex-row items-center" v-if="agree > 0">
+            <IconNiceDark></IconNiceDark> {{ agree }}个点赞
           </div>
           <div class="border border-[#07c160] rounded-lg p-2 bg-white" v-if="showCommentFormField">
             <div data-action="" class="">
@@ -117,9 +119,9 @@
             </div>
           </div>
           <div v-if="hasMoreComment">
-            <router-link to="post">
+            <div @click="goDetail" class=" cursor-pointer">
               <IconCommentMore></IconCommentMore>
-            </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -132,11 +134,15 @@
 import { ref } from "vue";
 import IconCommentMore from "@/components/icons/IconCommentMore.vue";
 import IconNice from "@/components/icons/IconNice.vue";
+import IconNiceDark from '@/components/icons/IconNiceDark.vue'
+import IconLiked from "@/components/icons/IconLiked.vue"
 import IconComment from "@/components/icons/IconComment.vue";
 import IconSmiley from "@/components/icons/IconSmiley.vue";
 import { ElMessage } from "element-plus";
 import axios from "axios";
 import time from '@/assets/time'
+import { useRouter } from 'vue-router'
+const route = useRouter()
 
 let ax = axios.create();
 
@@ -153,6 +159,7 @@ const hasMoreComment = ref(false)
 const isShowUserInfoForm = ref(true)
 const nickName = localStorage.getItem('nickName')
 const avatarUrl = localStorage.getItem('avatarUrl')
+const agree = props.data.agree;
 
 if (props.data) {
   if (props.data.fields && props.data.fields.friend_pictures && props.data.fields.friend_pictures.value !== '') {
@@ -341,19 +348,26 @@ function ShowCommentContainer() {
   }
 }
 
+const isPraise = ref(true);
+/**
+ * 点赞
+ */
 const clickGood = () => {
   const nowCid = props.data.cid;
-  const isPraise = true;
   // 如果已经点赞过，不再点赞
   const praiseList = localStorage.getItem('praiseList');
+
   // 如果praiseList包含这个cid，那么就是已点赞，当前进行取消点赞操作
-  var cidIndex = praiseList.indexOf(nowCid);
+  var cidIndex = -1;
+  if (praiseList != null) {
+    cidIndex = praiseList.indexOf(nowCid);
+  }
   if (cidIndex === -1) {
     // 没点赞，进行点赞
-    isPraise = true;
+    isPraise.value = true;
   } else {
     // 取消点赞
-    isPraise = false;
+    isPraise.value = false;
   }
   const praiseParam = { cid: nowCid, isPraise };
   ax.post(import.meta.env.VITE_HTTP + '/index.php/api/praise', praiseParam)
@@ -361,7 +375,7 @@ const clickGood = () => {
       // 重新加载评论
 
       // 点赞更新localstorage
-      if (isPraise === true) {
+      if (isPraise.value === true) {
         praiseList.push(nowCid);
       } else {
         praiseList.splice(cidIndex, 1);
@@ -371,5 +385,14 @@ const clickGood = () => {
     .catch(error => {
 
     })
+}
+
+const goDetail = () => {
+  route.push({
+    name: 'Post',
+    params: {
+      id: props.data.cid
+    }
+  })
 }
 </script>

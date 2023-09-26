@@ -420,7 +420,7 @@ class RestfulIcefox_Action extends Typecho_Widget implements Widget_Interface_Do
         $cid = $this->getParams('cid', '');
 
         $select = $this->db
-            ->select('cid', 'created', 'type', 'slug', 'commentsNum', 'text')
+            ->select('cid', 'created', 'type', 'slug', 'commentsNum', 'text', 'agree')
             ->from('table.contents')
             ->where('password IS NULL');
 
@@ -842,6 +842,7 @@ class RestfulIcefox_Action extends Typecho_Widget implements Widget_Interface_Do
         $this->checkState('praise');
 
         $cid = $this->getParams('cid', '');
+        $isPraise = $this->getParams('isPraise');
 
         if (!empty($cid)) {
             $db = $this->db;
@@ -854,8 +855,10 @@ class RestfulIcefox_Action extends Typecho_Widget implements Widget_Interface_Do
             //先获取当前赞
             $row = $db->fetchRow($db->select('agree')->from('table.contents')->where('cid = ?', $cid));
 
-            $updateRows = $db->query($db->update('table.contents')->rows(array('agree' => (int) $row['agree'] + 1))->where('cid = ?', $cid));
-
+            if ($isPraise == true)
+                $updateRows = $db->query($db->update('table.contents')->rows(array('agree' => (int) $row['agree'] + 1))->where('cid = ?', $cid));
+            else
+                $updateRows = $db->query($db->update('table.contents')->rows(array('agree' => (int) $row['agree'] - 1))->where('cid = ?', $cid)->where('agree > 0'));
 
             if ($updateRows) {
                 $state =  "success";

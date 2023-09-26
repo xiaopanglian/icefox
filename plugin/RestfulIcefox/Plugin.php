@@ -3,13 +3,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
     exit;
 }
 /**
- * Typecho Restful 插件 Icefox修改版
+ * Typecho Restful Icefox 插件
  * 原作者 MoeFront Studio
  * 原版地址：https://moefront.github.io
  *
  * @package Restful By Icefox
  * @author 小胖脸
- * @version 1.1.2
+ * @version 1.2.1
  * @link https://xiaopanglian.com
  */
 class RestfulIcefox_Plugin implements Typecho_Plugin_Interface
