@@ -53,9 +53,9 @@
             class="absolute right-16 top-[-10px] bg-[#4b5153] flex flex-row justify-center items-center rounded-lg commentTip"
             v-if="showCommentTipField">
             <div class="flex flex-row justify-center items-center pl-5 pr-5 pt-2 pb-2 cursor-pointer" @click="clickGood">
-              <IconNice v-if="isPraise"></IconNice>
+              <IconNice v-if="!isPraise"></IconNice>
               <span class="text-white whitespace-nowrap ml-1 mr-1" v-if="isPraise">点赞</span>
-              <IconLiked v-if="!isPraise"></IconLiked>
+              <IconLiked v-if="isPraise"></IconLiked>
               <span class="text-white whitespace-nowrap ml-1 mr-1" v-if="!isPraise">取消</span>
             </div>
             |
@@ -142,6 +142,7 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 import time from '@/assets/time'
 import { useRouter } from 'vue-router'
+import { intval } from "locutus/php/var";
 const route = useRouter()
 
 let ax = axios.create();
@@ -159,7 +160,8 @@ const hasMoreComment = ref(false)
 const isShowUserInfoForm = ref(true)
 const nickName = localStorage.getItem('nickName')
 const avatarUrl = localStorage.getItem('avatarUrl')
-const agree = props.data.agree;
+const agree = ref(0);
+agree.value = props.data.agree;
 
 if (props.data) {
   if (props.data.fields && props.data.fields.friend_pictures && props.data.fields.friend_pictures.value !== '') {
@@ -270,7 +272,6 @@ function submitComment() {
     })
     .catch(error => {
     })
-
 }
 
 function loadUserInfo() {
@@ -348,19 +349,21 @@ function ShowCommentContainer() {
   }
 }
 
-const isPraise = ref(true);
+const isPraise = ref(false);
 /**
  * 点赞
  */
 const clickGood = () => {
   const nowCid = props.data.cid;
   // 如果已经点赞过，不再点赞
-  const praiseList = localStorage.getItem('praiseList');
+  let praiseList = JSON.parse(localStorage.getItem('praiseList'));
 
   // 如果praiseList包含这个cid，那么就是已点赞，当前进行取消点赞操作
   var cidIndex = -1;
   if (praiseList != null) {
     cidIndex = praiseList.indexOf(nowCid);
+  }else{
+    praiseList = []
   }
   if (cidIndex === -1) {
     // 没点赞，进行点赞
@@ -369,18 +372,24 @@ const clickGood = () => {
     // 取消点赞
     isPraise.value = false;
   }
-  const praiseParam = { cid: nowCid, isPraise };
+  const praiseParam = { cid: nowCid, isPraise: isPraise.value };
   ax.post(import.meta.env.VITE_HTTP + '/index.php/api/praise', praiseParam)
     .then(data => {
+      showCommentTip()
       // 重新加载评论
-
+      if (isPraise.value === true) {
+        agree.value = parseInt(agree.value) + 1;
+      } else {
+        agree.value = parseInt(agree.value) - 1;
+      }
+      
       // 点赞更新localstorage
       if (isPraise.value === true) {
         praiseList.push(nowCid);
       } else {
         praiseList.splice(cidIndex, 1);
       }
-      localStorage.setItem('praiseList', praiseList);
+      localStorage.setItem('praiseList', JSON.stringify(praiseList));
     })
     .catch(error => {
 
