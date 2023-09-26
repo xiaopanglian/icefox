@@ -342,7 +342,8 @@ function showCommentForm(coid, text, isShow) {
 const showCommentContainer = ref(false)
 
 function ShowCommentContainer() {
-  if (showCommentFormField.value === true || hasComment.value === true) {
+  console.log(agree.value )
+  if (showCommentFormField.value === true || hasComment.value === true || agree.value > 0) {
     showCommentContainer.value = true;
   } else {
     showCommentContainer.value = false;
@@ -426,4 +427,6 @@ const goDetail = () => {
     }
   })
 }
+
+ShowCommentContainer();
 </script>
