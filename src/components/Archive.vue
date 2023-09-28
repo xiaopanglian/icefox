@@ -413,6 +413,8 @@ const clickGood = () => {
         praiseList.splice(cidIndex, 1);
       }
       localStorage.setItem('praiseList', JSON.stringify(praiseList));
+
+      ShowCommentContainer();
     })
     .catch(error => {
 
