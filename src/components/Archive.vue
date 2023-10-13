@@ -20,16 +20,16 @@
       <div class="w-11/12">
         <div class="grid grid-cols-1" v-if="imgs.length === 1">
           <el-image :src="url" alt="" class="max-w-full max-h-48 object-cover cursor-pointer preview-image"
-            :zoom-rate="1.2" :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true" />
+            :zoom-rate="1.2" :preview-src-list="imgs" :initial-index="0" fit="cover" :hide-on-click-modal="true" />
         </div>
 
 
         <div class="jgg-container" v-if="imgs.length > 1">
 
-          <div class="jgg-box" v-for="src in imgs">
+          <div class="jgg-box" v-for="(src, index) in imgs">
             <div class="content">
               <el-image :src="src" alt="" class="w-full h-full object-cover cursor-pointer preview-image" :zoom-rate="1.2"
-                :preview-src-list="imgs" :initial-index="4" fit="cover" :hide-on-click-modal="true" />
+                :preview-src-list="imgs" :initial-index="index" fit="cover" :hide-on-click-modal="true" />
             </div>
           </div>
 
@@ -341,7 +341,7 @@ function showCommentForm(coid, text, isShow) {
 const showCommentContainer = ref(false)
 
 function ShowCommentContainer() {
-  console.log(agree.value )
+  console.log(agree.value)
   if (showCommentFormField.value === true || hasComment.value === true || agree.value > 0) {
     showCommentContainer.value = true;
   } else {
