@@ -50,3 +50,7 @@ pre > code {
 article .content a{
   text-decoration: underline;
 }
+
+article .content img{
+  max-width: 18rem;
+}

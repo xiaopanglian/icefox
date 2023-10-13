@@ -1,6 +1,6 @@
 <template>
   <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
-    <div class="w-16 lg:w-32 flex justify-end pr-2 lg:pr-5">
+    <div class="w-16 min-w-16 lg:w-32 flex justify-end pr-2 lg:pr-5 flex-shrink-0">
       <img :src="avatarUrl" alt="头像avatarUrl" class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover" />
     </div>
     <div class="w-11/12 flex flex-col">
@@ -11,8 +11,12 @@
 
       <!--内容-->
       <div class="mt-3 mb-3">
-        <div class="text-[#1b1b1b] content">
+        <div class="text-[#1b1b1b] content mr-3 break-all " :class="isShowAllText ? '' : ' h-24 overflow-hidden '"
+          id="content">
           <span v-html="text"></span>
+        </div>
+        <div v-if="isShowAllTextButton">
+          <a class="text-[#576b95]" @click="showAllTextFunction()">{{ showAllTxt }}</a>
         </div>
       </div>
 
@@ -429,5 +433,30 @@ const goDetail = () => {
   })
 }
 
+const isShowAllTextButton = ref(false);
+const isShowAllText = ref(true);
+const showAllTxt = ref('全文')
+if (getLineCount() > 4) {
+  isShowAllText.value = false;
+  isShowAllTextButton.value = true;
+}
+
+const showAllTextFunction = () => {
+  if (isShowAllText.value === false) {
+    isShowAllText.value = true;
+    showAllTxt.value = '收缩';
+  } else {
+    isShowAllText.value = false;
+    showAllTxt.value = '全文';
+  }
+}
+function getLineCount() {
+  var textSplit = text.value.split('\n');
+  var lineCount = 0;
+  textSplit.forEach(i => {
+    lineCount += (i.length / 15);
+  });
+  return lineCount;
+}
 ShowCommentContainer();
 </script>
