@@ -142,7 +142,6 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 import time from '@/assets/time'
 import { useRouter } from 'vue-router'
-import { intval } from "locutus/php/var";
 const route = useRouter()
 
 let ax = axios.create();
