@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Archive v-for="item in list" :data="item" :showAllComment="false"></Archive>
+    <Archive v-for="item in list" :data="item" :showAllComment="false" :avatarUrl="avatarUrl" :nickName="nickName">
+    </Archive>
   </div>
   <div class="flex justify-center pt-3 pb-3">
     <span @click="loadMore()">{{ loadingText }}</span>
@@ -10,7 +11,7 @@
 <script setup>
 import axios from "axios";
 import Archive from "@/components/Archive.vue";
-import { computed, ref } from "vue";
+import { computed, ref, getCurrentInstance } from "vue";
 import { ElMessage } from "element-plus";
 
 const list = ref([]);
@@ -55,4 +56,13 @@ const loadMore = async () => {
 }
 
 loadMore();
+
+const bus = getCurrentInstance().appContext.config.globalProperties.$bus;
+const avatarUrl = ref(localStorage.getItem('avatarUrl'));
+const nickName = ref(localStorage.getItem('nickName'));
+// 更新头像
+bus.on('message', (message) => {
+  avatarUrl.value = message.avatarUrl;
+  nickName.value = message.nickName;
+});
 </script>

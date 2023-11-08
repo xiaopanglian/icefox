@@ -1,7 +1,7 @@
 <template>
   <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pb-5">
     <div class="w-16 min-w-16 lg:w-32 flex justify-end pr-2 lg:pr-5 flex-shrink-0">
-      <img :src="avatarUrl" alt="头像avatarUrl" class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover" />
+      <img :src="props.avatarUrl" alt="头像avatarUrl" class="w-[32px] h-[32px] lg:w-[64px] lg:h-[64px] rounded-lg object-cover" />
     </div>
     <div class="w-11/12 flex flex-col">
       <!--作者-->
@@ -135,7 +135,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, getCurrentInstance, onMounted, onBeforeUnmount } from "vue";
 import IconCommentMore from "@/components/icons/IconCommentMore.vue";
 import IconNice from "@/components/icons/IconNice.vue";
 import IconNiceDark from '@/components/icons/IconNiceDark.vue'
@@ -146,11 +146,14 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 import time from '@/assets/time'
 import { useRouter } from 'vue-router'
+
+const bus = getCurrentInstance().appContext.config.globalProperties.$bus;
+
 const route = useRouter()
 
 let ax = axios.create();
 
-const props = defineProps(['data', 'showAllComment']);
+const props = defineProps(['data', 'showAllComment', 'avatarUrl', 'nickName']);
 
 const showAllComment = props.showAllComment;
 
@@ -161,8 +164,10 @@ const formPlaceHolder = ref('评论');
 const hasMoreComment = ref(false)
 
 const isShowUserInfoForm = ref(true)
-const nickName = localStorage.getItem('nickName')
-const avatarUrl = localStorage.getItem('avatarUrl')
+const nickName = props.nickName;
+const avatarUrl = props.avatarUrl;
+
+
 const agree = ref(0);
 agree.value = props.data.agree;
 
@@ -181,6 +186,8 @@ if (props.data) {
     text.value = props.data.text;
   }
 }
+
+
 
 getRecentComments();
 
@@ -345,7 +352,6 @@ function showCommentForm(coid, text, isShow) {
 const showCommentContainer = ref(false)
 
 function ShowCommentContainer() {
-  console.log(agree.value)
   if (showCommentFormField.value === true || hasComment.value === true || agree.value > 0) {
     showCommentContainer.value = true;
   } else {
