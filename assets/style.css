@@ -1,0 +1,179 @@
+@unocss all;
+
+@font-face {
+    font-display: swap;
+    font-family: HarmonyOS-Sans;
+    src: url('./HarmonyOS-Sans.woff2') format("truetype");
+}
+
+.text-color-link {
+    color: #576b95;
+}
+
+.bg-color-primary {
+    background-color: #f7f7f7;
+}
+
+* {
+    cursor: default;
+    font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
+}
+
+body {
+    cursor: default;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
+}
+
+input::placeholder {
+    color: #c6c6c6;
+}
+
+.head {
+    background-image: url('http://0ru.cn/usr/uploads/2023/08/906729241.jpg');
+    background-size: cover;
+}
+
+.hudong {
+    width: 100%;
+    height: 100%;
+    background-image: url('./svgs/post.fun.ico.light.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    color: transparent;
+}
+
+.hudong:hover {
+    background-color: #dedede;
+}
+
+.like {
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.aside.like.light.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    color: transparent;
+}
+.unlike {
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.aside.like.light.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    color: transparent;
+}
+
+.hudong-container {
+    width: 120px;
+    border-radius: 5px;
+}
+
+.hudong-like {
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.fun.btn.like.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+.hudong-liked{
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.fun.btn.liked.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
+.hudong-comment {
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.fun.btn.comment.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
+.face {
+    width: 18px;
+    height: 18px;
+    background-image: url('./svgs/post.comment.face.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
+.hidden-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-content a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    color: #111111;
+}
+
+.article-content a:hover {
+    cursor: pointer;
+}
+
+.article-content img {
+    max-width: 100%;
+}
+
+.article-content>p {
+    margin: 0;
+}
+
+.multi-pictures {
+    width: calc(100% - 45px);
+}
+
+.scrollload-bottom {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 3px 0;
+    font-size: 12px;
+    color: #333;
+}
+
+
+.comment-waiting {
+    font-size: 12px;
+    background-color: #e6e6e6;
+    color: #999;
+}
+
+@media screen and (min-width: 567px) {
+    .main-container {
+        max-width: 567px;
+    }
+
+    .side-area {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .main-container {
+        width: 100%;
+        min-width: 300px;
+    }
+
+    .side-area {
+        display: none;
+    }
+}
