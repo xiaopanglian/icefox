@@ -54,12 +54,21 @@ function themeConfig($form)
 
 function themeFields($layout)
 {
+    $friendVideo = new Typecho_Widget_Helper_Form_Element_Textarea(
+        'friend_video',
+        null,
+        null,
+        _t('朋友圈视频'),
+        _t('<span style="color:red;">在这里填入朋友圈视频地址</span>')
+    );
+    $layout->addItem($friendVideo);
+
     $friendPicture = new Typecho_Widget_Helper_Form_Element_Textarea(
         'friend_pictures',
         null,
         null,
         _t('朋友圈图片'),
-        _t('<span style="color:red;">在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果是视频，只能上传一个）</span>')
+        _t('<span style="color:red;">在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果填了朋友圈视频，则优先视频）</span>')
     );
     $layout->addItem($friendPicture);
 

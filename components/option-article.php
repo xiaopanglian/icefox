@@ -38,20 +38,34 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                     </div>
                 </div> -->
         <!--多图-->
+
         <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3 mt-3"
             id="preview-<?php echo $this->cid; ?>">
             <?php
-            $friendPicture = $this->fields->friend_pictures;
-            if ($friendPicture) {
-                $friendPictures = explode(',', $friendPicture);
-                foreach ($friendPictures as $picture) {
-                    ?>
-                    <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
-                        <img src="<?php echo $picture ?>"
-                            class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
-                            data-cid="<?php echo $this->cid; ?>" />
-                    </div>
-                    <?php
+            $friendVideo = $this->fields->friend_video;
+            if (!empty($friendVideo)) {
+                ?>
+                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
+                    <video src="<?php echo $friendVideo ?>" autoplay="autoplay" loop preload="auto" controls="controls"
+                        class="w-full h-full object-cover absolute top-0" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
+                </div>
+                <?php
+            } else {
+
+                $friendPicture = $this->fields->friend_pictures;
+                if ($friendPicture) {
+                    $friendPictures = explode(',', $friendPicture);
+                    foreach ($friendPictures as $picture) {
+                        $exten = pathinfo($friendPicture, PATHINFO_EXTENSION);
+                        if ($exten)
+                        ?>
+                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
+                            <img src="<?php echo $picture ?>"
+                                class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                data-cid="<?php echo $this->cid; ?>" />
+                        </div>
+                        <?php
+                    }
                 }
             }
             ?>

@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.0.0 beta
+ * @version 1.0.1
  * @link http://0ru.cn
  */
 
