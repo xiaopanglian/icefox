@@ -33,6 +33,7 @@
 .h-\[48px\]{height:48px;}
 .h-0{height:0;}
 .h-15{height:3.75rem;}
+.h-72{height:18rem;}
 .h-77{height:19.25rem;}
 .h-9{height:2.25rem;}
 .h-full{height:100%;}
@@ -84,6 +85,7 @@
 .bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255 / var(--un-bg-opacity));}
 .bg-cover{background-size:cover;}
 .object-cover{object-fit:cover;}
+.object-contain{object-fit:contain;}
 .p-0{padding:0;}
 .p-1{padding:0.25rem;}
 .p-2{padding:0.5rem;}

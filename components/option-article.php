@@ -45,9 +45,9 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             $friendVideo = $this->fields->friend_video;
             if (!empty($friendVideo)) {
                 ?>
-                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
+                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-72 relative col-span-3">
                     <video src="<?php echo $friendVideo ?>" autoplay="autoplay" loop preload="auto" controls="controls"
-                        class="w-full h-full object-cover absolute top-0" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
+                        class="w-full h-72 object-contain absolute top-0" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
                 </div>
                 <?php
             } else {
