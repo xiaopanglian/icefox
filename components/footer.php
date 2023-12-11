@@ -58,6 +58,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     else
         echo 1; ?>" />
     <input class="_totalPage" value="<?php echo ceil($this->getTotal() / $this->parameter->pageSize); ?>" />
+    <input id="commentsRequireMail" value="<?php echo $this->options->commentsRequireMail; ?>" />
+    <input id="commentsRequireURL" value="<?php echo $this->options->commentsRequireURL; ?>" />
     <li>
         <div class="bg-white p-2 rounded-sm border-1 border-solid border-[#07c160]">
             <div class="grid grid-cols-3 gap-2">

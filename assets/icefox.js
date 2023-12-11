@@ -170,6 +170,9 @@ function clickComment() {
             let cid = $(e.target).data('cid');
             let coid = $(e.target).data('coid');
 
+            let requiredMail = $("#commentsRequireMail").val();
+            let requiredURL = $("#commentsRequireURL").val();
+
             let author = document.querySelector('.input-author').value;
             let url = document.querySelector('.input-url').value;
             let mail = document.querySelector('.input-mail').value;
@@ -182,6 +185,14 @@ function clickComment() {
                 url: url,
                 text: text,
             };
+            if (requiredMail == 1 && param.mail === '') {
+                alert('邮件不能为空');
+                return;
+            }
+            if (requiredURL == 1 && param.url === '') {
+                alert('网址不能为空');
+                return;
+            }
 
             // 记录信息到localStorage
             window.localStorage.setItem('author', author);
@@ -293,7 +304,7 @@ function clickLike() {
                 }
             })
             .catch(function (error) {
-                
+
             });
     });
 
