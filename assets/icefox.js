@@ -185,6 +185,10 @@ function clickComment() {
                 url: url,
                 text: text,
             };
+            if (param.author === '') {
+                alert('昵称不能为空');
+                return;
+            }
             if (requiredMail == 1 && param.mail === '') {
                 alert('邮件不能为空');
                 return;
