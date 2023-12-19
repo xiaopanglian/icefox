@@ -1,13 +1,13 @@
 <?php
 /**
- * 朋友圈Icefox主题1.0版本
+ * 朋友圈Icefox主题
  * 全新版本，优化UI，优化交互
  * 示例站：<a href="http://0ru.cn" target="_blank">http://0ru.cn/</a>
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.0.1
- * @link http://0ru.cn
+ * @version 1.0.2
+ * @link http://xiaopanglian.com/
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__'))
