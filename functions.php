@@ -3,6 +3,7 @@
 use Typecho\Common;
 use Widget\Options;
 use Widget\Notice;
+
 if (!defined('__TYPECHO_ROOT_DIR__'))
     exit;
 
@@ -49,7 +50,18 @@ function themeConfig($form)
     );
     $form->addInput($beian);
 
-    backupThemeData();
+    $autoPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
+        'autoPlayVideo',
+        [
+            'yes' => _t("是"),
+            'no' => _t("否")
+        ],
+        'yes',
+        _t('是否默认静音播放视频')
+    );
+    $form->addInput($autoPlayVideo);
+
+    // backupThemeData();
 }
 
 function themeFields($layout)

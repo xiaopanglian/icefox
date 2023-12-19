@@ -44,10 +44,17 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             <?php
             $friendVideo = $this->fields->friend_video;
             if (!empty($friendVideo)) {
+                $autoplay = '';
+                if ($this->options->autoPlayVideo == 'yes'){
+                    $autoplay = 'autoplay';
+                }else{
+                    $autoplay = '';
+                }
                 ?>
                 <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-3">
-                    <video src="<?php echo $friendVideo ?>" autoplay="autoplay" muted loop preload="auto" controls="controls"
-                        class="w-full" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
+                    <video src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?> muted loop preload="auto"
+                        controls="controls" class="w-full" data-cid="<?php echo $this->cid; ?>"
+                        data-play="">您的浏览器不支持video标签</video>
                 </div>
                 <?php
             } else {

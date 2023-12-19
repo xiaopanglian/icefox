@@ -38,4 +38,18 @@ function getWebsiteHomeUrl()
     return $tmpUrl;
 }
 
+/**
+ * 查找数组选项值，无法获取则返回默认值
+ * @param $optionName     名称
+ * @param $searchName   数组名
+ * @param $defaultValue 默认值
+ */
+function inArrayOptionValueOrDefault($optionName, $searchName, $defaultValue)
+{
+    if ($optionValue = Helper::options()->$optionName) {
+        return in_array($searchName, $optionValue);
+    } else {
+        return $defaultValue;
+    }
+}
 ?>
