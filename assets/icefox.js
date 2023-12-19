@@ -61,61 +61,46 @@ window.onload = async () => {
         }
     });
 
+
 };
 
 /**
  * 加载文章是否需要全文按钮
  */
 function loadQW() {
-    var articleContents = document.querySelectorAll('.article-content');
-    articleContents.forEach(content => {
-        if (content && content.scrollHeight > content.offsetHeight) {
-            let cid = content.attributes['data-cid'].value;
-            // 需要全文按钮
-            var qw = document.querySelector('.qw-' + cid);
-            qw.classList.remove('hidden');
+    $.each($(".article-content"), function (index, element) {
+        if (element.scrollHeight > element.offsetHeight) {
+            let cid = $(element).data('cid');
 
-            var qw = document.querySelector('.ss-' + cid);
-            qw.classList.add('hidden');
+            //添加全文按钮
+            $(".qw-" + cid).removeClass('hidden');
         }
-    });
+    })
 }
 
 // 点击全文按钮
 function clickQW() {
-    let qwElements = document.querySelectorAll('.qw');
-    qwElements.forEach(qwElement => {
-        qwElement.addEventListener('click', event => {
-            event.target.classList.add('hidden');
+    $(".qw").off('click');
+    $(".qw").on('click', function (e) {
+        $(e.target).addClass('hidden');
 
-            let cid = event.target.attributes['data-cid'].value;
+        let cid = $(e.target).data('cid');
 
-            let slh = document.querySelector('.content-' + cid);
-            slh.classList.remove('hidden-clamp');
-
-            var qw = document.querySelector('.qw-' + cid);
-            qw.classList.add('hidden');
-            var qw = document.querySelector('.ss-' + cid);
-            qw.classList.remove('hidden');
-        });
+        $(".content-" + cid).removeClass("line-clamp-4");
+        $(".ss-" + cid).removeClass('hidden');
     });
 }
 
 // 点击收缩按钮
 function clickSS() {
-    let qwElements = document.querySelectorAll('.ss');
-    qwElements.forEach(qwElement => {
-        qwElement.addEventListener('click', event => {
-            event.target.classList.add('hidden');
+    $(".ss").off('click');
+    $(".ss").on('click', function (e) {
+        $(e.target).addClass('hidden');
 
-            let cid = event.target.attributes['data-cid'].value;
+        let cid = $(e.target).data('cid');
 
-            let slh = document.querySelector('.content-' + cid);
-            slh.classList.add('hidden-clamp');
-
-            var qw = document.querySelector('.qw-' + cid);
-            qw.classList.remove('hidden');
-        });
+        $(".content-" + cid).addClass("line-clamp-4");
+        $(".qw-" + cid).removeClass('hidden');
     });
 }
 

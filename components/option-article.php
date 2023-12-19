@@ -23,14 +23,14 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             <?php endif; ?>
         </section>
         <section
-            class="cursor-default text-[14px] article-content break-all hidden-clamp content-<?php echo $this->cid; ?>"
+            class="cursor-default text-[14px] article-content break-all line-clamp-4 content-<?php echo $this->cid; ?>"
             data-cid="<?php echo $this->cid; ?>">
             <?php $this->content(); ?>
         </section>
-        <span class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $this->cid; ?> hidden"
-            data-cid="<?php echo $this->cid; ?>">全文</span>
-        <span class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $this->cid; ?> hidden"
-            data-cid="<?php echo $this->cid; ?>">收缩</span>
+        <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $this->cid; ?> hidden"
+            data-cid="<?php echo $this->cid; ?>">全文</div>
+        <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $this->cid; ?> hidden"
+            data-cid="<?php echo $this->cid; ?>">收缩</div>
         <!--一张图-->
         <!-- <div>
                     <div>
@@ -45,9 +45,9 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             $friendVideo = $this->fields->friend_video;
             if (!empty($friendVideo)) {
                 ?>
-                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-72 relative col-span-3">
-                    <video src="<?php echo $friendVideo ?>" autoplay="autoplay" loop preload="auto" controls="controls"
-                        class="w-full h-72 object-contain absolute top-0" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
+                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-3">
+                    <video src="<?php echo $friendVideo ?>" autoplay="autoplay" muted loop preload="auto" controls="controls"
+                        class="w-full" data-cid="<?php echo $this->cid; ?>">您的浏览器不支持video标签</video>
                 </div>
                 <?php
             } else {

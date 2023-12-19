@@ -61,6 +61,7 @@ input::placeholder {
     cursor: pointer;
     color: transparent;
 }
+
 .unlike {
     width: 18px;
     height: 18px;
@@ -85,7 +86,8 @@ input::placeholder {
     background-position: center;
     color: transparent;
 }
-.hudong-liked{
+
+.hudong-liked {
     width: 18px;
     height: 18px;
     background-image: url('./svgs/post.fun.btn.liked.svg');
@@ -110,13 +112,6 @@ input::placeholder {
     background-repeat: no-repeat;
     background-position: center;
     color: transparent;
-}
-
-.hidden-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 .article-content a {
