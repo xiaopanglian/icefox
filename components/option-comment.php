@@ -16,7 +16,14 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <span class="text-[14px] text-color-link">
                             <a href="<?php echo $comment['url'] ?>" target="_blank"
                                 class="cursor-pointer text-color-link no-underline">
-                                <?php echo $comment['author'] ?>
+                                <?php echo $comment['author']; ?>
+                                <?php
+                                if ($comment['authorId'] == $this->authorId) {
+                                    ?>
+                                    <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                    <?php
+                                }
+                                ?>
                             </a>
                         </span>
                         <span data-separator=":"
@@ -39,11 +46,25 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                     <a href="<?php echo $childComment['url'] ?>" target="_blank"
                                         class="cursor-pointer text-color-link no-underline">
                                         <?php echo $childComment['author'] ?>
+                                        <?php
+                                        if ($childComment['authorId'] == $this->authorId) {
+                                            ?>
+                                            <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                            <?php
+                                        }
+                                        ?>
                                     </a>
                                 </span>
                                 <span class="text-[14px]">回复</span>
                                 <span class="text-[14px] text-color-link">
                                     <?php echo $comment['author'] ?>
+                                    <?php
+                                    if ($comment['authorId'] == $this->authorId) {
+                                        ?>
+                                        <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                        <?php
+                                    }
+                                    ?>
                                 </span>
                                 <span data-separator=":"
                                     class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to"
