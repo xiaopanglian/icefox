@@ -128,7 +128,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </section>
         <!--评论列表-->
-        <section>
+        <section class="break-all">
             <?php $this->need('/components/option-like.php'); ?>
             <?php $this->need('/components/option-comment.php'); ?>
         </section>
