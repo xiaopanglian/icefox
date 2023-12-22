@@ -111,8 +111,12 @@ window.addEventListener('click', (event) => {
     if (event.target.classList.contains('hudong')) {
         return;
     }
+    if (event.target.classList.contains('comment-to')) {
+        return;
+    }
     // 隐藏所有互动悬浮框
     hiddenHudongModal();
+    removeAllCommentForm();
 });
 
 /**
@@ -122,8 +126,9 @@ function clickHudong() {
     $(".hudong").off('click');
     $(".hudong").on('click', function (e) {
         let hudongElement = e.target;
-
+        
         hiddenHudongModal();
+        removeAllCommentForm();
 
         let modal = $(hudongElement).next();
         modal.removeClass('hidden');
@@ -357,14 +362,7 @@ function getCommentFormHtml(cid, coid, name) {
  * 移除其他评论框
  */
 function removeAllCommentForm() {
-    let commentForm = document.querySelectorAll('.comment-form');
-
-    if (commentForm.length > 0) {
-        for (let commentFormChild of commentForm) {
-            let cid = commentFormChild.attributes['data-cid'].value;
-            document.querySelector('.comment-ul-cid-' + cid).removeChild(commentFormChild);
-        }
-    }
+    $(".comment-form").remove();
 }
 
 /**

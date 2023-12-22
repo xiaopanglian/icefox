@@ -30,7 +30,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                             class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to"
                             data-coid="<?php echo $comment['coid'] ?>" data-cid="<?php echo $comment['cid'] ?>"
                             data-name="<?php echo $comment['author'] ?>">
-                            <?php echo preg_replace("/<br>|<p>|<\/p>/", ' ', $comment['text']) ?>
+                            <?php echo strip_tags(preg_replace("/<br>|<p>|<\/p>/", ' ', $comment['text'])) ?>
                         </span>
                     </div>
                 </li>
@@ -70,7 +70,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                     class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to"
                                     data-coid="<?php echo $childComment['coid'] ?>" data-cid="<?php echo $childComment['cid'] ?>"
                                     data-name="<?php echo $childComment['author'] ?>">
-                                    <?php echo preg_replace("/<br>|<p>|<\/p>/", ' ', $childComment['text']) ?>
+                                    <?php echo strip_tags(preg_replace("/<br>|<p>|<\/p>/", ' ', $childComment['text'])) ?>
                                 </span>
 
                             </div>
