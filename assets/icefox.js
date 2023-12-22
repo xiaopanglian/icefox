@@ -114,6 +114,15 @@ window.addEventListener('click', (event) => {
     if (event.target.classList.contains('comment-to')) {
         return;
     }
+    if (event.target.classList.contains('face')) {
+        return;
+    }
+    if ($(event.target).prop('tagName') === 'INPUT') {
+        return;
+    }
+    if ($(event.target).prop('tagName') === 'BUTTON') {
+        return;
+    }
     // 隐藏所有互动悬浮框
     hiddenHudongModal();
     removeAllCommentForm();
@@ -126,7 +135,7 @@ function clickHudong() {
     $(".hudong").off('click');
     $(".hudong").on('click', function (e) {
         let hudongElement = e.target;
-        
+
         hiddenHudongModal();
         removeAllCommentForm();
 
@@ -187,6 +196,10 @@ function clickComment() {
                 alert('网址不能为空');
                 return;
             }
+            if (param.text === '') {
+                alert('评论内容不能为空');
+                return;
+            }
 
             // 记录信息到localStorage
             window.localStorage.setItem('author', author);
@@ -237,11 +250,12 @@ function clickComment() {
                         }
                     } else {
                         // 评论异常，弹出进行提醒
+                        alert(response.data.msg);
                     }
 
                 })
                 .catch(function (error) {
-
+                    alert('系统异常，请稍候重试')
                 });
         });
 
