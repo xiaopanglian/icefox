@@ -7,8 +7,12 @@ let globalData = {
 window.onload = async () => {
     // 网站接口请求地址前缀
     globalData.webSiteHomeUrl = document.querySelector('.webSiteHomeUrl').value;
-    globalData.loadMorePage = parseInt(document.querySelector('._currentPage').value);
-    globalData.totalPage = parseInt(document.querySelector('._totalPage').value);
+    if (document.querySelector('._currentPage')) {
+        globalData.loadMorePage = parseInt(document.querySelector('._currentPage').value);
+    }
+    if (document.querySelector('._totalPage')) {
+        globalData.totalPage = parseInt(document.querySelector('._totalPage').value);
+    }
 
     loadQW();
     clickQW();
@@ -61,7 +65,9 @@ window.onload = async () => {
         }
     });
 
-
+    $(".go-back").on('click',function(){
+        window.history.back();
+    });
 };
 
 /**

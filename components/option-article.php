@@ -122,7 +122,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <a href="javascript:;"
                             class="cursor-pointer text-[#fff] no-underline flex items-center text-[14px] comment-to"
                             data-cid="<?php echo $this->cid; ?>"><span
-                                class="hudong-comment inline-block mr-2 cursor-pointer"></span>评论</a>
+                                class="hudong-comment inline-block mr-2 cursor-pointer comment-to" data-cid="<?php echo $this->cid; ?>"></span>评论</a>
                     </div>
                 </div>
             </div>

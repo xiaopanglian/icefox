@@ -17,6 +17,20 @@ function getCommentByCid($cid, $parent = 0, $len = 5): array
 }
 
 /**
+ * 根据文章id获取评论数量
+ */
+function getCommentCountByCid($cid){
+    
+    $db = Typecho_Db::get();
+    $prefix = $db->getPrefix();
+
+    $list = $db->fetchAll($db->select('cid')->from('table.comments')->where('cid = ?', $cid)->where('status = ?', 'approved'));
+    $count = count($list);
+
+    return $count;
+}
+
+/**
  * 获取点赞
  */
 function getAgreeNumByCid($cid)

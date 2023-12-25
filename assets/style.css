@@ -47,6 +47,17 @@ input::placeholder {
     color: transparent;
 }
 
+.ico-back{
+    width: 20px;
+    height: 20px;
+    background-image: url('./svgs/post.top.back.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+    color: transparent;
+}
+
 .hudong:hover {
     background-color: #dedede;
 }
@@ -157,6 +168,10 @@ input::placeholder {
         max-width: 567px;
     }
 
+    .top-container {
+        max-width: 567px;
+    }
+
     .side-area {
         display: block;
     }
@@ -164,6 +179,11 @@ input::placeholder {
 
 @media screen and (max-width: 567px) {
     .main-container {
+        width: 100%;
+        min-width: 300px;
+    }
+
+    .top-container {
         width: 100%;
         min-width: 300px;
     }

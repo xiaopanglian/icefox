@@ -3,12 +3,17 @@
 if (!defined('__TYPECHO_ROOT_DIR__'))
     exit;
 
+$commentCount = 5;
+if ($this->is('single')) {
+    $commentCount = 999;
+}
 ?>
 
 <div class="index-comments bottom-shadow bg-[#f7f7f7] pl-3 pr-3 ">
     <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $this->cid; ?> comment-ul">
         <?php
-        $comments = getCommentByCid($this->cid, 0, 999);
+        $count = getCommentCountByCid($this->cid);
+        $comments = getCommentByCid($this->cid, 0, $commentCount);
         if ($comments) {
             foreach ($comments as $comment): ?>
                 <li class="pos-rlt comment-li-coid-<?php echo $comment['coid'] ?> pb-1">
@@ -20,7 +25,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                 <?php
                                 if ($comment['authorId'] == $this->authorId) {
                                     ?>
-                                    <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                    <span
+                                        class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
                                     <?php
                                 }
                                 ?>
@@ -49,7 +55,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                         <?php
                                         if ($childComment['authorId'] == $this->authorId) {
                                             ?>
-                                            <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                            <span
+                                                class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
                                             <?php
                                         }
                                         ?>
@@ -61,7 +68,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                     <?php
                                     if ($comment['authorId'] == $this->authorId) {
                                         ?>
-                                        <span class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                        <span
+                                            class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
                                         <?php
                                     }
                                     ?>
@@ -81,7 +89,17 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
                 <?php ?>
             <?php endforeach; ?>
+            <?php
+            if ($count > 5 & $commentCount == 5) {
+                ?>
+                <li>
+                    <a href="<?php $this->permalink() ?>"
+                        class="cursor-pointer text-color-link no-underline text-[14px]">查看更多...</a>
+                </li>
 
+                <?php
+            }
+            ?>
             <?php
         }
         ?>
