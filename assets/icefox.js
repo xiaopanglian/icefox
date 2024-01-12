@@ -27,6 +27,9 @@ window.onload = async () => {
     // 点击点赞
     clickLike();
 
+    // 点击emoji
+    clickEmoji();
+
     // 大图预览
     let previewImages = document.querySelectorAll('.preview-image');
     previewImages.forEach((element) => {
@@ -123,6 +126,12 @@ window.addEventListener('click', (event) => {
     if (event.target.classList.contains('face')) {
         return;
     }
+    if (event.target.classList.contains('face-item')) {
+        return;
+    }
+    if (event.target.classList.contains('face-container')) {
+        return;
+    }
     if ($(event.target).prop('tagName') === 'INPUT') {
         return;
     }
@@ -133,6 +142,38 @@ window.addEventListener('click', (event) => {
     hiddenHudongModal();
     removeAllCommentForm();
 });
+
+/**
+ * 点击emoji
+ */
+function clickEmoji() {
+    $(".face-item").off('click');
+    $(".face-item").on('click', function (e) {
+        let cid = $(e.target).data('cid');
+        var input = $('input[data-cid=' + cid + '].input-text');
+
+        var textToAppend = $(e.target).text(); // 要追加的文本  
+        var currentVal = input.val();
+        input.val(currentVal + textToAppend);
+    });
+}
+
+/**
+ * 点击emoji表情显示/隐藏emoji
+ */
+function clickEmojiFace() {
+    $(".face").off('click');
+    $(".face").on('click', function (e) {
+        let cid = $(e.target).data('cid');
+        var faceContainer = $('.face-container[data-cid=' + cid + ']');
+
+        if ($(faceContainer).hasClass('hidden')) {
+            $(faceContainer).removeClass('hidden');
+        } else {
+            $(faceContainer).addClass('hidden');
+        }
+    });
+}
 
 /**
  * 点击互动
@@ -168,6 +209,9 @@ function clickComment() {
             //有coid，在对应评论处显示评论框
             document.querySelector('.comment-li-coid-' + coid).insertAdjacentHTML('afterend', getCommentFormHtml(cid, coid, name));
         }
+
+        clickEmoji();
+        clickEmojiFace();
 
         // 点击评论回复按钮
         $(".btn-comment").off('click');
@@ -369,8 +413,96 @@ function getCommentFormHtml(cid, coid, name) {
         <div class="mt-2">
             <input placeholder="${placeholder}" class="border-0 outline-none w-full rounded-sm p-1 input-text" data-cid="${cid}" data-coid="${coid}" />
         </div>
+        <div class="face-container hidden" data-cid="${cid}" data-coid="${coid}">
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😀</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😄</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😁</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😆</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😅</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😂</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤣</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😊</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😇</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🙂</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🙃</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😉</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😌</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😍</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥰</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😘</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😗</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😙</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😚</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😋</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😛</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😝</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😜</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤪</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤨</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🧐</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤓</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😎</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤩</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥳</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😏</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😒</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😞</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😔</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😟</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😕</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🙁</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">☹️</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😣</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😖</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😫</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😩</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥺</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😢</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😭</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😤</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😠</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😡</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤬</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤯</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😳</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥵</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥶</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😱</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😨</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😰</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😥</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😓</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤗</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤔</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤭</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤫</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤥</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😶</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😐</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😑</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😬</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🙄</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😯</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😦</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😧</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😮</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😲</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥱</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😴</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤤</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😪</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😵</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤐</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🥴</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤢</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤮</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤧</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😷</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤒</span>
+<span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤕</span>
+        </div>
         <div class="flex justify-end mt-2">
-            <div class="face mr-2 cursor-pointer"></div>
+            <div class="face mr-2 cursor-pointer" data-cid="${cid}" data-coid="${coid}"></div>
             <button class="btn-comment bg-[#07c160] border-0 outline-none text-white cursor-pointer rounded-sm" data-cid="${cid}" data-coid="${coid}">回复</button>
         </div>
     </div>
