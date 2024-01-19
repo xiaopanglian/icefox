@@ -1,0 +1,8 @@
+.admin-title {
+    color: red;
+    font-size: 24px;
+    background-color: white;
+    border-radius: 6px;
+    text-align: center;
+    padding: 3px 0;
+}

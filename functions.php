@@ -12,54 +12,79 @@ include_once 'core/core.php';
 
 function themeConfig($form)
 {
-    $backgroundImageUrl = new Typecho_Widget_Helper_Form_Element_Text(
-        'backgroundImageUrl',
-        null,
-        null,
-        _t('站点顶部背景图'),
-        _t('在这里填入一个图片 URL 地址, 以在站点顶部显示该图片')
-    );
+    ?>
+    <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
+    <div>
+        <div class="admin-title">Icefox主题后台配置（v1.2.6）</div>
+        <div>
+            <div>
+                <?php
+                $backgroundImageUrl = new Typecho_Widget_Helper_Form_Element_Text(
+                    'backgroundImageUrl',
+                    null,
+                    null,
+                    _t('站点顶部背景图'),
+                    _t('在这里填入一个图片 URL 地址, 以在站点顶部显示该图片')
+                );
 
-    $form->addInput($backgroundImageUrl);
+                $form->addInput($backgroundImageUrl);
 
-    $userAvatarUrl = new Typecho_Widget_Helper_Form_Element_Text(
-        'userAvatarUrl',
-        null,
-        null,
-        _t('用户头像'),
-        _t('在这里填入一个图片 URL 地址')
-    );
+                $userAvatarUrl = new Typecho_Widget_Helper_Form_Element_Text(
+                    'userAvatarUrl',
+                    null,
+                    null,
+                    _t('用户头像'),
+                    _t('在这里填入一个图片 URL 地址')
+                );
 
-    $form->addInput($userAvatarUrl);
+                $form->addInput($userAvatarUrl);
 
-    $topPost = new Typecho_Widget_Helper_Form_Element_Text(
-        "topPost",
-        null,
-        null,
-        "置顶文章<span style='color:red'>（暂不可用）</span>",
-        "格式：文章的ID,文章的ID,文章的ID （中间使用英文逗号,分隔）"
-    );
-    $form->addInput($topPost);
+                $topPost = new Typecho_Widget_Helper_Form_Element_Text(
+                    "topPost",
+                    null,
+                    null,
+                    "置顶文章",
+                    "格式：文章的ID,文章的ID,文章的ID （中间使用英文逗号,分隔）"
+                );
+                $form->addInput($topPost);
 
-    $beian = new Typecho_Widget_Helper_Form_Element_Text(
-        "beian",
-        null,
-        null,
-        "备案号",
-        "例如：京ICP备00000001号"
-    );
-    $form->addInput($beian);
+                $beian = new Typecho_Widget_Helper_Form_Element_Text(
+                    "beian",
+                    null,
+                    null,
+                    "备案号",
+                    "例如：京ICP备00000001号"
+                );
+                $form->addInput($beian);
 
-    $autoPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
-        'autoPlayVideo',
-        [
-            'yes' => _t("是"),
-            'no' => _t("否")
-        ],
-        'yes',
-        _t('是否默认静音播放视频')
-    );
-    $form->addInput($autoPlayVideo);
+                $autoPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
+                    'autoPlayVideo',
+                    [
+                        'yes' => _t("是"),
+                        'no' => _t("否")
+                    ],
+                    'yes',
+                    _t('是否默认播放视频')
+                );
+                $form->addInput($autoPlayVideo);
+
+                $autoMutedPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
+                    'autoMutedPlayVideo',
+                    [
+                        'yes' => _t("是"),
+                        'no' => _t("否")
+                    ],
+                    'yes',
+                    _t('是否默认静音播放视频')
+                );
+                $form->addInput($autoMutedPlayVideo);
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <?php
+
 
     // backupThemeData();
 }

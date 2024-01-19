@@ -2,7 +2,13 @@
 
 if (!defined('__TYPECHO_ROOT_DIR__'))
     exit;
+$isSingle = false;
+$lineClamp = 'line-clamp-4';
 
+if ($this->is('single')) {
+    $isSingle = true;
+    $lineClamp = '';
+}
 ?>
 
 <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pl-5 pr-5">
@@ -23,14 +29,20 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             <?php endif; ?>
         </section>
         <section
-            class="cursor-default text-[14px] article-content break-all line-clamp-4 content-<?php echo $this->cid; ?>"
+            class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $this->cid; ?>"
             data-cid="<?php echo $this->cid; ?>">
             <?php $this->content(); ?>
         </section>
-        <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $this->cid; ?> hidden"
-            data-cid="<?php echo $this->cid; ?>">全文</div>
-        <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $this->cid; ?> hidden"
-            data-cid="<?php echo $this->cid; ?>">收缩</div>
+        <?php
+        if (!$isSingle) {
+            ?>
+            <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $this->cid; ?> hidden"
+                data-cid="<?php echo $this->cid; ?>">全文</div>
+            <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $this->cid; ?> hidden"
+                data-cid="<?php echo $this->cid; ?>">收缩</div>
+            <?php
+        }
+        ?>
         <!--一张图-->
         <!-- <div>
                     <div>
@@ -45,15 +57,21 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             $friendVideo = $this->fields->friend_video;
             if (!empty($friendVideo)) {
                 $autoplay = '';
-                if ($this->options->autoPlayVideo == 'yes'){
+                if ($this->options->autoPlayVideo == 'yes') {
                     $autoplay = 'autoplay';
-                }else{
+                } else {
                     $autoplay = '';
+                }
+                $autoMuted = '';
+                if ($this->options->autoMutedPlayVideo == 'yes') {
+                    $autoMuted = 'muted';
+                } else {
+                    $autoMuted = '';
                 }
                 ?>
                 <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-3">
-                    <video src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?> muted loop preload="auto"
-                        controls="controls" class="w-full" data-cid="<?php echo $this->cid; ?>"
+                    <video src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>     <?php echo $autoMuted; ?> loop
+                        preload="auto" controls="controls" class="w-full" data-cid="<?php echo $this->cid; ?>"
                         data-play="">您的浏览器不支持video标签</video>
                 </div>
                 <?php
@@ -122,7 +140,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <a href="javascript:;"
                             class="cursor-pointer text-[#fff] no-underline flex items-center text-[14px] comment-to"
                             data-cid="<?php echo $this->cid; ?>"><span
-                                class="hudong-comment inline-block mr-2 cursor-pointer comment-to" data-cid="<?php echo $this->cid; ?>"></span>评论</a>
+                                class="hudong-comment inline-block mr-2 cursor-pointer comment-to"
+                                data-cid="<?php echo $this->cid; ?>"></span>评论</a>
                     </div>
                 </div>
             </div>
