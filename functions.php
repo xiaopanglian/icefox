@@ -15,7 +15,7 @@ function themeConfig($form)
     ?>
     <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
     <div>
-        <div class="admin-title">Icefox主题后台配置（v1.2.6）</div>
+        <div class="admin-title">Icefox主题后台配置（v1.2.7）</div>
         <div>
             <div>
                 <?php
@@ -78,6 +78,25 @@ function themeConfig($form)
                     _t('是否默认静音播放视频')
                 );
                 $form->addInput($autoMutedPlayVideo);
+
+                $script = new Typecho_Widget_Helper_Form_Element_Textarea(
+                    "script",
+                    null,
+                    null,
+                    "全局自定义JavaScript",
+                    "不用添加script标签"
+                );
+                $form->addInput($script);
+
+                $css = new Typecho_Widget_Helper_Form_Element_Textarea(
+                    "css",
+                    null,
+                    null,
+                    "全局自定义CSS",
+                    "不用添加style标签"
+                );
+                $form->addInput($css);
+
                 ?>
             </div>
         </div>

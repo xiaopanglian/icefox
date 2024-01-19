@@ -13,11 +13,17 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/style.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/viewer.min.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('uno.css'); ?>">
+    <style>
+        <?php echo $this->options->css; ?>
+    </style>
     <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/axios.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/viewer.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/scrollload.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/icefox.js'); ?>"></script>
+    <script type="text/javascript">
+        <?php echo $this->options->script; ?>
+    </script>
 </head>
 
 <body class="bg-[#f0f0f0]">

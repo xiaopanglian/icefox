@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.2.6
+ * @version 1.2.7
  * @link http://xiaopanglian.com/
  */
 
@@ -21,9 +21,9 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
     <?php $this->need('/components/option-header.php'); ?>
 
-    <div class="article-container">
-        <?php $this->need('/components/option-article-top.php'); ?>
+    <?php $this->need('/components/option-article-top.php'); ?>
 
+    <div class="article-container">
         <?php while ($this->next()): ?>
             <?php $this->need('/components/option-article.php'); ?>
         <?php endwhile; ?>
