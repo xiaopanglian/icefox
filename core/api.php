@@ -34,7 +34,7 @@ function addComment($self)
         'created' => $options->gmtTime,
         'agent' => $self->request->getAgent(),
         'ip' => $self->request->getIp(),
-        'ownerId' => $self->author->uid,
+        'ownerId' => 1,
         'type' => 'comment',
         'status' => $options->commentsRequireModeration ? 'waiting' : 'approved'
     );
