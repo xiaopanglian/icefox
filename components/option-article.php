@@ -11,13 +11,13 @@ if ($this->is('single')) {
 }
 ?>
 
-<article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pl-5 pr-5">
+<article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
     <div class="mr-3">
         <div class="w-9 h-9">
             <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
         </div>
     </div>
-    <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 border-gray-100 border-solid">
+    <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid">
         <section class="flex flex-row justify-between items-center">
             <span class="text-color-link cursor-default text-[14px]">
                 <?php $this->author(); ?>
@@ -25,7 +25,7 @@ if ($this->is('single')) {
             <?php $isAdvertise = $this->fields->isAdvertise;
             if ($isAdvertise == true):
                 ?>
-                <span class="text-[12px] bg-[#f0f0f0] p-1 text-[#c6c6c6] rounded-sm">广告</span>
+                <span class="text-[12px] bg-[#f0f0f0] dark:bg-[#262626] p-1 text-[#c6c6c6] rounded-sm">广告</span>
             <?php endif; ?>
         </section>
         <section
@@ -116,7 +116,7 @@ if ($this->is('single')) {
                 <?php echo getTimeFormatStr($this->created); ?>
             </div>
             <div class="w-[30px] h-[20px] relative">
-                <div class="hudong rounded-sm"></div>
+                <div class="hudong dark:bg-[#262626] rounded-sm"></div>
                 <div class="hudong-modal absolute right-10 top-[-10px] hidden">
                     <div
                         class="bg-[#4c4c4c] text-[#fff] hudong-container pt-2 pb-2 pl-5 pr-5 flex flex-row items-center justify-between">

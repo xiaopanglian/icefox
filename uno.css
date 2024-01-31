@@ -34,6 +34,7 @@
 .col-span-3{grid-column:span 3/span 3;}
 .grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
 .m-0{margin:0;}
+.m181\.026{margin:45.2565rem;}
 .mx-auto{margin-left:auto;margin-right:auto;}
 .mb-12{margin-bottom:3rem;}
 .mb-2{margin-bottom:0.5rem;}
@@ -102,7 +103,9 @@
 .border-gray-100{--un-border-opacity:1;border-color:rgb(243 244 246 / var(--un-border-opacity));}
 .border-gray-200{--un-border-opacity:1;border-color:rgb(229 231 235 / var(--un-border-opacity));}
 .border-red-700{--un-border-opacity:1;border-color:rgb(185 28 28 / var(--un-border-opacity));}
+.dark .dark\:border-gray-600{--un-border-opacity:1;border-color:rgb(75 85 99 / var(--un-border-opacity));}
 .rounded{border-radius:0.25rem;}
+.rounded-3xl{border-radius:1.5rem;}
 .rounded-lg{border-radius:0.5rem;}
 .rounded-sm{border-radius:0.125rem;}
 .border-solid{border-style:solid;}
@@ -110,9 +113,12 @@
 .bg-\[\#07c160\]{--un-bg-opacity:1;background-color:rgb(7 193 96 / var(--un-bg-opacity));}
 .bg-\[\#454545\]{--un-bg-opacity:1;background-color:rgb(69 69 69 / var(--un-bg-opacity));}
 .bg-\[\#4c4c4c\]{--un-bg-opacity:1;background-color:rgb(76 76 76 / var(--un-bg-opacity));}
+.bg-\[\#E8E9EC\]{--un-bg-opacity:1;background-color:rgb(232 233 236 / var(--un-bg-opacity));}
 .bg-\[\#f0f0f0\]{--un-bg-opacity:1;background-color:rgb(240 240 240 / var(--un-bg-opacity));}
 .bg-\[\#f7f7f7\]{--un-bg-opacity:1;background-color:rgb(247 247 247 / var(--un-bg-opacity));}
 .bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255 / var(--un-bg-opacity));}
+.dark .dark\:bg-\[\#262626\]{--un-bg-opacity:1;background-color:rgb(38 38 38 / var(--un-bg-opacity));}
+.dark .dark\:bg-\[\#323232\]{--un-bg-opacity:1;background-color:rgb(50 50 50 / var(--un-bg-opacity));}
 .bg-opacity-70{--un-bg-opacity:0.7;}
 .bg-cover{background-size:cover;}
 .object-cover{object-fit:cover;}
@@ -138,6 +144,7 @@
 .text-sm{font-size:0.875rem;line-height:1.25rem;}
 .text-xs{font-size:0.75rem;line-height:1rem;}
 .leading-8{line-height:2rem;}
+.dark .dark\:text-\[\#cccccc\]{--un-text-opacity:1;color:rgb(204 204 204 / var(--un-text-opacity));}
 .text-\[\#00b894\]{--un-text-opacity:1;color:rgb(0 184 148 / var(--un-text-opacity));}
 .text-\[\#c6c6c6\]{--un-text-opacity:1;color:rgb(198 198 198 / var(--un-text-opacity));}
 .text-\[\#fff\],

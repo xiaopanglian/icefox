@@ -10,11 +10,44 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <?php
     $beian = $this->options->beian;
     if (isset($beian)) {
-        echo '<a href="https://beian.miit.gov.cn/" class="cursor-pointer text-gray-300" target="_blank">'.$beian.'</a>';
+        echo '<a href="https://beian.miit.gov.cn/" class="cursor-pointer text-gray-300" target="_blank">' . $beian . '</a>';
     }
     ?>
 </div>
 <div class="fixed right-10 bottom-10 side-area">
+    <div class="w-[48px] h-[48px] cursor-pointer rounded-3xl bg-[#E8E9EC] flex justify-center items-center mb-2">
+        <svg t="1706667782532" class="icon cursor-pointer" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="6107" xmlns:xlink="http://www.w3.org/1999/xlink" width="36"
+            height="36" @click="darkMode=true" x-show="darkMode==false">
+            <path
+                d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z"
+                fill="#FFB531" p-id="6108" class="cursor-pointer"></path>
+            <path
+                d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z"
+                fill="#030835" p-id="6109" class="cursor-pointer"></path>
+        </svg>
+        <svg t="1706667797282" class="icon cursor-pointer" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="8226" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" @click="darkMode=false" x-show="darkMode==true">
+            <path
+                d="M512 170.682c-11.782 0-21.312-9.562-21.312-21.342V21.344C490.688 9.562 500.22 0.016 512 0.016c11.812 0 21.344 9.546 21.344 21.328V149.34c0 11.78-9.532 21.342-21.344 21.342zM512 1023.984s0.032 0 0 0c-11.75 0-21.312-9.562-21.312-21.312v-127.994c0-11.812 9.562-21.376 21.344-21.376 11.782 0 21.312 9.562 21.312 21.376v127.994c0 11.75-9.532 21.312-21.344 21.312z"
+                fill="#F6BB42" p-id="8227" class="cursor-pointer"></path>
+            <path
+                d="M270.664 270.648c-8.344 8.328-21.844 8.328-30.156 0L149.98 180.136c-8.312-8.328-8.312-21.828 0-30.156a21.332 21.332 0 0 1 30.188 0l90.496 90.496c8.344 8.328 8.344 21.844 0 30.172zM874.052 874.022a21.332 21.332 0 0 1-30.188 0l-90.498-90.5c-8.344-8.344-8.344-21.842 0-30.154a21.332 21.332 0 0 1 30.188 0l90.498 90.498c8.312 8.312 8.312 21.812 0 30.156z"
+                fill="#FFCE54" p-id="8228" class="cursor-pointer"></path>
+            <path
+                d="M170.7 512c0 11.782-9.562 21.328-21.344 21.328H21.36C9.578 533.328 0.048 523.782 0.016 512c0-11.782 9.562-21.328 21.344-21.328h127.996c11.78 0 21.344 9.546 21.344 21.328zM1023.984 512c0 11.782-9.532 21.328-21.312 21.328h-127.994c-11.782 0-21.344-9.546-21.344-21.328s9.562-21.328 21.344-21.328h127.994c11.782 0 21.312 9.546 21.312 21.328z"
+                fill="#F6BB42" p-id="8229" class="cursor-pointer"></path>
+            <path
+                d="M270.664 753.368c8.344 8.312 8.344 21.81 0 30.154l-90.496 90.5a21.332 21.332 0 0 1-30.188 0c-8.312-8.344-8.312-21.844 0-30.156l90.528-90.498c8.312-8.344 21.812-8.344 30.156 0zM874.052 149.964c0 0.016 0 0 0 0 8.31 8.342 8.31 21.842 0 30.17l-90.53 90.512c-8.312 8.328-21.812 8.328-30.156 0-8.344-8.328-8.344-21.844 0-30.172l90.498-90.512c8.344-8.326 21.844-8.326 30.188 0.002z"
+                fill="#FFCE54" p-id="8230" class="cursor-pointer"></path>
+            <path
+                d="M512 789.302c-152.9 0-277.302-124.372-277.302-277.302 0-152.916 124.402-277.32 277.302-277.32 152.934 0 277.336 124.404 277.336 277.32 0 152.932-124.402 277.302-277.336 277.302z"
+                fill="#FFCE54" p-id="8231" class="cursor-pointer"></path>
+            <path
+                d="M512 213.338c-164.932 0-298.646 133.714-298.646 298.662 0 164.932 133.714 298.678 298.646 298.678 164.964 0 298.68-133.746 298.68-298.678 0-164.948-133.716-298.662-298.68-298.662z m181.026 479.656c-48.342 48.374-112.622 74.996-181.026 74.996-68.374 0-132.652-26.624-180.994-74.996-48.342-48.31-74.998-112.622-74.998-180.994s26.656-132.668 74.998-181.01c48.342-48.356 112.622-74.982 180.994-74.982 68.404 0 132.684 26.626 181.026 74.982 48.342 48.342 74.966 112.638 74.966 181.01 0 68.374-26.624 132.684-74.966 180.994z"
+                fill="#F6BB42" p-id="8232" class="cursor-pointer"></path>
+        </svg>
+    </div>
     <div class="w-[48px] h-[48px] cursor-pointer" onclick="scrollToTop(); return false;">
         <svg t="1700186173794" class="icon cursor-pointer" viewBox="0 0 1024 1024" version="1.1"
             xmlns="http://www.w3.org/2000/svg" p-id="4023" xmlns:xlink="http://www.w3.org/1999/xlink" width="48"
@@ -61,14 +94,14 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <input id="commentsRequireMail" value="<?php echo $this->options->commentsRequireMail; ?>" />
     <input id="commentsRequireURL" value="<?php echo $this->options->commentsRequireURL; ?>" />
     <li>
-        <div class="bg-white p-2 rounded-sm border-1 border-solid border-[#07c160]">
+        <div class="bg-white dark:bg-[#262626] p-2 rounded-sm border-1 border-solid border-[#07c160]">
             <div class="grid grid-cols-3 gap-2">
-                <input placeholder="昵称" class="border-0 outline-none bg-color-primary p-1 rounded-sm" />
-                <input placeholder="网址" class="border-0 outline-none bg-color-primary p-1 rounded-sm" />
-                <input placeholder="邮箱" class="border-0 outline-none bg-color-primary p-1 rounded-sm" />
+                <input placeholder="昵称" class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
+                <input placeholder="网址" class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
+                <input placeholder="邮箱" class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
             </div>
             <div class="mt-2">
-                <input placeholder="回复内容" class="border-0 outline-none w-full rounded-sm p-1" />
+                <input placeholder="回复内容" class="border-0 outline-none w-full rounded-sm p-1 dark:text-[#cccccc]" />
             </div>
             <div class="flex justify-end mt-2">
                 <div class="face mr-2 cursor-pointer"></div>

@@ -9,7 +9,7 @@ if ($this->is('single')) {
 }
 ?>
 
-<div class="index-comments bottom-shadow bg-[#f7f7f7] pl-3 pr-3 ">
+<div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] pl-3 pr-3 ">
     <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $this->cid; ?> comment-ul">
         <?php
         $count = getCommentCountByCid($this->cid);

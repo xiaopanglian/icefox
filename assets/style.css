@@ -47,7 +47,7 @@ input::placeholder {
     color: transparent;
 }
 
-.ico-back{
+.ico-back {
     width: 20px;
     height: 20px;
     background-image: url('./svgs/post.top.back.svg');
@@ -68,7 +68,6 @@ input::placeholder {
     background-image: url('./svgs/post.aside.like.light.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #f7f7f7;
     cursor: pointer;
     color: transparent;
 }
@@ -79,7 +78,6 @@ input::placeholder {
     background-image: url('./svgs/post.aside.like.light.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #f7f7f7;
     cursor: pointer;
     color: transparent;
 }
@@ -131,6 +129,10 @@ input::placeholder {
     color: #111111;
 }
 
+.dark .article-content a {
+    color: #cccccc;
+}
+
 .article-content a:hover {
     cursor: pointer;
 }
@@ -156,6 +158,9 @@ input::placeholder {
     color: #333;
 }
 
+.dark .scrollload-bottom{
+    color: #cccccc;
+}
 
 .comment-waiting {
     font-size: 12px;

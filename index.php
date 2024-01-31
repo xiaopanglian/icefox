@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.2.8
+ * @version 1.3.0
  * @link http://xiaopanglian.com/
  */
 
@@ -17,7 +17,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 <?php $this->need('/components/header.php'); ?>
 
 
-<div class="bg-white mx-auto main-container">
+<div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container" :class="{'dark':darkMode}">
 
     <?php $this->need('/components/option-header.php'); ?>
 

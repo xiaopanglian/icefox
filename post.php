@@ -9,7 +9,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 
 <?php $this->need('/components/single-top.php'); ?>
-<div class="bg-white mx-auto main-container">
+<div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container">
 
     <?php $this->need('/components/option-header.php'); ?>
 
