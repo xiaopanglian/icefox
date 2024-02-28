@@ -535,25 +535,8 @@ function imagePreviewAddEventListener(element) {
 }
 
 function preview(event) {
-    // let cid = event.target.attributes['data-cid'].value;
-
-    // if (gallery)
-    //     gallery.destroy();
-
-    // gallery = new Viewer(document.getElementById('preview-' + cid), {
-    //     focus: false,
-    //     navbar: false,
-    //     rotatable: false,
-    //     scalable: false,
-    //     slideOnTouch: false,
-    //     title: false,
-    //     toggleOnDblclick: false,
-    //     tooltip: false,
-    // });
-
-    // gallery.show();
     Fancybox.bind("[data-fancybox]", {
-        Thumbs: false
+        Thumbs: false // 不显示底部图片组
     });
 }
 
