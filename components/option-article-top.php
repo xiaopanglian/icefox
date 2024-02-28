@@ -49,7 +49,7 @@ foreach ($topCids as $key => $value) {
             <section
                 class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $topArticle['cid']; ?>"
                 data-cid="<?php echo $topArticle['cid']; ?>">
-                <?php echo $topArticle['text']; ?>
+                <?php echo $this::markdown($topArticle['text']); ?>
             </section>
             <?php
             if (!$isSingle) {
