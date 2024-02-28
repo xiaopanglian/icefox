@@ -10,8 +10,24 @@ function getCommentByCid($cid, $parent = 0, $len = 5): array
         ->from('table.comments')
         ->where('cid = ?', $cid)
         ->where('parent = ?', $parent)
+        ->where('type = ?', 'comment')
         ->where('status = ?', 'approved')
         ->order('created', Typecho_Db::SORT_DESC)
+        ->limit($len);
+    return $db->fetchAll($select);
+}
+/**
+ * 根据文章id获取最新子评论列表
+ */
+function getChildCommentByCid($cid, $len = 5): array
+{
+    $db = Typecho_Db::get();
+    $select = $db->select('coid,author,authorId,ownerId,mail,text,created,parent,url,cid')
+        ->from('table.comments')
+        ->where('cid = ?', $cid)
+        ->where('type = ?', 'comment')
+        ->where('status = ?', 'approved')
+        ->order('created', Typecho_Db::SORT_ASC)
         ->limit($len);
     return $db->fetchAll($select);
 }
@@ -19,8 +35,9 @@ function getCommentByCid($cid, $parent = 0, $len = 5): array
 /**
  * 根据文章id获取评论数量
  */
-function getCommentCountByCid($cid){
-    
+function getCommentCountByCid($cid)
+{
+
     $db = Typecho_Db::get();
     $prefix = $db->getPrefix();
 

@@ -21,6 +21,7 @@ if ($this->is('single')) {
                         <span class="text-[14px] text-color-link">
                             <a href="<?php echo $comment['url'] ?>" target="_blank"
                                 class="cursor-pointer text-color-link no-underline">
+                                <?php echo $comment['coid']; ?>
                                 <?php echo $comment['author']; ?>
                                 <?php
                                 if ($comment['authorId'] == $this->authorId) {
@@ -42,48 +43,63 @@ if ($this->is('single')) {
                 </li>
 
                 <?php
-                $childComments = getCommentByCid($this->cid, $comment['coid'], 999);
+                $childComments = getChildCommentByCid($this->cid, 999);
                 if ($childComments) {
-                    foreach ($childComments as $childComment): ?>
-
-                        <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?>">
-                            <div class="comment-body">
-                                <span class="text-[14px] text-color-link">
-                                    <a href="<?php echo $childComment['url'] ?>" target="_blank"
-                                        class="cursor-pointer text-color-link no-underline">
-                                        <?php echo $childComment['author'] ?>
-                                        <?php
-                                        if ($childComment['authorId'] == $this->authorId) {
-                                            ?>
-                                            <span
-                                                class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                    $tmpParentCoid = $comment['coid'];
+                    $hasNext = false;
+                    foreach ($childComments as $childComment) {
+                        $hasMore = false;
+                        foreach ($childComments as $childEach) {
+                            if ($childEach['parent'] == $tmpParentCoid) {
+                                ?>
+                                <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?>">
+                                    <div class="comment-body">
+                                        <span class="text-[14px] text-color-link">
+                                            <a href="<?php echo $childComment['url'] ?>" target="_blank"
+                                                class="cursor-pointer text-color-link no-underline">
+                                                <?php echo $childComment['coid'] ?>
+                                                <?php echo $childComment['author'] ?>
+                                                <?php
+                                                if ($childComment['authorId'] == $this->authorId) {
+                                                    ?>
+                                                    <span
+                                                        class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </a>
+                                        </span>
+                                        <span class="text-[14px]">回复</span>
+                                        <span class="text-[14px] text-color-link">
+                                            <?php echo $comment['author'] ?>
                                             <?php
-                                        }
-                                        ?>
-                                    </a>
-                                </span>
-                                <span class="text-[14px]">回复</span>
-                                <span class="text-[14px] text-color-link">
-                                    <?php echo $comment['author'] ?>
-                                    <?php
-                                    if ($comment['authorId'] == $this->authorId) {
-                                        ?>
-                                        <span
-                                            class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
-                                        <?php
-                                    }
-                                    ?>
-                                </span>
-                                <span data-separator=":"
-                                    class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to"
-                                    data-coid="<?php echo $childComment['coid'] ?>" data-cid="<?php echo $childComment['cid'] ?>"
-                                    data-name="<?php echo $childComment['author'] ?>">
-                                    <?php echo strip_tags(preg_replace("/<br>|<p>|<\/p>/", ' ', $childComment['text'])) ?>
-                                </span>
+                                            if ($comment['authorId'] == $this->authorId) {
+                                                ?>
+                                                <span
+                                                    class="text-xs text-red-700 border border-red-700 border-solid pl-[1px] pr-[1px] rounded">作者</span>
+                                                <?php
+                                            }
+                                            ?>
+                                        </span>
+                                        <span data-separator=":"
+                                            class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to"
+                                            data-coid="<?php echo $childComment['coid'] ?>" data-cid="<?php echo $childComment['cid'] ?>"
+                                            data-name="<?php echo $childComment['author'] ?>">
+                                            <?php echo strip_tags(preg_replace("/<br>|<p>|<\/p>/", ' ', $childComment['text'])) ?>
+                                        </span>
 
-                            </div>
-                        </li>
-                    <?php endforeach;
+                                    </div>
+                                </li>
+                                <?php
+                                $tmpParentCoid = $childEach['coid'];
+                                $hasMore = true;
+                                break;
+                            }
+                        }
+                        if ($hasMore == false) {
+                            break;
+                        }
+                    }
                 }
                 ?>
 
