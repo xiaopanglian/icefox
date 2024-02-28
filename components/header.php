@@ -14,6 +14,10 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/style.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/viewer.min.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('uno.css'); ?>">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+/>
     <style>
         <?php echo $this->options->css; ?>
     </style>
@@ -23,6 +27,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/scrollload.min.js'); ?>"></script>
     <script defer src="<?php $this->options->themeUrl('assets/alpine.3.13.3.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/icefox.js'); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script type="text/javascript">
         <?php echo $this->options->script; ?>
     </script>

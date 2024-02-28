@@ -85,7 +85,7 @@ if ($this->is('single')) {
                         if ($exten)
                         ?>
                         <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
-                            <img src="<?php echo $picture ?>"
+                            <img src="<?php echo $picture ?>" data-fancybox="<?php echo $this->cid; ?>"
                                 class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
                                 data-cid="<?php echo $this->cid; ?>" />
                         </div>
