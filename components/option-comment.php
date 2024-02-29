@@ -42,9 +42,11 @@ if ($this->is('single')) {
                 </li>
 
                 <?php
-                $childComments = getCommentByCid($this->cid, $comment['coid'], 999);
-                if ($childComments) {
-                    foreach ($childComments as $childComment): ?>
+                $childComments = getChildCommentByCid($this->cid, 999);
+                $allChildComments = getChildComments($comment['coid'], $childComments);
+
+                if ($allChildComments) {
+                    foreach ($allChildComments as $childComment): ?>
 
                         <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?>">
                             <div class="comment-body">

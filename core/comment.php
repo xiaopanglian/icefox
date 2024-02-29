@@ -33,6 +33,44 @@ function getChildCommentByCid($cid, $len = 5): array
 }
 
 /**
+ * 获取下级评论
+ */
+function getChildCommentByCidOfComplete($parent, $list)
+{
+    $result = [];
+    $newList = array_filter($list, function ($li) use ($parent) {
+        return $li['parent'] == $parent;
+    });
+    foreach ($newList as $item) {
+        array_push($result, $item);
+
+        $result = array_merge($result, getChildCommentByCidOfComplete($item['coid'], $list));
+    }
+    return $result;
+}
+
+/**
+ * 获取评论列表（包含子级）
+ */
+function getChildComments($coid, $list)
+{
+    $result = [];
+    $newList = array_filter($list, function ($li) use ($coid) {
+        return $li['parent'] == $coid;
+    });
+    
+    foreach ($newList as $item) {
+        array_push($result, $item);
+        $childs = getChildCommentByCidOfComplete($item['coid'], $list);
+
+        foreach ($childs as $child) {
+            array_push($result, $child);
+        }
+    }
+    return $result;
+}
+
+/**
  * 根据文章id获取评论数量
  */
 function getCommentCountByCid($cid)
