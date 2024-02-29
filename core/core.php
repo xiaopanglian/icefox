@@ -52,4 +52,26 @@ function inArrayOptionValueOrDefault($optionName, $searchName, $defaultValue)
         return $defaultValue;
     }
 }
-?>
+
+/**
+ * 获取内容里面的图片
+ */
+function getAllImages($content)
+{
+    // 创建DOM对象
+    $dom = new DOMDocument();
+    @$dom->loadHTML($content); // @符号表示忽略错误信息
+
+    $imgs = [];
+
+    // 查找所有的img元素节点
+    $images = $dom->getElementsByTagName('img');
+    if ($images->length > 0) {
+        // 输出所有img标签的src属性值
+        foreach ($images as $image) {
+            array_push($imgs, $image->getAttribute('src'));
+        }
+    }
+
+    return $imgs;
+}

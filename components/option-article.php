@@ -31,7 +31,10 @@ if ($this->is('single')) {
         <section
             class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $this->cid; ?>"
             data-cid="<?php echo $this->cid; ?>">
-            <?php $this->content(); ?>
+            <?php
+            $clearContent = preg_replace('/<img[^>]+>/i', '', $this->content);
+            echo $clearContent;
+            ?>
         </section>
         <?php
         if (!$isSingle) {
@@ -76,12 +79,18 @@ if ($this->is('single')) {
                 </div>
                 <?php
             } else {
-
+                $contentPictures = getAllImages($this->content);
                 $friendPicture = $this->fields->friend_pictures;
                 if ($friendPicture) {
                     $friendPictures = explode(',', $friendPicture);
-                    foreach ($friendPictures as $picture) {
-                        $exten = pathinfo($friendPicture, PATHINFO_EXTENSION);
+                    foreach ($friendPictures as $friendPic) {
+                        array_push($contentPictures, $friendPic);
+                    }
+                }
+                $picture_list = array_slice($contentPictures, 0, 9);
+                if (count($picture_list) > 1) {
+                    foreach ($picture_list as $picture) {
+                        $exten = pathinfo($picture, PATHINFO_EXTENSION);
                         if ($exten)
                         ?>
                         <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
@@ -91,7 +100,18 @@ if ($this->is('single')) {
                         </div>
                         <?php
                     }
+                } else if (count($picture_list) == 1) {
+                    $exten = pathinfo($picture_list[0], PATHINFO_EXTENSION);
+                    if ($exten)
+                    ?>
+                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
+                            <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $this->cid; ?>"
+                                class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                data-cid="<?php echo $this->cid; ?>" />
+                        </div>
+                    <?php
                 }
+                // }
             }
             ?>
 
@@ -117,7 +137,7 @@ if ($this->is('single')) {
             </div>
             <div class="w-[30px] h-[20px] relative">
                 <div class="hudong dark:bg-[#262626] rounded-sm"></div>
-                <div class="hudong-modal absolute right-10 top-[-10px] hidden">
+                <div class="hudong-modal absolute right-10 top-[-10px] hidden animate-slideIn">
                     <div
                         class="bg-[#4c4c4c] text-[#fff] hudong-container pt-2 pb-2 pl-5 pr-5 flex flex-row items-center justify-between">
 

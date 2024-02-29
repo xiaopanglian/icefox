@@ -49,7 +49,10 @@ foreach ($topCids as $key => $value) {
             <section
                 class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $topArticle['cid']; ?>"
                 data-cid="<?php echo $topArticle['cid']; ?>">
-                <?php echo $this::markdown($topArticle['text']); ?>
+                <?php
+                $clearContent = preg_replace('/<img[^>]+>/i', '', $topArticle['text']);
+                echo $this::markdown($clearContent);
+                ?>
             </section>
             <?php
             if (!$isSingle) {
@@ -97,26 +100,39 @@ foreach ($topCids as $key => $value) {
                         <?php
                     }
                 } else {
-
-                    $friend_pictures = getArticleFieldsByCid($topArticle['cid'], 'friend_pictures');
-                    // print_r($friend_pictures);
-                    if (count($friend_pictures) > 0) {
-                        $friendPicture = $friend_pictures[0]['str_value'];
-                        if ($friendPicture) {
-                            $friendPictures = explode(',', $friendPicture);
-                            foreach ($friendPictures as $picture) {
-                                $exten = pathinfo($friendPicture, PATHINFO_EXTENSION);
-                                if ($exten)
-                                ?>
-                                <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
-                                    <img src="<?php echo $picture ?>"
-                                        class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
-                                        data-cid="<?php echo $topArticle['cid']; ?>" />
-                                </div>
-                                <?php
-                            }
+                    $contentPictures = getAllImages($topArticle['text']);
+                    $friendPicture = getArticleFieldsByCid($topArticle['cid'], 'friend_pictures');
+                  
+                    if(count($friendPicture) > 0){
+                        foreach($friendPicture as $tmpFriendPic){
+                            array_push($contentPictures, $tmpFriendPic['str_value']);
                         }
                     }
+                    $picture_list = array_slice($contentPictures, 0, 9);
+                    if (count($picture_list) > 1) {
+                        foreach ($picture_list as $picture) {
+                            $exten = pathinfo($picture, PATHINFO_EXTENSION);
+                            if ($exten)
+                            ?>
+                            <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
+                                <img src="<?php echo $picture ?>" data-fancybox="<?php echo $topArticle['cid']; ?>"
+                                    class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                    data-cid="<?php echo $topArticle['cid']; ?>" />
+                            </div>
+                            <?php
+                        }
+                    } else if (count($picture_list) == 1) {
+                        $exten = pathinfo($picture_list[0], PATHINFO_EXTENSION);
+                        if ($exten)
+                        ?>
+                            <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
+                                <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $topArticle['cid']; ?>"
+                                    class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                    data-cid="<?php echo $topArticle['cid']; ?>" />
+                            </div>
+                        <?php
+                    }
+                   
 
                 }
                 ?>
