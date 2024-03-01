@@ -87,7 +87,7 @@ if ($this->is('single')) {
                         array_push($contentPictures, $friendPic);
                     }
                 }
-                $picture_list = array_slice($contentPictures, 0, 9);
+                $picture_list = array_filter(array_slice($contentPictures, 0, 9));
                 if (count($picture_list) > 1) {
                     foreach ($picture_list as $picture) {
                         $exten = pathinfo($picture, PATHINFO_EXTENSION);

@@ -102,20 +102,21 @@ foreach ($topCids as $key => $value) {
                 } else {
                     $contentPictures = getAllImages($topArticle['text']);
                     $friendPicture = getArticleFieldsByCid($topArticle['cid'], 'friend_pictures');
-                  
-                    if(count($friendPicture) > 0){
-                        foreach($friendPicture as $tmpFriendPic){
+
+                    if (count($friendPicture) > 0) {
+                        foreach ($friendPicture as $tmpFriendPic) {
                             array_push($contentPictures, $tmpFriendPic['str_value']);
                         }
                     }
-                    $picture_list = array_slice($contentPictures, 0, 9);
+                    $picture_list = array_filter(array_slice($contentPictures, 0, 9));
+
                     if (count($picture_list) > 1) {
                         foreach ($picture_list as $picture) {
                             $exten = pathinfo($picture, PATHINFO_EXTENSION);
                             if ($exten)
                             ?>
                             <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
-                                <img src="<?php echo $picture ?>" data-fancybox="<?php echo $topArticle['cid']; ?>"
+                                <img src="<?php echo $picture ?>" data-fancybox="<?php echo $topArticle['cid']; ?>-top"
                                     class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
                                     data-cid="<?php echo $topArticle['cid']; ?>" />
                             </div>
@@ -126,13 +127,13 @@ foreach ($topCids as $key => $value) {
                         if ($exten)
                         ?>
                             <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
-                                <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $topArticle['cid']; ?>"
+                                <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $topArticle['cid']; ?>-top"
                                     class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
                                     data-cid="<?php echo $topArticle['cid']; ?>" />
                             </div>
                         <?php
                     }
-                   
+
 
                 }
                 ?>
