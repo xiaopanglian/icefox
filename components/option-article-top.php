@@ -106,9 +106,15 @@ foreach ($topCids as $key => $value) {
 
                     if (count($friendPicture) > 0) {
                         foreach ($friendPicture as $tmpFriendPic) {
-                            array_push($contentPictures, $tmpFriendPic['str_value']);
+                            $onePic = $tmpFriendPic['str_value'];
+
+                            $friendPictures = explode(',', $onePic);
+                            foreach ($friendPictures as $friendPic) {
+                                array_push($contentPictures, $friendPic);
+                            }
                         }
                     }
+
                     $picture_list = array_filter(array_slice($contentPictures, 0, 9));
 
                     if (count($picture_list) > 1) {
@@ -119,7 +125,7 @@ foreach ($topCids as $key => $value) {
                             <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
                                 <img src="<?php echo $picture ?>" data-fancybox="<?php echo $topArticle['cid']; ?>-top"
                                     class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
-                                    data-cid="<?php echo $topArticle['cid']; ?>" />
+                                    data-cid="<?php echo $topArticle['cid']; ?>-top" />
                             </div>
                             <?php
                         }

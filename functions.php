@@ -15,7 +15,7 @@ function themeConfig($form)
     ?>
     <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
     <div>
-        <div class="admin-title">Icefox主题后台配置（v1.5.3）</div>
+        <div class="admin-title">Icefox主题后台配置（v1.5.4）</div>
         <div>
             <div>
                 <?php
@@ -79,6 +79,24 @@ function themeConfig($form)
                 );
                 $form->addInput($autoMutedPlayVideo);
 
+                $neteasyCloudMusic = new Typecho_Widget_Helper_Form_Element_Text(
+                    'neteasyCloudMusic',
+                    null,
+                    null,
+                    _t('网易云音乐歌单地址'),
+                    _t('网页顶部播放器播放，目前只支持网易云音乐')
+                );
+                $form->addInput($neteasyCloudMusic);
+
+                $friendLinks = new Typecho_Widget_Helper_Form_Element_Textarea(
+                    "friendLinks",
+                    null,
+                    null,
+                    "友情链接",
+                    "使用||分隔，每一行一个友情链接。格式如下<br>logo || 名称 || 链接"
+                );
+                $form->addInput($friendLinks);
+
                 $script = new Typecho_Widget_Helper_Form_Element_Textarea(
                     "script",
                     null,
@@ -115,7 +133,7 @@ function themeFields($layout)
         null,
         null,
         _t('朋友圈视频'),
-        _t('<span style="color:red;">在这里填入朋友圈视频地址</span>')
+        _t('<span>在这里填入朋友圈视频地址</span>')
     );
     $layout->addItem($friendVideo);
 
@@ -124,7 +142,7 @@ function themeFields($layout)
         null,
         null,
         _t('朋友圈图片'),
-        _t('<span style="color:red;">在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果填了朋友圈视频，则优先视频）</span>')
+        _t('<span style="color:red;">不推荐，最好直接把图片添加在文章内容里面</span><br><span>在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果填了朋友圈视频，则优先视频）</span>')
     );
     $layout->addItem($friendPicture);
 
@@ -133,7 +151,7 @@ function themeFields($layout)
         null,
         null,
         _t('发布定位'),
-        _t('<span style="color:red;">在这里填定位名称（例：成都市·天府广场）</span>')
+        _t('<span>在这里填定位名称（例：成都市·天府广场）</span>')
     );
     $layout->addItem($position);
 
@@ -145,7 +163,7 @@ function themeFields($layout)
         ],
         "0",
         _t("是否是广告"),
-        _t('<span style="color:red;">默认不是</span>')
+        _t('<span>默认不是</span>')
     );
     $layout->addItem($isAdvertise);
 
