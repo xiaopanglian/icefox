@@ -47,20 +47,21 @@ foreach ($topCids as $key => $value) {
                 } ?>
             </section>
             <section
-                class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $topArticle['cid']; ?>"
-                data-cid="<?php echo $topArticle['cid']; ?>">
+                class="cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $topArticle['cid']; ?>-top"
+                data-cid="<?php echo $topArticle['cid']; ?>-top">
                 <?php
-                $clearContent = preg_replace('/<img[^>]+>/i', '', $topArticle['text']);
+                $clearContent = preg_replace('/<img[^>]+>/i', '', $this::markdown($topArticle['text']));
+                $clearContent = preg_replace('/<br><br>/i', '', $clearContent);
                 echo $this::markdown($clearContent);
                 ?>
             </section>
             <?php
             if (!$isSingle) {
                 ?>
-                <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $topArticle['cid']; ?> hidden"
-                    data-cid="<?php echo $topArticle['cid']; ?>">全文</div>
-                <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $topArticle['cid']; ?> hidden"
-                    data-cid="<?php echo $topArticle['cid']; ?>">收缩</div>
+                <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $topArticle['cid']; ?>-top hidden"
+                    data-cid="<?php echo $topArticle['cid']; ?>-top">全文</div>
+                <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $topArticle['cid']; ?>-top hidden"
+                    data-cid="<?php echo $topArticle['cid']; ?>-top">收缩</div>
                 <?php
             }
             ?>
@@ -100,7 +101,7 @@ foreach ($topCids as $key => $value) {
                         <?php
                     }
                 } else {
-                    $contentPictures = getAllImages($topArticle['text']);
+                    $contentPictures = getAllImages($this::markdown($topArticle['text']));
                     $friendPicture = getArticleFieldsByCid($topArticle['cid'], 'friend_pictures');
 
                     if (count($friendPicture) > 0) {

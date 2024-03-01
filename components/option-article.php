@@ -33,6 +33,7 @@ if ($this->is('single')) {
             data-cid="<?php echo $this->cid; ?>">
             <?php
             $clearContent = preg_replace('/<img[^>]+>/i', '', $this->content);
+            $clearContent = preg_replace('/<br><br>/i', '', $clearContent);
             echo $clearContent;
             ?>
         </section>
