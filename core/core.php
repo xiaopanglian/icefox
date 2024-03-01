@@ -58,11 +58,14 @@ function inArrayOptionValueOrDefault($optionName, $searchName, $defaultValue)
  */
 function getAllImages($content)
 {
+    $imgs = [];
+
+    if (empty($content)) {
+        return $imgs;
+    }
     // 创建DOM对象
     $dom = new DOMDocument();
     @$dom->loadHTML($content); // @符号表示忽略错误信息
-
-    $imgs = [];
 
     // 查找所有的img元素节点
     $images = $dom->getElementsByTagName('img');
