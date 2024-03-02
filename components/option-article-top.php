@@ -24,13 +24,13 @@ foreach ($topCids as $key => $value) {
     // print_r($topArticle);
     ?>
 
-    <article class="flex flex-row border-b borer-b-2 border-gray-200 pt-5 pl-5 pr-5">
+    <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
                 <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
             </div>
         </div>
-        <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 border-gray-100 border-solid">
+        <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid">
             <section class="flex flex-row justify-between items-center">
                 <span class="text-color-link cursor-default text-[14px]">
                     <?php echo $topArticle['screenName']; ?>
@@ -42,7 +42,7 @@ foreach ($topCids as $key => $value) {
                     $isAdvertise = $advertiseData[0]['str_value'];
                     if ($isAdvertise == true) {
                         ?>
-                        <span class="text-[12px] bg-[#f0f0f0] p-1 text-[#c6c6c6] rounded-sm">广告</span>
+                        <span class="text-[12px] dark:bg-[#262626] bg-[#f0f0f0] p-1 text-[#c6c6c6] rounded-sm">广告</span>
                     <?php }
                 } ?>
             </section>
@@ -166,7 +166,7 @@ foreach ($topCids as $key => $value) {
                     <?php echo getTimeFormatStr($topArticle['created']); ?>
                 </div>
                 <div class="w-[30px] h-[20px] relative">
-                    <div class="hudong rounded-sm"></div>
+                    <div class="hudong dark:bg-[#262626] rounded-sm"></div>
                     <div class="hudong-modal absolute right-10 top-[-10px] hidden">
                         <div
                             class="bg-[#4c4c4c] text-[#fff] hudong-container pt-2 pb-2 pl-5 pr-5 flex flex-row items-center justify-between">
@@ -197,14 +197,14 @@ foreach ($topCids as $key => $value) {
                 </div>
             </section>
             <!--评论列表-->
-            <section class="break-all">
+            <section class="break-all">                
                 <?php
                 $agreeNum = getAgreeNumByCid($topArticle['cid']);
                 $agree = $agreeNum['agree'];
                 $recording = $agreeNum['recording'];
                 ?>
                 <div
-                    class="bg-[#f7f7f7] pt-1 pb-1 pl-3 pr-3 bottom-shadow items-center border-1 border-b-solid border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $topArticle['cid']; ?>">
+                    class="bg-[#f7f7f7] dark:bg-[#262626] pt-1 pb-1 pl-3 pr-3 bottom-shadow items-center border-1 border-b-solid dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $topArticle['cid']; ?>">
                     <span class="like inline-block mr-2"></span>
                     <span class="text-[14px] ">
                         <!-- <span class="text-color-link no-underline text-[14px]">刘德华</span>,
@@ -226,7 +226,7 @@ foreach ($topCids as $key => $value) {
                 }
                 ?>
 
-                <div class="index-comments bottom-shadow bg-[#f7f7f7] pl-3 pr-3 ">
+                <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] pl-3 pr-3 ">
                     <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $topArticle['cid']; ?> comment-ul">
                         <?php
                         $count = getCommentCountByCid($topArticle['cid']);

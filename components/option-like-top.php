@@ -11,7 +11,7 @@ $agree = $agreeNum['agree'];
 $recording = $agreeNum['recording'];
 ?>
 <div
-    class="bg-[#f7f7f7] pt-1 pb-1 pl-3 pr-3 bottom-shadow items-center border-1 border-b-solid border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $topArticle['cid']; ?>">
+    class="bg-[#f7f7f7] dark:bg-[#262626] pt-1 pb-1 pl-3 pr-3 bottom-shadow items-center border-1 border-b-solid dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $topArticle['cid']; ?>">
     <span class="like inline-block mr-2"></span>
     <span class="text-[14px] ">
         <!-- <span class="text-color-link no-underline text-[14px]">刘德华</span>,
