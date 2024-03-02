@@ -54,10 +54,12 @@
 .inline-block{display:inline-block;}
 .contents{display:contents;}
 .hidden{display:none;}
+.aspect-square{aspect-ratio:1/1;}
 .h-\[20px\]{height:20px;}
 .h-\[22px\]{height:22px;}
 .h-\[48px\]{height:48px;}
 .h-\[50px\]{height:50px;}
+.h-\[80px\]{height:80px;}
 .h-0{height:0;}
 .h-10{height:2.5rem;}
 .h-15{height:3.75rem;}
@@ -69,10 +71,12 @@
 .w-\[1px\]{width:1px;}
 .w-\[30px\]{width:30px;}
 .w-\[48px\]{width:48px;}
+.w-\[calc\(66\.66\%\)\]{width:calc(66.66%);}
 .w-10{width:2.5rem;}
 .w-15{width:3.75rem;}
 .w-9{width:2.25rem;}
 .w-90\%{width:90%;}
+.w-auto{width:auto;}
 .w-full{width:100%;}
 .flex{display:flex;}
 .flex-row{flex-direction:row;}
@@ -126,6 +130,7 @@
 .dark .dark\:bg-opacity-50{--un-bg-opacity:0.5;}
 .bg-opacity-70{--un-bg-opacity:0.7;}
 .bg-cover{background-size:cover;}
+.bg-center{background-position:center;}
 .object-cover{object-fit:cover;}
 .p-0{padding:0;}
 .p-1{padding:0.25rem;}

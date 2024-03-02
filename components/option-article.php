@@ -47,13 +47,22 @@ if ($this->is('single')) {
             <?php
         }
         ?>
-        <!--一张图-->
-        <!-- <div>
-                    <div>
-                        <img src="http://localhost:8008/usr/uploads/2023/11/3995299155.jpg" class="max-h-[300] max-w-[300] object-cover" />
+        
+        <?php 
+            $music = $this->fields->music;
+            if(!empty($music)){
+				$musicArr = $friendPictures = explode('||', $music);
+                ?>
+                    <div class="w-full">
+                        <figure class="flex overflow-hidden rounded-sm h-[80px] w-[calc(66.66%)] m-0 bg-cover bg-center "  style="background-image: url('<?php echo $musicArr[3]; ?>')">
+							<div class="w-full h-full bg-cover bg-center backdrop-blur-lg backdrop-filter bg-opacity-50">
+								<img src="<?php echo $musicArr[3]; ?>" class="h-full w-auto aspect-square object-cover" />
+							</div>
+                        </figure>
                     </div>
-                </div> -->
-        <!--多图-->
+                <?php
+            }
+        ?>
 
         <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3 mt-3"
             id="preview-<?php echo $this->cid; ?>">

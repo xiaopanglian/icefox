@@ -31,3 +31,4 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 </div><!-- end #main-->
 
 <?php $this->need('/components/footer.php'); ?>
+<?php $this->need('/components/top-music.php'); ?>

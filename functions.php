@@ -167,6 +167,15 @@ function themeFields($layout)
     );
     $layout->addItem($isAdvertise);
 
+    $music = new Typecho_Widget_Helper_Form_Element_Textarea(
+        'music',
+        null,
+        null,
+        _t('插入音乐'),
+        _t('格式如下：<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
+    );
+    $layout->addItem($music);
+
     // $canComment = new Typecho_Widget_Helper_Form_Element_Radio(
     //     "canComment",
     //     [
