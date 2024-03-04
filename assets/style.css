@@ -5,17 +5,21 @@
     font-family: HarmonyOS-Sans;
     src: url('./HarmonyOS-Sans.woff2') format("truetype");
 }
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
 }
+
 .rotate-animation {
     animation: rotate 5s linear infinite;
 }
+
 .text-color-link {
     color: #576b95;
 }
@@ -168,7 +172,7 @@ input::placeholder {
     color: #333;
 }
 
-.dark .scrollload-bottom{
+.dark .scrollload-bottom {
     color: #cccccc;
 }
 
@@ -190,6 +194,22 @@ input::placeholder {
     .side-area {
         display: block;
     }
+    
+    .music-card {
+        height: 80px;
+        width: 66.66%;
+    }
+    
+    .music-card-text{
+		font-size:15px;
+		width:160px;
+    }
+    
+    .music-card-play-position{
+		position: absolute;
+		right: 20px;
+		top:20px;
+    }
 }
 
 @media screen and (max-width: 567px) {
@@ -205,5 +225,20 @@ input::placeholder {
 
     .side-area {
         display: none;
+    }
+
+    .music-card {
+        height: 60px;
+        width: 75%;
+    }
+    
+    .music-card-text{
+		font-size:12px;
+		width:100px;
+    }
+    .music-card-play-position{
+		position: absolute;
+		right: 12px;
+		top:12px;
     }
 }

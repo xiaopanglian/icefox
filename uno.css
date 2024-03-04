@@ -25,11 +25,9 @@
 .bottom-10{bottom:2.5rem;}
 .left-10{left:2.5rem;}
 .right-10{right:2.5rem;}
-.right-3{right:0.75rem;}
 .right-6{right:1.5rem;}
 .top-\[-10px\]{top:-10px;}
 .top-0{top:0;}
-.top-5{top:1.25rem;}
 .line-clamp-4{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;}
 .z-50{z-index:50;}
 .grid{display:grid;}
@@ -62,7 +60,6 @@
 .h-\[22px\]{height:22px;}
 .h-\[48px\]{height:48px;}
 .h-\[50px\]{height:50px;}
-.h-\[80px\]{height:80px;}
 .h-0{height:0;}
 .h-10{height:2.5rem;}
 .h-15{height:3.75rem;}
@@ -74,7 +71,6 @@
 .w-\[1px\]{width:1px;}
 .w-\[30px\]{width:30px;}
 .w-\[48px\]{width:48px;}
-.w-\[calc\(66\.66\%\)\]{width:calc(66.66%);}
 .w-10{width:2.5rem;}
 .w-15{width:3.75rem;}
 .w-9{width:2.25rem;}
@@ -144,6 +140,7 @@
 .pb-1{padding-bottom:0.25rem;}
 .pb-2{padding-bottom:0.5rem;}
 .pl-\[1px\]{padding-left:1px;}
+.pl-\[5px\]{padding-left:5px;}
 .pl-3{padding-left:0.75rem;}
 .pl-5{padding-left:1.25rem;}
 .pr-\[1px\]{padding-right:1px;}

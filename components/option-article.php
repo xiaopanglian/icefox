@@ -11,7 +11,7 @@ if ($this->is('single')) {
 }
 ?>
 
-<article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
+<article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5 overflow-hidden">
     <div class="mr-3">
         <div class="w-9 h-9">
             <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
@@ -54,14 +54,14 @@ if ($this->is('single')) {
 				$musicArr = $friendPictures = explode('||', $music);
                 ?>
                     <div class="w-full">
-                        <figure class="flex overflow-hidden rounded-sm h-[80px] w-[calc(66.66%)] m-0 bg-cover bg-center "  style="background-image: url('<?php echo $musicArr[3]; ?>')">
+                        <figure class="flex overflow-hidden rounded-sm music-card m-0 bg-cover bg-center "  style="background-image: url('<?php echo $musicArr[3]; ?>')">
 							<div class="w-full h-full bg-cover bg-center backdrop-blur-lg backdrop-filter bg-opacity-50 flex flex-row relative">
 								<img src="<?php echo $musicArr[3]; ?>" class="h-full w-auto aspect-square object-cover rounded-full music-img" id="music-img-<?php echo $this->cid; ?>" rotate="rotate-animation" />
-								<div class="flex flex-col text-white p-2">
-									<span class="mt-1"><?php echo $musicArr[0]; ?></span>
-									<span class="mt-1"><?php echo $musicArr[1]; ?></span>
+								<div class="flex flex-col text-white h-full justify-center pl-[5px]">
+									<span class="mt-1 truncate music-card-text"><?php echo $musicArr[0]; ?></span>
+									<span class="mt-1 truncate music-card-text"><?php echo $musicArr[1]; ?></span>
 								</div>
-								<div class="absolute right-3 top-5">
+								<div class="music-card-play-position">
 									<img width="36" height="36" src="<?php $this->options->themeUrl('assets/svgs/music-play-light.svg'); ?>" @click="playAudio(<?php echo $this->cid; ?>, '<?php echo $musicArr[2]; ?>')" id="music-play-<?php echo $this->cid; ?>" class="music-play" />
                                     <img width="36" height="36" src="<?php $this->options->themeUrl('assets/svgs/music-pause-light.svg'); ?>" class="music-pause hidden" @click="pauseAudio(<?php echo $this->cid; ?>)" id="music-pause-<?php echo $this->cid; ?>" />
 								</div>
