@@ -5,6 +5,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 ?>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
@@ -14,7 +15,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/style.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/viewer.min.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('uno.css'); ?>">
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/fancybox.css'); ?>" >
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/fancybox.css'); ?>">
     <style>
         <?php echo $this->options->css; ?>
     </style>

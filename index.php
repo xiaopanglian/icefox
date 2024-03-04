@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.5.5
+ * @version 1.6.0
  * @link http://xiaopanglian.com/
  */
 
@@ -31,4 +31,3 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 </div><!-- end #main-->
 
 <?php $this->need('/components/footer.php'); ?>
-<?php $this->need('/components/top-music.php'); ?>

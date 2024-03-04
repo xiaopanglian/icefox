@@ -110,6 +110,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </div>
     </li>
+    <div class="animate-spin"></div>
 </div>
 </body>
 

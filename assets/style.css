@@ -5,7 +5,17 @@
     font-family: HarmonyOS-Sans;
     src: url('./HarmonyOS-Sans.woff2') format("truetype");
 }
-
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.rotate-animation {
+    animation: rotate 5s linear infinite;
+}
 .text-color-link {
     color: #576b95;
 }

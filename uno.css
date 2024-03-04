@@ -25,9 +25,11 @@
 .bottom-10{bottom:2.5rem;}
 .left-10{left:2.5rem;}
 .right-10{right:2.5rem;}
+.right-3{right:0.75rem;}
 .right-6{right:1.5rem;}
 .top-\[-10px\]{top:-10px;}
 .top-0{top:0;}
+.top-5{top:1.25rem;}
 .line-clamp-4{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;}
 .z-50{z-index:50;}
 .grid{display:grid;}
@@ -47,6 +49,7 @@
 .mr-3{margin-right:0.75rem;}
 .mr-4{margin-right:1rem;}
 .mr-5{margin-right:1.25rem;}
+.mt-1{margin-top:0.25rem;}
 .mt-2{margin-top:0.5rem;}
 .mt-3{margin-top:0.75rem;}
 .mt-4{margin-top:1rem;}
@@ -81,6 +84,8 @@
 .flex{display:flex;}
 .flex-row{flex-direction:row;}
 .flex-col{flex-direction:column;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.animate-spin{animation:spin 1s linear infinite;}
 .cursor-default{cursor:default;}
 .cursor-help{cursor:help;}
 .cursor-pointer{cursor:pointer;}
@@ -112,6 +117,7 @@
 .dark .dark\:border-gray-600{--un-border-opacity:1;border-color:rgb(75 85 99 / var(--un-border-opacity));}
 .rounded{border-radius:0.25rem;}
 .rounded-3xl{border-radius:1.5rem;}
+.rounded-full{border-radius:9999px;}
 .rounded-lg{border-radius:0.5rem;}
 .rounded-sm{border-radius:0.125rem;}
 .border-solid{border-style:solid;}

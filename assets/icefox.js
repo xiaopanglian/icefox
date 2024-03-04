@@ -1,8 +1,12 @@
 let globalData = {
     webSiteHomeUrl: '',
     loadMorePage: 1,
-    totalPage: 0
+    totalPage: 0,
+    playMusicId: 0,
+    audio: new Audio()
 };
+
+
 
 window.onload = async () => {
     // 网站接口请求地址前缀
@@ -13,6 +17,10 @@ window.onload = async () => {
     if (document.querySelector('._totalPage')) {
         globalData.totalPage = parseInt(document.querySelector('._totalPage').value);
     }
+
+    globalData.audio.addEventListener('ended', function() {
+        refreshAudioUI();
+    });
 
     loadQW();
     clickQW();
@@ -597,4 +605,58 @@ function scrollToTop() {
         timeOut = setTimeout('scrollToTop()', 10);
     }
     else clearTimeout(timeOut);
+}
+
+/**
+ * 加载音乐
+ */
+function loadAudio(src) {
+    globalData.audio.src = src;
+    globalData.audio.load();
+}
+
+/**
+ * 播放音乐
+ */
+function playAudio(cid, src) {
+    if (globalData.playMusicId != cid) {
+        loadAudio(src);
+        globalData.playMusicId = cid;
+    }
+    globalData.audio.play();
+    
+    refreshAudioUI();
+    
+    // 隐藏播放按钮，显示暂停按钮
+    $("#music-play-"+cid).addClass("hidden");
+    $("#music-pause-"+cid).removeClass("hidden");
+    
+    $("#music-img-"+cid).addClass("rotate-animation");
+}
+
+function pauseAudio(cid) {
+    globalData.audio.pause();
+    // 隐藏暂停按钮，显示播放按钮
+    $("#music-play-"+cid).removeClass("hidden");
+    $("#music-pause-"+cid).addClass("hidden");
+    
+    $("#music-img-"+cid).removeClass("rotate-animation");
+}
+
+/**
+ * 刷新播放器UI
+ */
+function refreshAudioUI(){
+    
+    // 隐藏其他文章的播放器播放按钮
+    $.each($(".music-img"),function(index,item){
+		$(item).removeClass("rotate-animation");
+    });
+    $.each($(".music-play"),function(index,item){
+		$(item).removeClass("hidden");
+    });
+    $.each($(".music-pause"),function(index,item){
+		$(item).addClass("hidden");
+    });
+    
 }
