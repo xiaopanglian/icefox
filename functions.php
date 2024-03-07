@@ -44,7 +44,7 @@ function themeConfig($form)
                     null,
                     null,
                     "置顶文章",
-                    "格式：文章的ID,文章的ID,文章的ID （中间使用英文逗号,分隔）"
+                    "格式：文章的ID || 文章的ID || 文章的ID （中间使用 || 分隔）"
                 );
                 $form->addInput($topPost);
 
