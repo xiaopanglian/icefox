@@ -15,6 +15,19 @@ function getArticleByCid($cid): array
 }
 
 /**
+ * 根据文章Id获取文章作者名称
+ */
+function _getUserScreenNameByCid($cid){
+	$db = Typecho_Db::get();
+    $select = $db->select('table.users.screenName')
+        ->from('table.contents')
+        ->join('table.users', 'table.contents.authorId = table.users.uid')
+        ->where('cid = ?', $cid)
+        ->limit(1);
+    return $db->fetchRow($select);
+}
+
+/**
  * 根据文章id获取文章字段
  */
 function getArticleFieldsByCid($cid, $name)
