@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.6.1
+ * @version 1.6.3
  * @link http://xiaopanglian.com/
  */
 
@@ -21,15 +21,15 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <?php $this->need('/components/option-header.php'); ?>
 
     <?php $this->need('/components/post-list-top.php'); ?>
-    <?php $this->need('/components/post-list.php'); ?>
 
 
-    <?php // $this->need('/components/option-article-top.php'); ?>
+    <?php // $this->need('/components/option-article-top.php');  ?>
 
     <div class="article-container">
-        <?php //while ($this->next()): ?>
-            <?php //$this->need('/components/option-article.php'); ?>
-        <?php //endwhile; ?>
+        <?php $this->need('/components/post-list.php'); ?>
+        <?php //while ($this->next()):  ?>
+        <?php //$this->need('/components/option-article.php');  ?>
+        <?php //endwhile;  ?>
     </div>
 </div><!-- end #main-->
 

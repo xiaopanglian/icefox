@@ -14,16 +14,19 @@ if ($this->is('single')) {
 ?>
 
 <?php
-$topCids = explode('||', $this->options->topPost);
+$topCids = array_filter(explode('||', $this->options->topPost));
+
 foreach ($topCids as $cid): ?>
     <?php $this->widget('Widget_Archive@icefox' . $cid, 'pageSize=1&type=post', 'cid=' . $cid)->to($item); ?>
+    <?php $item = (object)$item; ?>
     <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
                 <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
             </div>
         </div>
-        <div class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid">
+        <div
+            class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid pb-1">
             <section class="flex flex-row justify-between items-center mb-1">
                 <span class="text-color-link cursor-default text-[14px]">
                     <?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?>
@@ -40,8 +43,8 @@ foreach ($topCids as $cid): ?>
                 } ?>
             </section>
             <section
-                class="mb-1 cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $item->cid; ?>-top"
-                data-cid="<?php echo $item->cid; ?>-top">
+                class="mb-1 cursor-default text-[14px] article-content break-all <?php echo $lineClamp; ?> content-<?php echo $item->cid; ?>"
+                data-cid="<?php echo $item->cid; ?>">
                 <?php
                 $clearContent = preg_replace('/<img[^>]+>/i', '', $this::markdown($item->text));
                 $clearContent = preg_replace('/<br><br>/i', '', $clearContent);
@@ -51,10 +54,49 @@ foreach ($topCids as $cid): ?>
             <?php
             if (!$isSingle) {
                 ?>
-                <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $item->cid; ?>-top hidden"
-                    data-cid="<?php echo $item->cid; ?>-top">全文</div>
-                <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $item->cid; ?>-top hidden"
-                    data-cid="<?php echo $item->cid; ?>-top">收缩</div>
+                <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $item->cid; ?> hidden mb-1"
+                    data-cid="<?php echo $item->cid; ?>">全文</div>
+                <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $item->cid; ?> hidden mb-1"
+                    data-cid="<?php echo $item->cid; ?>">收缩</div>
+                <?php
+            }
+            ?>
+
+            <?php
+            $music = getArticleFieldsByCid($item->cid, 'music');
+            if (count($music) > 0 && !empty($music[0]['str_value'])) {
+                $music = $music[0]['str_value'];
+                $musicArr = explode('||', $music);
+                ?>
+                <section class="w-full mb-1">
+                    <figure class="flex overflow-hidden rounded-sm music-card m-0 bg-cover bg-center "
+                        style="background-image: url('<?php echo $musicArr[3]; ?>')">
+                        <div
+                            class="w-full h-full bg-cover bg-center backdrop-blur-lg backdrop-filter bg-opacity-50 flex flex-row relative">
+                            <img src="<?php echo $musicArr[3]; ?>"
+                                class="h-full w-auto aspect-square object-cover rounded-full music-img"
+                                id="music-img-<?php echo $item->cid; ?>" rotate="rotate-animation" />
+                            <div class="flex flex-col text-white h-full justify-center pl-[5px]">
+                                <span class="mt-1 truncate music-card-text">
+                                    <?php echo $musicArr[0]; ?>
+                                </span>
+                                <span class="mt-1 truncate music-card-text">
+                                    <?php echo $musicArr[1]; ?>
+                                </span>
+                            </div>
+                            <div class="music-card-play-position">
+                                <img width="36" height="36"
+                                    src="<?php $this->options->themeUrl('assets/svgs/music-play-light.svg'); ?>"
+                                    @click="playAudio(<?php echo $item->cid; ?>, '<?php echo $musicArr[2]; ?>')"
+                                    id="music-play-<?php echo $item->cid; ?>" class="music-play" />
+                                <img width="36" height="36"
+                                    src="<?php $this->options->themeUrl('assets/svgs/music-pause-light.svg'); ?>"
+                                    class="music-pause hidden" @click="pauseAudio(<?php echo $item->cid; ?>)"
+                                    id="music-pause-<?php echo $item->cid; ?>" />
+                            </div>
+                        </div>
+                    </figure>
+                </section>
                 <?php
             }
             ?>
@@ -79,7 +121,7 @@ foreach ($topCids as $cid): ?>
                     ?>
                     <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
                         id="preview-<?php echo $item->cid; ?>">
-                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-3">
+                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-2">
                             <video src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>             <?php echo $autoMuted; ?> loop
                                 preload="auto" controls="controls" class="w-full" data-cid="<?php echo $item->cid; ?>"
                                 data-play="">您的浏览器不支持video标签</video>
@@ -104,33 +146,66 @@ foreach ($topCids as $cid): ?>
 
                 $picture_list = array_filter(array_slice($contentPictures, 0, 9));
 
-                if (count($picture_list) > 1) {
-                    foreach ($picture_list as $picture) {
-                        $exten = pathinfo($picture, PATHINFO_EXTENSION);
-                        if ($exten)
-                        ?>
-                        <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
-                            id="preview-<?php echo $item->cid; ?>">
-                            <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative">
-                                <img src="<?php echo $picture ?>" data-fancybox="<?php echo $item->cid; ?>-top"
-                                    class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
-                                    data-cid="<?php echo $item->cid; ?>-top" />
-                            </div>
-                        </section>
-                        <?php
-                    }
-                } else if (count($picture_list) == 1) {
+                if (count($picture_list) == 1) {
                     $exten = pathinfo($picture_list[0], PATHINFO_EXTENSION);
                     if ($exten)
                     ?>
+                    <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
+                        id="preview-<?php echo $item->cid; ?>">
+                        <div class="overflow-hidden cursor-zoom-in col-span-2">
+                            <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $item->cid; ?>"
+                                class="cursor-zoom-in preview-image max-w-full max-h-64"
+                                data-cid="<?php echo $item->cid; ?>" />
+                        </div>
+                    </section>
+                    <?php
+
+                } else if (count($picture_list) == 4) {
+                    ?>
                         <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
                             id="preview-<?php echo $item->cid; ?>">
-                            <div class="overflow-hidden rounded-lg cursor-zoom-in w-full h-0 pt-[100%] relative col-span-3">
-                                <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $item->cid; ?>-top"
-                                    class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
-                                    data-cid="<?php echo $item->cid; ?>" />
-                            </div>
+                            <?php
+                            $index = 0;
+                            foreach ($picture_list as $picture) {
+                                if ($index == 2) {
+                                    ?>
+                                    <div class="overflow-hidden cursor-zoom-in w-full h-0 pt-[100%] relative">
+                                    </div>
+                                <?php
+                                }
+                                $exten = pathinfo($picture, PATHINFO_EXTENSION);
+                                if ($exten) {
+                                    ?>
+                                    <div class="overflow-hidden cursor-zoom-in w-full h-0 pt-[100%] relative">
+                                        <img src="<?php echo $picture ?>" data-fancybox="<?php echo $item->cid; ?>"
+                                            class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                            data-cid="<?php echo $item->cid; ?>" />
+                                    </div>
+                                <?php
+                                }
+                                $index++;
+                            }
+                            ?>
                         </section>
+                    <?php
+                } else if (count($picture_list) > 0) {
+                    ?>
+                            <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
+                                id="preview-<?php echo $item->cid; ?>">
+                            <?php
+                            foreach ($picture_list as $picture) {
+                                $exten = pathinfo($picture, PATHINFO_EXTENSION);
+                                if ($exten)
+                                ?>
+                                    <div class="overflow-hidden cursor-zoom-in w-full h-0 pt-[100%] relative">
+                                        <img src="<?php echo $picture ?>" data-fancybox="<?php echo $item->cid; ?>"
+                                            class="w-full h-full object-cover absolute top-0 cursor-zoom-in preview-image"
+                                            data-cid="<?php echo $item->cid; ?>" />
+                                    </div>
+                            <?php
+                            }
+                            ?>
+                            </section>
                     <?php
                 }
 
@@ -189,26 +264,27 @@ foreach ($topCids as $cid): ?>
                 </div>
             </section>
             <!--评论列表-->
-            <section class="break-all mb-1">
+            <section class="break-all mb-1 overflow-hidden rounded-md">
                 <?php
                 $agreeNum = getAgreeNumByCid($item->cid);
                 $agree = $agreeNum['agree'];
                 $recording = $agreeNum['recording'];
-                ?>
-                <div
-                    class="bg-[#f7f7f7] dark:bg-[#262626] pt-1 pb-1 pl-3 pr-3 bottom-shadow items-center border-1 border-b-solid dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
-                    <span class="like inline-block mr-2"></span>
-                    <span class="text-[14px] ">
-                        <!-- <span class="text-color-link no-underline text-[14px]">刘德华</span>,
+                if ($agree > 0):
+                    ?>
+                    <div
+                        class="bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 bottom-shadow items-center border-1 border-b-solid dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
+                        <span class="like inline-block mr-2"></span>
+                        <span class="text-[14px] ">
+                            <!-- <span class="text-color-link no-underline text-[14px]">刘德华</span>,
             <span class="text-color-link no-underline text-[14px]">张学友</span>, -->
-                        <span class="text-color-link text-[14px]">
-                            <span class="fk-cid-<?php echo $item->cid; ?>">
-                                <?php echo $agree; ?>
-                            </span> 位访客
+                            <span class="text-color-link text-[14px]">
+                                <span class="fk-cid-<?php echo $item->cid; ?>">
+                                    <?php echo $agree; ?>
+                                </span> 位访客
+                            </span>
                         </span>
-                    </span>
-                </div>
-
+                    </div>
+                <?php endif; ?>
 
                 <?php
 
@@ -218,12 +294,15 @@ foreach ($topCids as $cid): ?>
                 }
                 ?>
 
-                <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] pl-3 pr-3 ">
-                    <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $item->cid; ?> comment-ul">
-                        <?php
-                        $count = getCommentCountByCid($item->cid);
-                        $comments = getCommentByCid($item->cid, 0, $commentCount);
-                        if ($comments) {
+
+                <?php
+                $count = getCommentCountByCid($item->cid);
+                $comments = getCommentByCid($item->cid, 0, $commentCount);
+                if ($comments) {
+                    ?>
+                    <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 ">
+                        <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $item->cid; ?> comment-ul">
+                            <?php
                             foreach ($comments as $comment): ?>
                                 <li class="pos-rlt comment-li-coid-<?php echo $comment['coid'] ?> pb-1">
                                     <div class="comment-body">
@@ -255,7 +334,7 @@ foreach ($topCids as $cid): ?>
                                 if ($childComments) {
                                     foreach ($childComments as $childComment): ?>
 
-                                        <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?>">
+                                        <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?> pb-1">
                                             <div class="comment-body">
                                                 <span class="text-[14px] text-color-link">
                                                     <a href="<?php echo $childComment['url'] ?>" target="_blank"
@@ -310,15 +389,16 @@ foreach ($topCids as $cid): ?>
                                 <?php
                             }
                             ?>
-                            <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
+
+                        </ul>
+                    </div>
+                    <?php
+                }
+                ?>
             </section>
         </div>
     </article>
 
-<?php
+    <?php
 endforeach;
 ?>
