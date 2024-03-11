@@ -16,6 +16,11 @@
     }
 }
 
+/* 隐藏视频的默认控制栏 */
+/* video::-webkit-media-controls {
+    display:none !important;
+} */
+
 .rotate-animation {
     animation: rotate 5s linear infinite;
 }

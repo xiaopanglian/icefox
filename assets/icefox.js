@@ -18,7 +18,7 @@ window.onload = async () => {
         globalData.totalPage = parseInt(document.querySelector('._totalPage').value);
     }
 
-    globalData.audio.addEventListener('ended', function() {
+    globalData.audio.addEventListener('ended', function () {
         refreshAudioUI();
     });
 
@@ -148,7 +148,7 @@ window.addEventListener('click', (event) => {
     }
     // 隐藏所有互动悬浮框
     hiddenHudongModal();
-    removeAllCommentForm();
+    // removeAllCommentForm();
 });
 
 /**
@@ -192,7 +192,6 @@ function clickHudong() {
         let hudongElement = e.target;
 
         hiddenHudongModal();
-        removeAllCommentForm();
 
         let modal = $(hudongElement).next();
         modal.removeClass('hidden');
@@ -204,10 +203,23 @@ function clickHudong() {
 function clickComment() {
     $(".comment-to").off('click');
     $(".comment-to").on('click', function (e) {
-        removeAllCommentForm();
 
         let cid = $(e.target).data('cid');
         let coid = $(e.target).data('coid');
+
+        // 找到已有的评论框
+        var existsCommentFormCoid = $(".comment-form").data("coid");
+
+        removeAllCommentForm();
+        if (existsCommentFormCoid != undefined) {
+            //如果是当前cid，那么只隐藏，不显示新的
+            if (existsCommentFormCoid == coid) {
+                return;
+            }
+        }
+
+
+
         let name = $(e.target).data('name');
 
         if (coid == undefined) {
@@ -624,39 +636,39 @@ function playAudio(cid, src) {
         globalData.playMusicId = cid;
     }
     globalData.audio.play();
-    
+
     refreshAudioUI();
-    
+
     // 隐藏播放按钮，显示暂停按钮
-    $("#music-play-"+cid).addClass("hidden");
-    $("#music-pause-"+cid).removeClass("hidden");
-    
-    $("#music-img-"+cid).addClass("rotate-animation");
+    $("#music-play-" + cid).addClass("hidden");
+    $("#music-pause-" + cid).removeClass("hidden");
+
+    $("#music-img-" + cid).addClass("rotate-animation");
 }
 
 function pauseAudio(cid) {
     globalData.audio.pause();
     // 隐藏暂停按钮，显示播放按钮
-    $("#music-play-"+cid).removeClass("hidden");
-    $("#music-pause-"+cid).addClass("hidden");
-    
-    $("#music-img-"+cid).removeClass("rotate-animation");
+    $("#music-play-" + cid).removeClass("hidden");
+    $("#music-pause-" + cid).addClass("hidden");
+
+    $("#music-img-" + cid).removeClass("rotate-animation");
 }
 
 /**
  * 刷新播放器UI
  */
-function refreshAudioUI(){
-    
+function refreshAudioUI() {
+
     // 隐藏其他文章的播放器播放按钮
-    $.each($(".music-img"),function(index,item){
-		$(item).removeClass("rotate-animation");
+    $.each($(".music-img"), function (index, item) {
+        $(item).removeClass("rotate-animation");
     });
-    $.each($(".music-play"),function(index,item){
-		$(item).removeClass("hidden");
+    $.each($(".music-play"), function (index, item) {
+        $(item).removeClass("hidden");
     });
-    $.each($(".music-pause"),function(index,item){
-		$(item).addClass("hidden");
+    $.each($(".music-pause"), function (index, item) {
+        $(item).addClass("hidden");
     });
-    
+
 }
