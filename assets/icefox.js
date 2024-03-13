@@ -209,16 +209,17 @@ function clickComment() {
 
         // 找到已有的评论框
         var existsCommentFormCoid = $(".comment-form").data("coid");
+        var existsCommentFormCid = $(".comment-form").data("cid");
+        if (existsCommentFormCoid === 'undefined') existsCommentFormCoid = undefined;
+        if (existsCommentFormCid === 'undefined') existsCommentFormCid = undefined;
+
+        var hasCommentForm = $(".comment-form").length > 0;
 
         removeAllCommentForm();
-        if (existsCommentFormCoid != undefined) {
-            //如果是当前cid，那么只隐藏，不显示新的
-            if (existsCommentFormCoid == coid) {
-                return;
-            }
+
+        if (hasCommentForm && existsCommentFormCoid === coid && existsCommentFormCid === cid) {
+            return;
         }
-
-
 
         let name = $(e.target).data('name');
 
@@ -423,7 +424,7 @@ function getCommentFormHtml(cid, coid, name) {
         placeholder = '回复@' + name;
     }
     return `
-    <li class="comment-form" data-cid="${cid}" data-coid="${coid}">
+    <li class="comment-form px-2 py-2" data-cid="${cid}" data-coid="${coid}">
     <div class="bg-white dark:bg-[#262626] p-2 rounded-sm border-1 border-solid border-[#07c160]">
         <div class="grid grid-cols-3 gap-2">
             <input placeholder="昵称" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-author dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${author}" />

@@ -84,7 +84,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </div>
 </div>
 
-<div class="hidden">
+<div class="hidden px-2 py-2 first-of-type:pt-2">
     <input class="webSiteHomeUrl" value="<?php echo getWebsiteHomeUrl(); ?>" />
     <input class="_currentPage" value="<?php if ($this->_currentPage > 1)
         echo $this->_currentPage;

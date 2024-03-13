@@ -30,7 +30,7 @@ foreach ($list->stack as $item) {
         continue;
     }
     ?>
-   <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
+    <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
                 <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
@@ -164,8 +164,7 @@ foreach ($list->stack as $item) {
                         id="preview-<?php echo $item->cid; ?>">
                         <div class="overflow-hidden cursor-zoom-in col-span-2">
                             <img src="<?php echo $picture_list[0] ?>" data-fancybox="<?php echo $item->cid; ?>"
-                                class="cursor-zoom-in preview-image max-w-full max-h-64"
-                                data-cid="<?php echo $item->cid; ?>" />
+                                class="cursor-zoom-in preview-image max-w-full max-h-64" data-cid="<?php echo $item->cid; ?>" />
                         </div>
                     </section>
                     <?php
@@ -308,13 +307,13 @@ foreach ($list->stack as $item) {
                 <?php
                 $count = getCommentCountByCid($item->cid);
                 $comments = getCommentByCid($item->cid, 0, $commentCount);
-                if ($comments) {
-                    ?>
-                    <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 ">
-                        <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $item->cid; ?> comment-ul">
-                            <?php
+                ?>
+                <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] ">
+                    <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $item->cid; ?> comment-ul">
+                        <?php
+                        if ($comments) {
                             foreach ($comments as $comment): ?>
-                                <li class="pos-rlt comment-li-coid-<?php echo $comment['coid'] ?> pb-1">
+                                <li class="pos-rlt comment-li-coid-<?php echo $comment['coid'] ?> pb-1 px-2 first-of-type:pt-2">
                                     <div class="comment-body">
                                         <span class="text-[14px] text-color-link">
                                             <a href="<?php echo $comment['url'] ?>" target="_blank"
@@ -344,7 +343,7 @@ foreach ($list->stack as $item) {
                                 if ($childComments) {
                                     foreach ($childComments as $childComment): ?>
 
-                                        <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?> pb-1">
+                                        <li class="pos-rlt comment-li-coid-<?php echo $childComment['coid'] ?> pb-1 px-2">
                                             <div class="comment-body">
                                                 <span class="text-[14px] text-color-link">
                                                     <a href="<?php echo $childComment['url'] ?>" target="_blank"
@@ -391,20 +390,17 @@ foreach ($list->stack as $item) {
                             <?php
                             if ($count > 5 & $commentCount == 5) {
                                 ?>
-                                <li>
-                                    <a href="<?php $this->permalink() ?>"
-                                        class="cursor-pointer text-color-link no-underline text-[14px]">查看更多...</a>
+                                <li class="px-2 pb-1">
+                                    <a href="<?php echo $item->permalink; ?>"
+                                        class="cursor-pointer text-color-link no-underline text-[13px]">查看更多…</a>
                                 </li>
 
                                 <?php
                             }
-                            ?>
-
-                        </ul>
-                    </div>
-                    <?php
-                }
-                ?>
+                        }
+                        ?>
+                    </ul>
+                </div>
             </section>
         </div>
     </article>
