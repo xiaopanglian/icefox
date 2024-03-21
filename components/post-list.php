@@ -67,7 +67,7 @@ foreach ($list->stack as $item) {
                 <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $item->cid; ?> hidden mb-1"
                     data-cid="<?php echo $item->cid; ?>">全文</div>
                 <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $item->cid; ?> hidden mb-1"
-                    data-cid="<?php echo $item->cid; ?>">收缩</div>
+                    data-cid="<?php echo $item->cid; ?>">收起</div>
                 <?php
             }
             ?>
@@ -243,7 +243,7 @@ foreach ($list->stack as $item) {
                 </div>
                 <div class="w-[30px] h-[20px] relative">
                     <div class="hudong dark:bg-[#262626] rounded-sm"></div>
-                    <div class="hudong-modal absolute right-10 top-[-10px] hidden">
+                    <div class="hudong-modal animate-slide-in absolute right-10 top-[-10px] hidden">
                         <div
                             class="bg-[#4c4c4c] text-[#fff] hudong-container pt-2 pb-2 pl-5 pr-5 flex flex-row items-center justify-between">
 

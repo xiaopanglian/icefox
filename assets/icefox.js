@@ -108,7 +108,7 @@ function clickQW() {
     });
 }
 
-// 点击收缩按钮
+// 点击收起按钮
 function clickSS() {
     $(".ss").off('click');
     $(".ss").on('click', function (e) {

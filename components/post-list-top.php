@@ -57,7 +57,7 @@ foreach ($topCids as $cid): ?>
                 <div class="text-[14px] text-color-link cursor-pointer qw qw-<?php echo $item->cid; ?> hidden mb-1"
                     data-cid="<?php echo $item->cid; ?>">全文</div>
                 <div class="text-[14px] text-color-link cursor-pointer ss ss-<?php echo $item->cid; ?> hidden mb-1"
-                    data-cid="<?php echo $item->cid; ?>">收缩</div>
+                    data-cid="<?php echo $item->cid; ?>">收起</div>
                 <?php
             }
             ?>
