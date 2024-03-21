@@ -74,7 +74,7 @@ foreach ($list->stack as $item) {
 
             <?php
             $music = getArticleFieldsByCid($item->cid, 'music');
-            if (count($music) > 0 && !empty($music[0]['str_value'])) {
+            if (count($music) > 0 && !empty ($music[0]['str_value'])) {
                 $music = $music[0]['str_value'];
                 $musicArr = explode('||', $music);
                 ?>
@@ -113,9 +113,9 @@ foreach ($list->stack as $item) {
 
             <?php
             $friend_video = getArticleFieldsByCid($item->cid, 'friend_video');
-            if (count($friend_video) > 0 && !empty($friend_video[0]['str_value'])) {
+            if (count($friend_video) > 0 && !empty ($friend_video[0]['str_value'])) {
                 $friendVideo = $friend_video[0]['str_value'];
-                if (!empty($friendVideo)) {
+                if (!empty ($friendVideo)) {
                     $autoplay = '';
                     if ($this->options->autoPlayVideo == 'yes') {
                         $autoplay = 'autoplay';
@@ -275,13 +275,27 @@ foreach ($list->stack as $item) {
             <!--评论列表-->
             <section class="break-all mb-1 overflow-hidden rounded-md">
                 <?php
+
+                $commentCount = 5;
+                if ($this->is('single')) {
+                    $commentCount = 999;
+                }
+
+                $count = getCommentCountByCid($item->cid);
+                $comments = getCommentByCid($item->cid, 0, $commentCount);
+                $dzClass = "";
+                if ($count > 0) {
+                    $dzClass = "border-b-solid";
+                }
+                ?>
+                <?php
                 $agreeNum = getAgreeNumByCid($item->cid);
                 $agree = $agreeNum['agree'];
                 $recording = $agreeNum['recording'];
                 if ($agree > 0):
                     ?>
                     <div
-                        class="bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 bottom-shadow items-center border-1 border-b-solid dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
+                        class="bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 bottom-shadow items-center border-1 <?php echo $dzClass; ?> dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
                         <span class="like inline-block mr-2"></span>
                         <span class="text-[14px] ">
                             <!-- <span class="text-color-link no-underline text-[14px]">刘德华</span>,
@@ -295,19 +309,6 @@ foreach ($list->stack as $item) {
                     </div>
                 <?php endif; ?>
 
-                <?php
-
-                $commentCount = 5;
-                if ($this->is('single')) {
-                    $commentCount = 999;
-                }
-                ?>
-
-
-                <?php
-                $count = getCommentCountByCid($item->cid);
-                $comments = getCommentByCid($item->cid, 0, $commentCount);
-                ?>
                 <div class="index-comments bottom-shadow bg-[#f7f7f7] dark:bg-[#262626] ">
                     <ul class="list-none p-0 m-0 comment-ul-cid-<?php echo $item->cid; ?> comment-ul">
                         <?php
