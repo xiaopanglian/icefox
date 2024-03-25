@@ -48,7 +48,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                 fill="#F6BB42" p-id="8232" class="cursor-pointer"></path>
         </svg>
     </div>
-    <div class="w-[48px] h-[48px] cursor-pointer" onclick="scrollToTop(); return false;">
+    <div class="w-[48px] h-[48px] cursor-pointer rounded-3xl bg-[#E8E9EC] flex justify-center items-center" onclick="scrollToTop(); return false;">
         <svg t="1700186173794" class="icon cursor-pointer" viewBox="0 0 1024 1024" version="1.1"
             xmlns="http://www.w3.org/2000/svg" p-id="4023" xmlns:xlink="http://www.w3.org/1999/xlink" width="48"
             height="48">

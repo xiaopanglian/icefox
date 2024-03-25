@@ -16,6 +16,12 @@
     }
 }
 
+@media screen and (max-width: 800px) {
+    input, textarea, .ivu-select {
+        font-size: 16px !important;
+    }
+}
+
 /* 隐藏视频的默认控制栏 */
 /* video::-webkit-media-controls {
     display:none !important;
@@ -160,7 +166,7 @@ input::placeholder {
     max-width: 100%;
 }
 
-.article-content>p {
+.article-content > p {
     margin: 0;
 }
 
@@ -199,21 +205,21 @@ input::placeholder {
     .side-area {
         display: block;
     }
-    
+
     .music-card {
         height: 80px;
         width: 66.66%;
     }
-    
-    .music-card-text{
-		font-size:15px;
-		width:160px;
+
+    .music-card-text {
+        font-size: 15px;
+        width: 160px;
     }
-    
-    .music-card-play-position{
-		position: absolute;
-		right: 20px;
-		top:20px;
+
+    .music-card-play-position {
+        position: absolute;
+        right: 20px;
+        top: 20px;
     }
 }
 
@@ -229,21 +235,34 @@ input::placeholder {
     }
 
     .side-area {
-        display: none;
+        /*display: none;*/
+        right: 1rem;
+        bottom: 2rem;
+    }
+
+    .side-area > div {
+        width: 32px;
+        height: 32px;
+    }
+
+    .side-area svg {
+        width: 24px;
+        height: 24px;
     }
 
     .music-card {
         height: 60px;
         width: 75%;
     }
-    
-    .music-card-text{
-		font-size:12px;
-		width:100px;
+
+    .music-card-text {
+        font-size: 12px;
+        width: 100px;
     }
-    .music-card-play-position{
-		position: absolute;
-		right: 12px;
-		top:12px;
+
+    .music-card-play-position {
+        position: absolute;
+        right: 12px;
+        top: 12px;
     }
 }

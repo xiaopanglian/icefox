@@ -9,7 +9,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
     <div class="absolute right-6 bottom-[-40] flex flex-col items-end w-90%">
         <div class="flex flex-row items-end">
-            <span class="text-white mr-5 mb-6"><?php echo $this->options->title ?></span>
+            <span class="text-white mr-5 mb-6"><?php echo $this->options->avatarTitle; ?></span>
             <div class="w-15 h-15 rounded-lg overflow-hidden">
                 <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-15 h-15 object-cover" />
             </div>

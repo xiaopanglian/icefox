@@ -6,7 +6,11 @@ let globalData = {
     audio: new Audio()
 };
 
-
+var lazyLoadInstance = new LazyLoad({
+    elements_selector: '[data-src]',
+    threshold: 0,
+    data_src: 'src'
+});
 
 window.onload = async () => {
     // 网站接口请求地址前缀
@@ -79,6 +83,8 @@ window.onload = async () => {
     $(".go-back").on('click', function () {
         window.history.back();
     });
+
+    lazyLoadInstance.update();
 };
 
 /**
@@ -197,6 +203,7 @@ function clickHudong() {
         modal.removeClass('hidden');
     });
 }
+
 /**
  * 点击评论
  */
@@ -278,7 +285,7 @@ function clickComment() {
             window.localStorage.setItem('url', url);
 
             axios.post(globalData.webSiteHomeUrl + '/api/comment', param,
-                { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+                {headers: {'content-type': 'application/x-www-form-urlencoded'}})
                 .then(function (response) {
                     if (response.data.status == 1) {
                         removeAllCommentForm();
@@ -346,9 +353,10 @@ function clickLike() {
             return alert('点赞失败');
         }
 
-        let param = { cid: cid, agree: agree };
-        axios.post(globalData.webSiteHomeUrl + '/api/like', param, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+        let param = {cid: cid, agree: agree};
+        axios.post(globalData.webSiteHomeUrl + '/api/like', param, {headers: {'content-type': 'application/x-www-form-urlencoded'}})
             .then(function (response) {
+console.log(response);
                 if (response.data.status == 1) {
                     // 点赞成功
                     if ($(".like-agree-" + cid).hasClass('hidden')) {
@@ -388,6 +396,7 @@ function clickLike() {
     });
 
 }
+
 /**
  * 隐藏所有互动悬浮框
  */
@@ -547,6 +556,7 @@ function generateHtml(html) {
 
 let imgElementArray = [];
 let gallery;
+
 /**
  * 大图预览。给大图元素绑定点击事件
  */
@@ -612,12 +622,12 @@ async function pjax(pageIndex, container) {
  * 回到顶部
  */
 var timeOut;
+
 function scrollToTop() {
     if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
         window.scrollBy(0, -50);
         timeOut = setTimeout('scrollToTop()', 10);
-    }
-    else clearTimeout(timeOut);
+    } else clearTimeout(timeOut);
 }
 
 /**

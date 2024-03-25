@@ -39,6 +39,16 @@ function themeConfig($form)
 
                 $form->addInput($userAvatarUrl);
 
+                $avatarTitle = new Typecho_Widget_Helper_Form_Element_Text(
+                    'avatarTitle',
+                    null,
+                    null,
+                    _t('顶部用户头像旁名称'),
+                    _t('在这里填入顶部用户头像胖展示的名称')
+                );
+
+                $form->addInput($avatarTitle);
+
                 $topPost = new Typecho_Widget_Helper_Form_Element_Text(
                     "topPost",
                     null,
