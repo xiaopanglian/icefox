@@ -6,7 +6,7 @@ let globalData = {
     audio: new Audio()
 };
 
-var lazyLoadInstance = new LazyLoad({
+let lazyLoadInstance = new LazyLoad({
     elements_selector: '[data-src]',
     threshold: 0,
     data_src: 'src'
@@ -613,6 +613,9 @@ async function pjax(pageIndex, container) {
         loadQW();
         clickQW();
         clickSS();
+
+        // 异步加载
+        lazyLoadInstance.update();
     }).catch(e => {
 
     });

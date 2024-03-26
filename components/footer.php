@@ -5,7 +5,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 ?>
 
-<div class="fixed left-10 bottom-10 text-gray-300 text-[12px] side-area">
+<div class="fixed left-10 bottom-10 text-gray-300 text-[12px] side-area side-area-left">
     <a href="https://xiaopanglian.com" class="cursor-pointer text-gray-300" target="_blank">Icefox Theme</a> .
     <?php
     $beian = $this->options->beian;

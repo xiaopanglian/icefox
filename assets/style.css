@@ -234,6 +234,10 @@ input::placeholder {
         min-width: 300px;
     }
 
+    .side-area-left {
+        display: none;
+    }
+
     .side-area {
         /*display: none;*/
         right: 1rem;

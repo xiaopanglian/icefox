@@ -8,6 +8,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>
         <?php echo $this->options->title ?>
     </title>
@@ -34,4 +35,4 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 </head>
 
 <body :class="{'dark':darkMode}" x-data="{darkMode:false}">
-    <div class="bg-[#f0f0f0] dark:bg-[#262626]">
+<div class="bg-[#f0f0f0] dark:bg-[#262626]">
