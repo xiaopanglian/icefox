@@ -26,6 +26,7 @@ window.onload = async () => {
         refreshAudioUI();
     });
 
+    printCopyright();
     loadQW();
     clickQW();
     clickSS();
@@ -85,6 +86,7 @@ window.onload = async () => {
     });
 
     lazyLoadInstance.update();
+
 };
 
 /**
@@ -658,6 +660,10 @@ function playAudio(cid, src) {
     $("#music-pause-" + cid).removeClass("hidden");
 
     $("#music-img-" + cid).addClass("rotate-animation");
+}
+
+function printCopyright(){
+    console.log('%cIcefox主题 By xiaopanglian v1.7.0-beta %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;','color: white; background-color: #ff6666; padding: 10px;');
 }
 
 function pauseAudio(cid) {
