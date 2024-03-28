@@ -15,7 +15,7 @@ function themeConfig($form)
     ?>
     <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
     <div>
-        <div class="admin-title">Icefox主题后台配置（v1.6.8）</div>
+        <div class="admin-title">Icefox主题后台配置（v1.7.0）</div>
         <div>
             <div>
                 <?php
