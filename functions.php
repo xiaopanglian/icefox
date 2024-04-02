@@ -7,6 +7,10 @@ use Widget\Notice;
 if (!defined('__TYPECHO_ROOT_DIR__'))
     exit;
 
+// 设置版本号
+if (!defined("__THEME_VERSION__")) {
+    define("__THEME_VERSION__", "1.7.1");
+}
 //icefox 核心包
 include_once 'core/core.php';
 
@@ -15,7 +19,7 @@ function themeConfig($form)
     ?>
     <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
     <div>
-        <div class="admin-title">Icefox主题后台配置（v1.7.0）</div>
+        <div class="admin-title">Icefox主题后台配置（v<?php echo __THEME_VERSION__; ?>）</div>
         <div>
             <div>
                 <?php
