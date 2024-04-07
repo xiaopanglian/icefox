@@ -448,7 +448,7 @@ function getCommentFormHtml(cid, coid, name) {
     return `
     <li class="comment-form px-2 py-2" data-cid="${cid}" data-coid="${coid}">
     <div class="bg-white dark:bg-[#262626] p-2 rounded-sm border-1 border-solid border-[#07c160]">
-        <div class="grid grid-cols-3 gap-2">
+        <div class="grid grid-cols-3 gap-2 ${loginClass}">
             <input placeholder="昵称" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-author dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${author}" />
             <input placeholder="网址" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-url dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${url}" />
             <input placeholder="邮箱" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-mail dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${mail}" />
