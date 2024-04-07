@@ -9,7 +9,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.7.1");
+    define("__THEME_VERSION__", "1.7.2");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -97,8 +97,8 @@ function themeConfig($form)
                     'neteasyCloudMusic',
                     null,
                     null,
-                    _t('网易云音乐歌单地址'),
-                    _t('网页顶部播放器播放，目前只支持网易云音乐')
+                    _t('网易云音乐歌单地址（功能开发中）'),
+                    _t('网页顶部播放器播放，目前只支持网易云音乐。')
                 );
                 $form->addInput($neteasyCloudMusic);
 
@@ -106,7 +106,7 @@ function themeConfig($form)
                     "friendLinks",
                     null,
                     null,
-                    "友情链接",
+                    "友情链接（功能开发中）",
                     "使用||分隔，每一行一个友情链接。格式如下<br>logo || 名称 || 链接"
                 );
                 $form->addInput($friendLinks);
@@ -137,7 +137,7 @@ function themeConfig($form)
     <?php
 
 
-    // backupThemeData();
+    backupThemeData();
 }
 
 function themeFields($layout)

@@ -430,6 +430,17 @@ function getCommentFormHtml(cid, coid, name) {
         url = '';
     }
 
+    // 判断是否登录
+    let loginClass = "";
+    let loginIs = $("#login-is").text();
+    if (loginIs === '1') {
+        // 已登录
+        author = $.trim($("#login-screenName").text());
+        mail = $.trim($("#login-mail").text());
+        url = $.trim($("#login-url").text());
+        loginClass = "hidden";
+    }
+
     let placeholder = '回复内容';
     if (coid) {
         placeholder = '回复@' + name;

@@ -111,6 +111,29 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
         </div>
     </li>
     <div class="animate-spin"></div>
+    <?php
+    // 检查用户是否登录
+    if ($this->user->hasLogin()) {
+        // 用户已登录，获取用户信息
+        $user = $this->user;
+        $screenName = $user->screenName; // 用户昵称
+        $mail = $user->mail; // 用户邮箱
+        $url = $user->url; // 用户网址
+    
+        ?>
+        <div id="login-is">1</div>
+        <div id="login-screenName">
+            <?php echo $screenName; ?>
+        </div>
+        <div id="login-mail">
+            <?php echo $mail; ?>
+        </div>
+        <div id="login-url">
+            <?php echo $url; ?>
+        </div>
+    <?php
+    }
+    ?>
 </div>
 </body>
 

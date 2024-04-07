@@ -30,6 +30,8 @@ foreach ($topCids as $cid): ?>
             <section class="flex flex-row justify-between items-center mb-1">
                 <span class="text-color-link cursor-default text-[14px]">
                     <?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?>
+                    
+                    <span class="text-[12px] p-1 text-red rounded-sm">置顶</span>
                 </span>
                 <?php
                 $advertiseData = getArticleFieldsByCid($item->cid, 'isAdvertise');
