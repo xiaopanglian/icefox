@@ -22,12 +22,13 @@ function getCommentByCid($cid, $parent = 0, $len = 5): array
 function getChildCommentByCid($cid, $len = 5): array
 {
     $db = Typecho_Db::get();
-    $select = $db->select('coid,author,authorId,ownerId,mail,text,created,parent,url,cid')
-        ->from('table.comments')
-        ->where('cid = ?', $cid)
-        ->where('type = ?', 'comment')
-        ->where('status = ?', 'approved')
-        ->order('created', Typecho_Db::SORT_ASC)
+    $select = $db->select('c1.coid,c1.author,c1.authorId,c1.ownerId,c1.mail,c1.text,c1.created,c1.parent,c1.url,c1.cid,c2.author as toAuthor,c2.authorId as toAuthorId')
+        ->from('table.comments as c1')
+        ->join('table.comments as c2', 'c1.parent = c2.coid', Typecho_Db::LEFT_JOIN)
+        ->where('c1.cid = ?', $cid)
+        ->where('c1.type = ?', 'comment')
+        ->where('c1.status = ?', 'approved')
+        ->order('c1.created', Typecho_Db::SORT_ASC)
         ->limit($len);
     return $db->fetchAll($select);
 }
@@ -58,7 +59,7 @@ function getChildComments($coid, $list)
     $newList = array_filter($list, function ($li) use ($coid) {
         return $li['parent'] == $coid;
     });
-    
+
     foreach ($newList as $item) {
         array_push($result, $item);
         $childs = getChildCommentByCidOfComplete($item['coid'], $list);
