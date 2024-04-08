@@ -234,7 +234,8 @@ function clickComment() {
 
         if (coid == undefined) {
             // 如果没有coid，那么就在最下方显示评论框
-            document.querySelector('.comment-ul-cid-' + cid).insertAdjacentHTML('beforeend', getCommentFormHtml(cid));
+            // document.querySelector('.comment-ul-cid-' + cid).insertAdjacentHTML('beforeend', getCommentFormHtml(cid));
+            $('.comment-ul-cid-' + cid).prepend(getCommentFormHtml(cid));
         } else {
             //有coid，在对应评论处显示评论框
             document.querySelector('.comment-li-coid-' + coid).insertAdjacentHTML('afterend', getCommentFormHtml(cid, coid, name));
@@ -287,7 +288,7 @@ function clickComment() {
             window.localStorage.setItem('url', url);
 
             axios.post(globalData.webSiteHomeUrl + '/api/comment', param,
-                {headers: {'content-type': 'application/x-www-form-urlencoded'}})
+                { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(function (response) {
                     if (response.data.status == 1) {
                         removeAllCommentForm();
@@ -355,10 +356,10 @@ function clickLike() {
             return alert('点赞失败');
         }
 
-        let param = {cid: cid, agree: agree};
-        axios.post(globalData.webSiteHomeUrl + '/api/like', param, {headers: {'content-type': 'application/x-www-form-urlencoded'}})
+        let param = { cid: cid, agree: agree };
+        axios.post(globalData.webSiteHomeUrl + '/api/like', param, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
             .then(function (response) {
-console.log(response);
+                console.log(response);
                 if (response.data.status == 1) {
                     // 点赞成功
                     if ($(".like-agree-" + cid).hasClass('hidden')) {
@@ -673,8 +674,8 @@ function playAudio(cid, src) {
     $("#music-img-" + cid).addClass("rotate-animation");
 }
 
-function printCopyright(){
-    console.log('%cIcefox主题 By xiaopanglian v1.7.3 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;','color: white; background-color: #ff6666; padding: 10px;');
+function printCopyright() {
+    console.log('%cIcefox主题 By xiaopanglian v1.7.3 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 function pauseAudio(cid) {
