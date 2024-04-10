@@ -641,10 +641,17 @@ async function pjax(pageIndex, container) {
 var timeOut;
 
 function scrollToTop() {
-    if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
-        window.scrollBy(0, -50);
-        timeOut = setTimeout('scrollToTop()', 10);
-    } else clearTimeout(timeOut);
+    // if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
+    //     window.scrollBy(0, -50);
+    //     timeOut = setTimeout('scrollToTop()', 10);
+    // } else clearTimeout(timeOut);
+    // 使用Anime.js进行平滑滚动
+    anime({
+        targets: 'html, body',
+        scrollTop: 0,
+        duration: 500,
+        easing: 'linear'
+    });
 }
 
 /**
