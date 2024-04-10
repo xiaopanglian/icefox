@@ -682,7 +682,7 @@ function playAudio(cid, src) {
 }
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.7.3 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v1.7.4 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 function pauseAudio(cid) {
