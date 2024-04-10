@@ -142,6 +142,12 @@ function themeConfig($form)
 
 function themeFields($layout)
 {
+    ?>
+<style>
+    textarea{width:100%;height:8rem;}
+    input[type=text]{width:100%;}
+</style>
+    <?php
     $friendVideo = new Typecho_Widget_Helper_Form_Element_Textarea(
         'friend_video',
         null,
@@ -149,6 +155,7 @@ function themeFields($layout)
         _t('朋友圈视频'),
         _t('<span>在这里填入朋友圈视频地址</span>')
     );
+    $friendVideo->input->setAttribute('class', 't-video-find friend_video_input');
     $layout->addItem($friendVideo);
 
     $friendPicture = new Typecho_Widget_Helper_Form_Element_Textarea(
@@ -158,6 +165,7 @@ function themeFields($layout)
         _t('朋友圈图片'),
         _t('<span style="color:red;">不推荐，最好直接把图片添加在文章内容里面</span><br><span>在这里填入朋友圈图片，最多9张，使用英文逗号隔开（注：如果填了朋友圈视频，则优先视频）</span>')
     );
+    $friendPicture->input->setAttribute('class', 't-default-find');
     $layout->addItem($friendPicture);
 
     $position = new Typecho_Widget_Helper_Form_Element_Text(
@@ -167,6 +175,7 @@ function themeFields($layout)
         _t('发布定位'),
         _t('<span>在这里填定位名称（例：成都市·天府广场）</span>')
     );
+    $position->input->setAttribute('class', 't-default-find');
     $layout->addItem($position);
 
     $isAdvertise = new Typecho_Widget_Helper_Form_Element_Radio(
@@ -179,6 +188,7 @@ function themeFields($layout)
         _t("是否是广告"),
         _t('<span>默认不是</span>')
     );
+    $isAdvertise->input->setAttribute('class', 't-default-find');
     $layout->addItem($isAdvertise);
 
     $music = new Typecho_Widget_Helper_Form_Element_Textarea(
@@ -188,6 +198,7 @@ function themeFields($layout)
         _t('插入音乐'),
         _t('格式如下：<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
     );
+    $music->input->setAttribute('class', 't-music-find');
     $layout->addItem($music);
 
     // $canComment = new Typecho_Widget_Helper_Form_Element_Radio(
@@ -201,6 +212,51 @@ function themeFields($layout)
     //     _t('<span style="color:red;">默认允许评论</span>')
     // );
     // $layout->addItem($canComment);
+}
+
+//自定义字段扩展
+Typecho_Plugin::factory('admin/write-post.php')->bottom = array('tabField', 'tabs');
+Typecho_Plugin::factory('admin/write-page.php')->bottom = array('tabField', 'tabs');
+class tabField {
+    public static function tabs()
+    {
+    ?>
+    <style>
+        .tabss{margin:10px;clear:both;display:block;height:30px;padding:0};
+        .tabss a{outline:none!important};        
+    </style>
+
+    <script>
+        $(function(){
+            var tabsHtml = `
+                    <ul class="typecho-option-tabs tabss" style="">
+                        <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
+                        <li class="" id="t-video"><a href="javascript:;">视频</a></li>
+                        <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
+                    </ul>`;
+            $("#custom-field-expand").after(tabsHtml);
+
+            //初始化，全部隐藏
+            $("#custom-field>table>tbody").find("tr").hide();
+
+            //初始化显示
+            $(".tabss>li.current").parent().siblings("table").find('.t-default-find').closest('tr').show();
+
+            $(".tabss li").click(function(){
+                var clasz = this.id;
+                //删除同胞的current
+                $(this).siblings().removeClass('current');
+                //自身添加current
+                $(this).addClass('current');
+                //全部隐藏
+                $("#custom-field>table>tbody").find("tr").hide();
+                //显示自身底下的子元素
+                $(".tabss>li.current").parent().siblings("table").find('.'+clasz+'-find').closest('tr').show();
+            });
+        });
+    </script>
+<?php
+    }
 }
 
 /**

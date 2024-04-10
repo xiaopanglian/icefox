@@ -21,6 +21,7 @@
 .absolute{position:absolute;}
 .fixed{position:fixed;}
 .relative{position:relative;}
+.static{position:static;}
 .bottom-\[-40\]{bottom:-40;}
 .bottom-10{bottom:2.5rem;}
 .left-10{left:2.5rem;}
@@ -85,6 +86,7 @@
 .flex{display:flex;}
 .flex-row{flex-direction:row;}
 .flex-col{flex-direction:column;}
+.table{display:table;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .animate-spin{animation:spin 1s linear infinite;}
 .cursor-default{cursor:default;}
