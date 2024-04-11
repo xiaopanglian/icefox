@@ -17,12 +17,20 @@ include_once 'core/core.php';
 function themeConfig($form)
 {
     ?>
-    <link rel="stylesheet" href="/usr/themes/icefox/assets/admin.css">
+    <link rel="stylesheet" href="/usr/themes/icefox/assets/css/admin.css">
     <div>
-        <div class="admin-title">Icefox主题后台配置（v<?php echo __THEME_VERSION__; ?>）</div>
+        <div class="admin-title">
+            Icefox主题后台配置（v<?php echo __THEME_VERSION__; ?>）
+            <div>
+                <?php
+                backupThemeData();
+                ?>
+            </div>
+        </div>
         <div>
             <div>
                 <?php
+
                 $backgroundImageUrl = new Typecho_Widget_Helper_Form_Element_Text(
                     'backgroundImageUrl',
                     null,
@@ -137,16 +145,21 @@ function themeConfig($form)
     <?php
 
 
-    backupThemeData();
 }
 
 function themeFields($layout)
 {
     ?>
-<style>
-    textarea{width:100%;height:8rem;}
-    input[type=text]{width:100%;}
-</style>
+    <style>
+        textarea {
+            width: 100%;
+            height: 8rem;
+        }
+
+        input[type=text] {
+            width: 100%;
+        }
+    </style>
     <?php
     $friendVideo = new Typecho_Widget_Helper_Form_Element_Textarea(
         'friend_video',
@@ -217,45 +230,59 @@ function themeFields($layout)
 //自定义字段扩展
 Typecho_Plugin::factory('admin/write-post.php')->bottom = array('tabField', 'tabs');
 Typecho_Plugin::factory('admin/write-page.php')->bottom = array('tabField', 'tabs');
-class tabField {
+class tabField
+{
     public static function tabs()
     {
-    ?>
-    <style>
-        .tabss{margin:10px;clear:both;display:block;height:30px;padding:0};
-        .tabss a{outline:none!important};        
-    </style>
+        ?>
+        <style>
+            .tabss {
+                margin: 10px;
+                clear: both;
+                display: block;
+                height: 30px;
+                padding: 0
+            }
 
-    <script>
-        $(function(){
-            var tabsHtml = `
-                    <ul class="typecho-option-tabs tabss" style="">
-                        <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
-                        <li class="" id="t-video"><a href="javascript:;">视频</a></li>
-                        <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
-                    </ul>`;
-            $("#custom-field-expand").after(tabsHtml);
+            ;
 
-            //初始化，全部隐藏
-            $("#custom-field>table>tbody").find("tr").hide();
+            .tabss a {
+                outline: none !important
+            }
 
-            //初始化显示
-            $(".tabss>li.current").parent().siblings("table").find('.t-default-find').closest('tr').show();
+            ;
+        </style>
 
-            $(".tabss li").click(function(){
-                var clasz = this.id;
-                //删除同胞的current
-                $(this).siblings().removeClass('current');
-                //自身添加current
-                $(this).addClass('current');
-                //全部隐藏
+        <script>
+            $(function () {
+                var tabsHtml = `
+                            <ul class="typecho-option-tabs tabss" style="">
+                                <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
+                                <li class="" id="t-video"><a href="javascript:;">视频</a></li>
+                                <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
+                            </ul>`;
+                $("#custom-field-expand").after(tabsHtml);
+
+                //初始化，全部隐藏
                 $("#custom-field>table>tbody").find("tr").hide();
-                //显示自身底下的子元素
-                $(".tabss>li.current").parent().siblings("table").find('.'+clasz+'-find').closest('tr').show();
+
+                //初始化显示
+                $(".tabss>li.current").parent().siblings("table").find('.t-default-find').closest('tr').show();
+
+                $(".tabss li").click(function () {
+                    var clasz = this.id;
+                    //删除同胞的current
+                    $(this).siblings().removeClass('current');
+                    //自身添加current
+                    $(this).addClass('current');
+                    //全部隐藏
+                    $("#custom-field>table>tbody").find("tr").hide();
+                    //显示自身底下的子元素
+                    $(".tabss>li.current").parent().siblings("table").find('.' + clasz + '-find').closest('tr').show();
+                });
             });
-        });
-    </script>
-<?php
+        </script>
+        <?php
     }
 }
 
@@ -376,7 +403,7 @@ function backupThemeData()
     ?>
 
     </form>
-    <?php echo '<br/><div class="message error">请先点击右下角的保存设置按钮，创建备份！<br/><br/><form class="backup" action="?calm_backup" method="post">
+    <?php echo '<div class="">请先点击右下角的保存设置按钮，创建备份！<br/><br/><form class="backup" action="?calm_backup" method="post">
     <input type="submit" name="type" class="btn primary" value="创建备份" />
     <input type="submit" name="type" class="btn primary" value="还原备份" />
     <input type="submit" name="type" class="btn primary" value="删除备份" /></form></div>';

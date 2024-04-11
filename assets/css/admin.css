@@ -1,8 +1,15 @@
 .admin-title {
-    color: red;
+    color: white;
     font-size: 24px;
-    background-color: white;
+    background-color: #33CCFF;
     border-radius: 6px;
     text-align: center;
     padding: 3px 0;
+}
+
+.col-mb-12,
+.col-tb-8,
+.col-tb-offset-2 {
+    margin-left: 0;
+    width: 100%;
 }
