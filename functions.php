@@ -101,6 +101,17 @@ function themeConfig($form)
                 );
                 $form->addInput($autoMutedPlayVideo);
 
+                $defaultThemeColor = new Typecho_Widget_Helper_Form_Element_Radio(
+                    'defaultThemeColor',
+                    [
+                        'yes' => _t("暗色"),
+                        'no' => _t("亮色")
+                    ],
+                    'yes',
+                    _t('默认主题配色')
+                );
+                $form->addInput($defaultThemeColor);
+
                 $neteasyCloudMusic = new Typecho_Widget_Helper_Form_Element_Text(
                     'neteasyCloudMusic',
                     null,
@@ -256,11 +267,11 @@ class tabField
         <script>
             $(function () {
                 var tabsHtml = `
-                            <ul class="typecho-option-tabs tabss" style="">
-                                <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
-                                <li class="" id="t-video"><a href="javascript:;">视频</a></li>
-                                <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
-                            </ul>`;
+                                            <ul class="typecho-option-tabs tabss" style="">
+                                                <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
+                                                <li class="" id="t-video"><a href="javascript:;">视频</a></li>
+                                                <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
+                                            </ul>`;
                 $("#custom-field-expand").after(tabsHtml);
 
                 //初始化，全部隐藏
