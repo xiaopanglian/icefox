@@ -8,12 +8,13 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>
         <?php echo $this->options->title ?>
     </title>
     <!-- 使用url函数转换相关路径 -->
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/style.css'); ?>?v=<?php echo __THEME_VERSION__; ?>">
+    <link rel="stylesheet"
+        href="<?php $this->options->themeUrl('assets/css/style.css'); ?>?v=<?php echo __THEME_VERSION__; ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/viewer.min.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('uno.css'); ?>?v=<?php echo __THEME_VERSION__; ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/fancybox.css'); ?>">
@@ -28,12 +29,14 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/fancybox.umd.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/lazyload.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/anime.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/icefox.js'); ?>?v=<?php echo __THEME_VERSION__; ?>"></script>
+    <script type="text/javascript"
+        src="<?php $this->options->themeUrl('assets/js/icefox.js'); ?>?v=<?php echo __THEME_VERSION__; ?>"></script>
     <script type="text/javascript">
         <?php echo $this->options->script; ?>
-    </script>    <!-- 通过自有函数输出HTML头部信息 -->
+    </script> <!-- 通过自有函数输出HTML头部信息 -->
     <?php $this->header(); ?>
 </head>
 
 <body :class="{'dark':darkMode}" x-data="{darkMode:false}">
-<div class="bg-[#f0f0f0] dark:bg-[#262626]">
+    <div class="bg-[#f0f0f0] dark:bg-[#262626]">
+        <div style="height: 100%">

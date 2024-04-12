@@ -16,8 +16,31 @@
     }
 }
 
+@-webkit-keyframes grow {
+    0% {
+        background-size: 100% 100%;
+    }
+
+    100% {
+        background-size: 150% 150%;
+    }
+}
+
+@keyframes grow {
+    0% {
+        background-size: 100% 100%;
+    }
+
+    100% {
+        background-size: 150% 150%;
+    }
+}
+
 @media screen and (max-width: 800px) {
-    input, textarea, .ivu-select {
+
+    input,
+    textarea,
+    .ivu-select {
         font-size: 16px !important;
     }
 }
@@ -59,6 +82,11 @@ input::placeholder {
 .head {
     background-image: url('http://0ru.cn/usr/uploads/2023/08/906729241.jpg');
     background-size: cover;
+}
+
+.bg-cover {
+    -webkit-animation: grow 15s linear forwards;
+    animation: grow 15s linear forwards;
 }
 
 .hudong {
@@ -166,7 +194,7 @@ input::placeholder {
     max-width: 100%;
 }
 
-.article-content > p {
+.article-content>p {
     margin: 0;
 }
 
@@ -244,7 +272,7 @@ input::placeholder {
         bottom: 2rem;
     }
 
-    .side-area > div {
+    .side-area>div {
         width: 32px;
         height: 32px;
     }
