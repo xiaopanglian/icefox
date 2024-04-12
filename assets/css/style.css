@@ -65,6 +65,7 @@
 * {
     cursor: default;
     font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
+    box-sizing: border-box;
 }
 
 body {
@@ -196,6 +197,13 @@ input::placeholder {
 
 .article-content>p {
     margin: 0;
+}
+
+.article-content>ul {
+    margin: 0;
+}
+.article-content pre > code{
+    text-wrap: wrap;
 }
 
 .multi-pictures {
