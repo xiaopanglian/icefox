@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.7.4
+ * @version 1.8.0
  * @link http://xiaopanglian.com/
  */
 
@@ -33,4 +33,5 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </div>
 </div><!-- end #main-->
 
+<?php $this->need('/components/modal.php'); ?>
 <?php $this->need('/components/footer.php'); ?>

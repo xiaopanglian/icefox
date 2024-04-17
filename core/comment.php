@@ -102,21 +102,31 @@ function getAgreeNumByCid($cid)
 
     //  查询出点赞数量
     $agree = $db->fetchRow($db->select('agree')->from('table.contents')->where('cid = ?', $cid));
-    //  获取记录点赞的 Cookie
-    $AgreeRecording = Typecho_Cookie::get('typechoAgreeRecording');
-    //  判断记录点赞的 Cookie 是否存在
-    if (empty($AgreeRecording)) {
-        //  如果不存在就写入 Cookie
-        Typecho_Cookie::set('typechoAgreeRecording', json_encode(array(0)));
-    }
+    
+    try {
+        //  获取记录点赞的 Cookie
+        $AgreeRecording = Typecho_Cookie::get('typechoAgreeRecording');
+        //  判断记录点赞的 Cookie 是否存在
+        if (empty($AgreeRecording)) {
+            //  如果不存在就写入 Cookie
+            Typecho_Cookie::set('typechoAgreeRecording', json_encode(array(0)));
+        }
 
-    //  返回
-    return array(
-        //  点赞数量
-        'agree' => $agree['agree'],
-        //  文章是否点赞过
-        'recording' => in_array($cid, json_decode(Typecho_Cookie::get('typechoAgreeRecording'))) ? true : false
-    );
+        //  返回
+        return array(
+            //  点赞数量
+            'agree' => $agree['agree'],
+            //  文章是否点赞过
+            'recording' => in_array($cid, json_decode(Typecho_Cookie::get('typechoAgreeRecording'))) ? true : false
+        );
+    } catch (Exception $exception) {
+        return array(
+            //  点赞数量
+            'agree' => $agree['agree'],
+            //  文章是否点赞过
+            'recording' => false
+        );
+    }
 }
 
 /**

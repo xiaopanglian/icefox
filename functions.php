@@ -1,15 +1,13 @@
 <?php
 
 use Typecho\Common;
-use Widget\Options;
-use Widget\Notice;
 
 if (!defined('__TYPECHO_ROOT_DIR__'))
     exit;
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.7.4");
+    define("__THEME_VERSION__", "1.8.0");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -125,7 +123,7 @@ function themeConfig($form)
                     "friendLinks",
                     null,
                     null,
-                    "友情链接（功能开发中）",
+                    "友情链接",
                     "使用||分隔，每一行一个友情链接。格式如下<br>logo || 名称 || 链接"
                 );
                 $form->addInput($friendLinks);
@@ -267,11 +265,11 @@ class tabField
         <script>
             $(function () {
                 var tabsHtml = `
-                                            <ul class="typecho-option-tabs tabss" style="">
-                                                <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
-                                                <li class="" id="t-video"><a href="javascript:;">视频</a></li>
-                                                <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
-                                            </ul>`;
+                                                                            <ul class="typecho-option-tabs tabss" style="">
+                                                                                <li class="current" id="t-default"><a href="javascript:;">默认</a></li>
+                                                                                <li class="" id="t-video"><a href="javascript:;">视频</a></li>
+                                                                                <li class="" id="t-music"><a href="javascript:;">音乐</a></li>
+                                                                            </ul>`;
                 $("#custom-field-expand").after(tabsHtml);
 
                 //初始化，全部隐藏
@@ -329,8 +327,11 @@ function backupThemeData()
                         ->rows(["value" => $value])
                         ->where("name = ?", "theme:" . $name . "_backup")
                 );
-                Notice::alloc()->set("备份更新成功", "success");
-                Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                try {
+                    Widget_Notice::alloc()->set("备份更新成功", "success");
+                    Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                } catch (Exception $exception) {
+                }
             ?>
             <?php
             } else {
@@ -342,8 +343,11 @@ function backupThemeData()
                             ->insert("table.options")
                             ->rows(["name" => "theme:" . $name . "_backup", "user" => "0", "value" => $value])
                     );
-                    Notice::alloc()->set("备份成功", "success");
-                    Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                    try {
+                        Widget_Notice::alloc()->set("备份成功", "success");
+                        Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                    } catch (Exception $exception) {
+                    }
                 ?>
                 <?php
                 }
@@ -371,14 +375,20 @@ function backupThemeData()
                         ->rows(["value" => $_value])
                         ->where("name = ?", "theme:" . $name)
                 );
-                Notice::alloc()->set("备份还原成功", "success");
-                Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                try {
+                    Widget_Notice::alloc()->set("备份还原成功", "success");
+                    Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                } catch (Exception $exception) {
+                }
             ?>
             <?php
             } else {
 
-                Notice::alloc()->set("无备份数据，请先创建备份", "error");
-                Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                try {
+                    Widget_Notice::alloc()->set("无备份数据，请先创建备份", "error");
+                    Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                } catch (Exception $exception) {
+                }
             ?>
             <?php
             } ?>
@@ -396,14 +406,20 @@ function backupThemeData()
             ) {
 
                 $db->query($db->delete("table.options")->where("name = ?", "theme:" . $name . "_backup"));
-                Notice::alloc()->set("删除备份成功", "success");
-                Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                try {
+                    Widget_Notice::alloc()->set("删除备份成功", "success");
+                    Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                } catch (Exception $exception) {
+                }
             ?>
             <?php
             } else {
 
-                Notice::alloc()->set("无备份数据，无法删除", "success");
-                Options::alloc()->response->redirect(Common::url("options-theme.php", Options::alloc()->adminUrl));
+                try {
+                    Widget_Notice::alloc()->set("无备份数据，无法删除", "success");
+                    Widget_Options::alloc()->response->redirect(Common::url("options-theme.php", Widget_Options::alloc()->adminUrl));
+                } catch (Exception $exception) {
+                }
             ?>
             <?php
             } ?>
@@ -414,7 +430,7 @@ function backupThemeData()
     ?>
 
     </form>
-    <?php echo '<div class="">请先点击右下角的保存设置按钮，创建备份！<br/><br/><form class="backup" action="?calm_backup" method="post">
+    <?php echo '<div class="text-xs">请先点击右下角的保存设置按钮，再创建备份！<br/><br/><form class="backup" action="?calm_backup" method="post">
     <input type="submit" name="type" class="btn primary" value="创建备份" />
     <input type="submit" name="type" class="btn primary" value="还原备份" />
     <input type="submit" name="type" class="btn primary" value="删除备份" /></form></div>';

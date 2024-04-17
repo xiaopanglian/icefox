@@ -65,7 +65,6 @@
 * {
     cursor: default;
     font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
-    box-sizing: border-box;
 }
 
 body {
@@ -78,16 +77,6 @@ body {
 
 input::placeholder {
     color: #c6c6c6;
-}
-
-.head {
-    background-image: url('http://0ru.cn/usr/uploads/2023/08/906729241.jpg');
-    background-size: cover;
-}
-
-.bg-cover {
-    -webkit-animation: grow 15s linear forwards;
-    animation: grow 15s linear forwards;
 }
 
 .hudong {
@@ -177,6 +166,15 @@ input::placeholder {
     color: transparent;
 }
 
+.face-dark {
+    width: 18px;
+    height: 18px;
+    background-image: url('../svgs/post.comment.face.dark.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+}
+
 .article-content a {
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -202,7 +200,8 @@ input::placeholder {
 .article-content>ul {
     margin: 0;
 }
-.article-content pre > code{
+
+.article-content pre>code {
     text-wrap: wrap;
 }
 
@@ -214,7 +213,7 @@ input::placeholder {
     display: inline-block;
     width: 100%;
     text-align: center;
-    padding: 3px 0;
+    padding: 10px 0;
     font-size: 12px;
     color: #333;
 }
@@ -227,6 +226,32 @@ input::placeholder {
     font-size: 12px;
     background-color: #e6e6e6;
     color: #999;
+}
+
+.friend-container {
+    width: 32rem;
+    max-height: 50%;
+}
+
+/* WebKit 浏览器滚动条样式 */
+.friend-container::-webkit-scrollbar {
+    width: 12px;
+    /* 设置滚动条宽度 */
+}
+
+.friend-container::-webkit-scrollbar-track {
+    background: #f2f2f2;
+    /* 设置滚动条轨道颜色 */
+}
+
+.friend-container::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 设置滚动条滑块颜色 */
+}
+
+.friend-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 设置鼠标悬停在滚动条滑块上时的颜色 */
 }
 
 @media screen and (min-width: 567px) {
@@ -278,6 +303,12 @@ input::placeholder {
         /*display: none;*/
         right: 1rem;
         bottom: 2rem;
+    }
+
+    .friend-container {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
     }
 
     .side-area>div {

@@ -30,17 +30,17 @@ foreach ($list->stack as $item) {
         continue;
     }
     ?>
-    <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 pt-5 pl-5 pr-5">
+    <article class="flex flex-row border-b borer-b-2 dark:border-gray-800 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
                 <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
             </div>
         </div>
         <div
-            class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid pb-1">
+            class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-800 border-gray-100 border-solid pb-1">
             <section class="flex flex-row justify-between items-center mb-1">
                 <span class="text-color-link cursor-default text-[14px]">
-                    <?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?>
+                    <a href="<?php echo $item->permalink; ?>" class="cursor-pointer text-color-link no-underline"><?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?></a>
                 </span>
                 <?php
                 $advertiseData = getArticleFieldsByCid($item->cid, 'isAdvertise');
@@ -82,7 +82,7 @@ foreach ($list->stack as $item) {
                 ?>
                 <section class="w-full mb-1">
                     <figure class="flex overflow-hidden rounded-sm music-card m-0 bg-cover bg-center "
-                        style="background-image: url('<?php echo $musicArr[3]; ?>')">
+                        style="background-image: url('<?php echo $musicArr[3]; ?>');background-color:#eee;">
                         <div
                             class="w-full h-full bg-cover bg-center backdrop-blur-lg backdrop-filter bg-opacity-50 flex flex-row relative">
                             <img src="<?php echo $musicArr[3]; ?>"
@@ -286,7 +286,7 @@ foreach ($list->stack as $item) {
                 $recording = $agreeNum['recording'];
                 ?>
                 <div
-                    class="bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 bottom-shadow items-center border-1 <?php echo $dzClass; ?> dark:border-gray-600 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
+                    class="bg-[#f7f7f7] dark:bg-[#262626] px-3 py-2 bottom-shadow items-center border-1 <?php echo $dzClass; ?> dark:border-gray-800 border-gray-100 <?php echo ($agree > 0 ? 'flex' : 'hidden'); ?> like-agree-<?php echo $item->cid; ?>">
                     <span class="like inline-block mr-2"></span>
                     <span class="text-[14px] ">
                         <span class="text-color-link text-[14px]">

@@ -57,7 +57,7 @@ window.onload = async () => {
         // 底部加载中的html
         loadingHtml: generateHtml('-- 加载中 --'),
         // 底部没有更多数据的html
-        noMoreDataHtml: generateHtml('-- 没有更多数据了 --'),
+        noMoreDataHtml: generateHtml('-- 已经到底了 --'),
         // 底部出现异常的html
         exceptionHtml: generateHtml('-- 出现异常 --'),
         loadMore: async function (sl) {
@@ -82,11 +82,32 @@ window.onload = async () => {
     });
 
     $(".go-back").on('click', function () {
-        window.history.back();
+        window.location.href = "/";
+    });
+
+    $(window).scroll(function () {
+        let headerHeight = $("header").height();
+        let topFixedHeight = $("#top-fixed").height();
+        if ($(this).scrollTop() + topFixedHeight > headerHeight) {
+            $('#top-fixed').addClass('bg-[#f0f0f0]');
+            $('#top-fixed').addClass('dark:bg-black/30');
+            $('#top-fixed').addClass('backdrop-blur-md');
+            $("#friend-light").addClass('hidden');
+            $("#friend-dark").removeClass('hidden');
+            $("#back-light").addClass('hidden');
+            $("#back-dark").removeClass('hidden');
+        } else {
+            $('#top-fixed').removeClass('bg-[#f0f0f0]');
+            $('#top-fixed').removeClass('dark:bg-black/30');
+            $('#top-fixed').removeClass('backdrop-blur-md');
+            $("#friend-light").removeClass('hidden');
+            $("#friend-dark").addClass('hidden');
+            $("#back-light").removeClass('hidden');
+            $("#back-dark").addClass('hidden');
+        }
     });
 
     lazyLoadInstance.update();
-
 };
 
 /**
@@ -303,17 +324,17 @@ function clickComment() {
                         if (param.parent > 0) {
                             //有coid，在对应评论处显示评论框
                             document.querySelector('.comment-li-coid-' + param.parent).insertAdjacentHTML('afterend', `
-                                <li class="pos-rlt comment-li-coid-${response.data.comment.coid}">
-                        <div class="comment-body">
-                            <span class="text-[14px] text-color-link">
-                                <a href="${response.data.comment.url}" target="_blank" class="cursor-pointer text-color-link no-underline">${response.data.comment.author}</a>
-                            </span>
-                            <span class="text-[14px]">回复</span>
-                            <span class="text-[14px] text-color-link">${name}</span>
-                            <span data-separator=":" class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to" data-coid="${response.data.comment.coid}" data-cid="${response.data.comment.cid}" data-name="${response.data.comment.author}">${param.text}</span>
-                            ${waiting}
-                        </div>
-                    </li>`);
+                                <li class="pos-rlt comment-li-coid-${response.data.comment.coid} pb-1 px-2 first-of-type:pt-2">
+                                    <div class="comment-body">
+                                        <span class="text-[14px] text-color-link">
+                                            <a href="${response.data.comment.url}" target="_blank" class="cursor-pointer text-color-link no-underline">${response.data.comment.author}</a>
+                                        </span>
+                                        <span class="text-[14px]">回复</span>
+                                        <span class="text-[14px] text-color-link">${name}</span>
+                                        <span data-separator=":" class="before:content-[attr(data-separator)] text-[14px] cursor-help comment-to" data-coid="${response.data.comment.coid}" data-cid="${response.data.comment.cid}" data-name="${response.data.comment.author}">${param.text}</span>
+                                        ${waiting}
+                                    </div>
+                                </li>`);
 
                         } else {
                             // 如果没有coid，那么就在最下方显示评论框
@@ -450,12 +471,12 @@ function getCommentFormHtml(cid, coid, name) {
     <li class="comment-form px-2 py-2" data-cid="${cid}" data-coid="${coid}">
     <div class="bg-white dark:bg-[#262626] p-2 rounded-sm border-1 border-solid border-[#07c160]">
         <div class="grid grid-cols-3 gap-2 ${loginClass}">
-            <input placeholder="昵称" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-author dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${author}" />
-            <input placeholder="网址" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-url dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${url}" />
-            <input placeholder="邮箱" class="border-0 outline-none bg-color-primary dark:bg-[#323232] p-1 rounded-sm input-mail dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${mail}" />
+            <input placeholder="昵称" class="border-0 outline-none bg-color-primary dark:bg-[#262626] p-1 rounded-sm input-author dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${author}" />
+            <input placeholder="网址" class="border-0 outline-none bg-color-primary dark:bg-[#262626] p-1 rounded-sm input-url dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${url}" />
+            <input placeholder="邮箱" class="border-0 outline-none bg-color-primary dark:bg-[#262626] p-1 rounded-sm input-mail dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" value="${mail}" />
         </div>
         <div class="mt-2">
-            <input placeholder="${placeholder}" class="border-0 outline-none w-full rounded-sm p-1 input-text dark:bg-[#323232] dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" />
+            <input placeholder="${placeholder}" class="border-0 outline-none w-full rounded-sm p-1 input-text dark:bg-[#262626] dark:text-[#cccccc]" data-cid="${cid}" data-coid="${coid}" />
         </div>
         <div class="face-container hidden" data-cid="${cid}" data-coid="${coid}">
 <span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">😀</span>
@@ -546,7 +567,7 @@ function getCommentFormHtml(cid, coid, name) {
 <span class="cursor-pointer face-item" data-cid="${cid}" data-coid="${coid}">🤕</span>
         </div>
         <div class="flex justify-end mt-2">
-            <div class="face mr-2 cursor-pointer" data-cid="${cid}" data-coid="${coid}"></div>
+            <div class="face dark:face-dark mr-2 cursor-pointer" data-cid="${cid}" data-coid="${coid}"></div>
             <button class="btn-comment bg-[#07c160] border-0 outline-none text-white cursor-pointer rounded-sm" data-cid="${cid}" data-coid="${coid}">回复</button>
         </div>
     </div>
@@ -682,7 +703,7 @@ function playAudio(cid, src) {
 }
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.7.4 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v1.8.0 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 function pauseAudio(cid) {
@@ -710,4 +731,20 @@ function refreshAudioUI() {
         $(item).addClass("hidden");
     });
 
+}
+
+/**
+ * 打开朋友圈弹框
+ */
+function showFriendModal() {
+    $("#friend-modal").show();
+    $("body").addClass("overflow-hidden");
+}
+
+/**
+ * 关闭朋友圈弹框
+ */
+function closeFriendModal() {
+    $("#friend-modal").hide();
+    $("body").removeClass("overflow-hidden");
 }

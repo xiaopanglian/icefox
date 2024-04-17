@@ -40,4 +40,4 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 <body :class="{'dark':darkMode}"
     x-data="{darkMode:<?php echo $this->options->defaultThemeColor == 'yes' ? 'true' : 'false'; ?>}">
     <div class="bg-[#f0f0f0] dark:bg-[#262626]">
-        <div style="height: 100%">
+        <div style="min-height:100%">
