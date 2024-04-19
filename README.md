@@ -17,3 +17,7 @@
 - [x] 后台配置是否自动播放视频
 - [x] 评论过多点击进入详情
 - [x] 评论表情
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaopanglian/icefox&type=Date)](https://star-history.com/#xiaopanglian/icefox&Date)
