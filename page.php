@@ -1,41 +1,40 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
-<!DOCTYPE HTML>
-<html>
+<?php
+// 详情页
+if (!defined('__TYPECHO_ROOT_DIR__'))
+    exit;
 
-<?php $this->need('components/head.php'); ?>
+?>
 
-<body>
-    <div class="container w-full lg:3/4 xl:w-3/5">
+<?php $this->need('/components/header.php'); ?>
 
-        <div class="col-mb-12 col-8 p-2" id="main" role="main">
-            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-                <h1 class="text-[#00b894] text-2xl" itemprop="name headline">
-                    <a itemprop="url" class="text-[#00b894] text-2xl no-underline" href="<?php $this->permalink() ?>"><?php $this->title() ?></a>
-                </h1>
-                <ul class="flex flex-row mt-4 mb-4 list-none list-outside p-0">
-                    <li class="text-sm text-gray-600 mr-4"><?php _e('时间: '); ?>
-                        <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
-                    </li>
-                </ul>
-                <div class="mt-8 mb-8 leading-8" id="content">
-                    <?php $this->content(); ?>
+
+<?php $this->need('/components/single-top.php'); ?>
+<div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container">
+
+    <?php $this->need('/components/option-header.php'); ?>
+
+    <div class="article-container">
+        <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 p-5">
+            <div class="mr-3">
+                <div class="w-9 h-9">
+                    <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
                 </div>
-            </article>
-
-            <hr>
-
-            <ul class="post-near list-none p-0 detail-next">
-                <li>上一篇: <?php $this->thePrev('%s', '没有了'); ?></li>
-                <li>下一篇: <?php $this->theNext('%s', '没有了'); ?></li>
-            </ul>
-        </div><!-- end #main-->
-
-        <?php $this->need('comments.php'); ?>
-
-        <!--footer部分-->
-        <?php $this->need('footer.php'); ?>
-
+            </div>
+            <div
+                class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-600 border-gray-100 border-solid pb-1">
+                <section class="flex flex-row justify-between items-center mb-1">
+                    <span class="text-color-link cursor-default text-[14px]">
+                        <?php //print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?>
+                    </span>
+                </section>
+                <section class="mb-1 cursor-default text-[14px] article-content break-all">
+                    <?php
+                    $this->content();
+                    ?>
+                </section>
+            </div>
+        </article>
     </div>
-</body>
+</div><!-- end #main-->
 
-</html>
+<?php $this->need('/components/single-footer.php'); ?>

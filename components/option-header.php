@@ -44,7 +44,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </div>
     <div class="absolute right-6 bottom-[-40] flex flex-col items-end w-90%">
         <div class="flex flex-row items-end">
-            <span class="text-white mr-5 mb-6"><?php echo $this->options->avatarTitle; ?></span>
+            <span class="text-white mr-5 mb-6"><a href="<?php echo $this->options->about; ?>" class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>
             <div class="w-15 h-15 rounded-lg overflow-hidden">
                 <a href="/" class="cursor-pointer w-full h-full"><img src="<?php echo $this->options->userAvatarUrl ?>"
                         class="w-15 h-15 object-cover cursor-pointer" /></a>

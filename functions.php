@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.8.0");
+    define("__THEME_VERSION__", "1.8.1");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -58,6 +58,15 @@ function themeConfig($form)
                 );
 
                 $form->addInput($avatarTitle);
+
+                $about = new Typecho_Widget_Helper_Form_Element_Text(
+                    'about',
+                    null,
+                    null,
+                    _t('顶部头像旁名称跳转地址'),
+                    _t('顶部头像旁名称跳转地址')
+                );
+                $form->addInput($about);
 
                 $topPost = new Typecho_Widget_Helper_Form_Element_Text(
                     "topPost",
