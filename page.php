@@ -27,7 +27,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <?php //print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?>
                     </span>
                 </section>
-                <section class="mb-1 cursor-default text-[14px] article-content break-all">
+                <section class="mb-1 cursor-default text-[14px] article-content break-all leading-6">
                     <?php
                     $this->content();
                     ?>
@@ -37,4 +37,5 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </div>
 </div><!-- end #main-->
 
+<?php $this->need('/components/modal.php'); ?>
 <?php $this->need('/components/single-footer.php'); ?>

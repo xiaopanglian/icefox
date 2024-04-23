@@ -388,4 +388,5 @@ if ($this->is('single')) {
     </div>
 </div><!-- end #main-->
 
+<?php $this->need('/components/modal.php'); ?>
 <?php $this->need('/components/single-footer.php'); ?>
