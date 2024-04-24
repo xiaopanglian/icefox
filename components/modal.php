@@ -42,11 +42,13 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 <!--音乐播放器-->
 <div id="music-modal" class="fixed top-50 right-2 w-20 rounded-md overflow-hidden hidden">
     <div class="flex flex-col">
-        <img src="https://0ru.cn/usr/uploads/2024/03/1435483458.webp" class="w-20 h-20 object-cover" />
+        <img src="" class="w-20 h-20 object-cover" id="fixed-music-cover" />
         <div class="bg-[#989997] flex flex-row justify-between">
             <div>
                 <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/fixed-music-play.svg'); ?>"
                     class="cursor-pointer " id="fixed-music-play" />
+                <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/fixed-music-pause.svg'); ?>"
+                    class="cursor-pointer hidden" id="fixed-music-pause" />
             </div>
             <div>
                 <img width="24" height="24"

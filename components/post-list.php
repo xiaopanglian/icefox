@@ -99,7 +99,7 @@ foreach ($list->stack as $item) {
                             <div class="music-card-play-position">
                                 <img width="36" height="36"
                                     src="<?php $this->options->themeUrl('assets/svgs/music-play-light.svg'); ?>"
-                                    @click="playAudio(<?php echo $item->cid; ?>, '<?php echo $musicArr[2]; ?>')"
+                                    @click="playAudio(<?php echo $item->cid; ?>, '<?php echo $musicArr[2]; ?>', '<?php echo $musicArr[3]; ?>')"
                                     id="music-play-<?php echo $item->cid; ?>" class="music-play" />
                                 <img width="36" height="36"
                                     src="<?php $this->options->themeUrl('assets/svgs/music-pause-light.svg'); ?>"

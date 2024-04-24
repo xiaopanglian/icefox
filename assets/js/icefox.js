@@ -12,6 +12,10 @@ let lazyLoadInstance = new LazyLoad({
     data_src: 'src'
 });
 
+function printCopyright() {
+    console.log('%cIcefox主题 By xiaopanglian v1.8.2 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+}
+
 window.onload = async () => {
     // 网站接口请求地址前缀
     globalData.webSiteHomeUrl = document.querySelector('.webSiteHomeUrl').value;
@@ -24,6 +28,9 @@ window.onload = async () => {
 
     globalData.audio.addEventListener('ended', function () {
         refreshAudioUI();
+
+        // 如果是列表播放，则继续播放下一首歌
+
     });
 
     printCopyright();
@@ -120,6 +127,37 @@ window.onload = async () => {
 
     $("#fixed-music-close").click(function () {
         $("#music-modal").hide();
+
+        closeAudio();
+    });
+
+    /**
+     * 暂停播放音乐
+     */
+    $("#fixed-music-pause").click(function () {
+        pauseAuditOne();
+
+
+        // 文章列表播放器按钮暂停
+        $("#music-play-" + globalData.playMusicId).removeClass("hidden");
+        $("#music-pause-" + globalData.playMusicId).addClass("hidden");
+
+        $("#fixed-music-play").show();
+        $("#fixed-music-pause").hide();
+
+        // 顶部播放器按钮暂停
+
+    });
+
+    $("#fixed-music-play").click(function () {
+        playAuditOne();
+
+        // 文章列表播放器按钮继续播放
+        $("#music-play-" + globalData.playMusicId).addClass("hidden");
+        $("#music-pause-" + globalData.playMusicId).removeClass("hidden");
+
+        $("#fixed-music-play").hide();
+        $("#fixed-music-pause").show();
     });
 
     lazyLoadInstance.update();
@@ -685,7 +723,7 @@ function scrollToTop() {
     anime({
         targets: 'html, body',
         scrollTop: 0,
-        duration: 500,
+        duration: 300,
         easing: 'linear'
     });
 }
@@ -698,10 +736,18 @@ function loadAudio(src) {
     globalData.audio.load();
 }
 
+function closeAudio() {
+    globalData.audio.pause();
+    globalData.audio.src = '';
+    globalData.playMusicId = 0;
+
+    refreshAudioUI();
+}
+
 /**
  * 播放音乐
  */
-function playAudio(cid, src) {
+function playAudio(cid, src, cover) {
     if (globalData.playMusicId != cid) {
         loadAudio(src);
         globalData.playMusicId = cid;
@@ -718,12 +764,19 @@ function playAudio(cid, src) {
     if ($("#music-modal").is(":hidden")) {
         $("#music-modal").show();
     }
+
+    $("#fixed-music-play").hide();
+    $("#fixed-music-pause").show();
+    $("#fixed-music-cover").attr("src", cover);
 }
 
-function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.8.1 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+function playAuditOne() {
+    globalData.audio.play();
 }
 
+/**
+ * 暂停音乐
+ */
 function pauseAudio(cid) {
     globalData.audio.pause();
     // 隐藏暂停按钮，显示播放按钮
@@ -731,6 +784,13 @@ function pauseAudio(cid) {
     $("#music-pause-" + cid).addClass("hidden");
 
     $("#music-img-" + cid).removeClass("rotate-animation");
+
+    $("#fixed-music-play").show();
+    $("#fixed-music-pause").hide();
+}
+
+function pauseAuditOne() {
+    globalData.audio.pause();
 }
 
 /**
@@ -739,9 +799,6 @@ function pauseAudio(cid) {
 function refreshAudioUI() {
 
     // 隐藏其他文章的播放器播放按钮
-    $.each($(".music-img"), function (index, item) {
-        $(item).removeClass("rotate-animation");
-    });
     $.each($(".music-play"), function (index, item) {
         $(item).removeClass("hidden");
     });
@@ -749,6 +806,8 @@ function refreshAudioUI() {
         $(item).addClass("hidden");
     });
 
+    $("#fixed-music-play").show();
+    $("#fixed-music-pause").hide();
 }
 
 /**
