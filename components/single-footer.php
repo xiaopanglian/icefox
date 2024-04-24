@@ -15,19 +15,35 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     ?>
 </div>
 <div class="fixed right-10 bottom-10 side-area">
-    <div class="w-[36px] h-[36px] cursor-pointer rounded-3xl bg-[#E8E9EC] hover:bg-[#DDDDDD] flex justify-center items-center mb-2">
-        <img src="<?php $this->options->themeUrl('assets/svgs/btn-moon.svg'); ?>" class="cursor-pointer" @click="darkMode=true"
-            x-show="darkMode==false" />
-        <img src="<?php $this->options->themeUrl('assets/svgs/btn-sun.svg'); ?>" class="cursor-pointer" @click="darkMode=false"
-            x-show="darkMode==true" />
+    <div
+        class="w-[36px] h-[36px] cursor-pointer rounded-3xl bg-[#E8E9EC] hover:bg-[#DDDDDD] flex justify-center items-center mb-2">
+        <img src="<?php $this->options->themeUrl('assets/svgs/btn-moon.svg'); ?>" class="cursor-pointer"
+            @click="darkMode=true" x-show="darkMode==false" />
+        <img src="<?php $this->options->themeUrl('assets/svgs/btn-sun.svg'); ?>" class="cursor-pointer"
+            @click="darkMode=false" x-show="darkMode==true" />
 
     </div>
-    <div class="w-[36px] h-[36px] cursor-pointer rounded-3xl bg-[#E8E9EC] hover:bg-[#DDDDDD] flex justify-center items-center"
-        onclick="scrollToTop(); return false;">
-        <img src="<?php $this->options->themeUrl('assets/svgs/btn-rocket.svg'); ?>" class="cursor-pointer" />
+    <div class="w-[36px] h-[36px] cursor-pointer rounded-3xl bg-[#E8E9EC] hover:bg-[#DDDDDD] hidden"
+        onclick="scrollToTop(); return false;" id="go-top">
+        <div class="w-full h-full flex justify-center items-center">
+            <img src="<?php $this->options->themeUrl('assets/svgs/btn-rocket.svg'); ?>" class="cursor-pointer" />
+        </div>
     </div>
 </div>
-
+<div class="hidden" id="top-music-container">
+    <?php
+    $topMusics = $this->options->topMusicList;
+    if ($topMusics) {
+        $topMusic_arr = preg_split('/\r\n|\n/', $topMusics);
+        foreach ($topMusic_arr as $row) {
+            $fl = explode('||', $row);
+            ?>
+            <div data-id="<?php echo $fl[0]; ?>" data-cover="<?php echo $fl[1]; ?>"></div>
+            <?php
+        }
+    }
+    ?>
+</div>
 <div class="hidden">
     <input class="webSiteHomeUrl" value="<?php echo getWebsiteHomeUrl(); ?>" />
     <input id="commentsRequireMail" value="<?php echo $this->options->commentsRequireMail; ?>" />

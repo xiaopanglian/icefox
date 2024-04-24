@@ -14,25 +14,42 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                     <?php
                     if ($this->is('single')) {
                         ?>
-                        <!-- <span class="ico-back h-10 w-10 flex items-center justify-center go-back"></span> -->
                         <img width="24" height="24"
                             src="<?php $this->options->themeUrl('assets/svgs/post.top.back.svg'); ?>"
-                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?> go-back"
+                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?> go-back mr-3"
                             id="back-light" />
                         <img width="24" height="24"
                             src="<?php $this->options->themeUrl('assets/svgs/post.top.back.dark.svg'); ?>"
-                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?> go-back"
+                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?> go-back mr-3"
                             id="back-dark" />
                         <?php
                     }
                     ?>
-                    <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
-                        class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
-                        id="top-play-light" />
-                    <img width="24" height="24"
-                        src="<?php $this->options->themeUrl('assets/svgs/btn-play.dark.svg'); ?>"
-                        class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>" 
-                        id="top-play-dark"/>
+                    <div id="top-play">
+                        <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
+                            class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
+                            id="top-play-light" />
+                        <img width="24" height="24"
+                            src="<?php $this->options->themeUrl('assets/svgs/btn-play.dark.svg'); ?>"
+                            class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
+                            id="top-play-dark" />
+                    </div>
+
+                    <div id="top-pause" class="hidden">
+                        <img width="24" height="24"
+                            src="<?php $this->options->themeUrl('assets/svgs/btn-pause.svg'); ?>"
+                            class="top-pause cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
+                            id="top-pause-light" />
+                        <img width="24" height="24"
+                            src="<?php $this->options->themeUrl('assets/svgs/btn-pause.dark.svg'); ?>"
+                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
+                            id="top-pause-dark" />
+                    </div>
+                    <div id="top-music-progress" class="ml-3">
+                        <div class="relative h-[3px] w-10 bg-[A2A3A1]">
+                            <div class="absolute h-[1px] w-0 left-0 top-[1px] bg-white" id="top-music-jdt"></div>
+                        </div>
+                    </div>
                 </span>
             </div>
             <div class="flex items-center">

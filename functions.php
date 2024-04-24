@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.8.2");
+    define("__THEME_VERSION__", "1.8.3");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -123,8 +123,8 @@ function themeConfig($form)
                     'topMusicList',
                     null,
                     null,
-                    _t('顶部音乐歌曲列表'),
-                    _t('网页顶部播放器播放，每一行一首歌，格式如下<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
+                    _t('顶部网易云音乐歌曲列表'),
+                    _t('网页顶部播放器播放，每一行一首歌，格式如下<br>网易云音乐id || 音乐封面图')
                 );
                 $form->addInput($topMusicList);
 
@@ -227,7 +227,7 @@ function themeFields($layout)
         null,
         null,
         _t('插入音乐'),
-        _t('格式如下：<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
+        _t('为兼容历史音乐，这里需要填入完整的播放地址，如果是网易云音乐，播放地址是：http://music.163.com/song/media/outer/url?id=xxxxxx.mp3，最后的xxxxxx替换为网易云音乐id。插入音乐格式如下：<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
     );
     $music->input->setAttribute('class', 't-music-find');
     $layout->addItem($music);
