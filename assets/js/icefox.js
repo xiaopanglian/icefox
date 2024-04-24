@@ -89,6 +89,7 @@ window.onload = async () => {
         let headerHeight = $("header").height();
         let topFixedHeight = $("#top-fixed").height();
         if ($(this).scrollTop() + topFixedHeight > headerHeight) {
+            // 顶部滑动下来
             $('#top-fixed').addClass('bg-[#f0f0f0]');
             $('#top-fixed').addClass('dark:bg-black/30');
             $('#top-fixed').addClass('backdrop-blur-md');
@@ -96,7 +97,10 @@ window.onload = async () => {
             $("#friend-dark").removeClass('hidden');
             $("#back-light").addClass('hidden');
             $("#back-dark").removeClass('hidden');
+            $("#top-play-light").addClass('hidden');
+            $("#top-play-dark").removeClass('hidden');
         } else {
+            // 顶部未滑动下来
             $('#top-fixed').removeClass('bg-[#f0f0f0]');
             $('#top-fixed').removeClass('dark:bg-black/30');
             $('#top-fixed').removeClass('backdrop-blur-md');
@@ -104,7 +108,18 @@ window.onload = async () => {
             $("#friend-dark").addClass('hidden');
             $("#back-light").removeClass('hidden');
             $("#back-dark").addClass('hidden');
+            $("#top-play-light").removeClass('hidden');
+            $("#top-play-dark").addClass('hidden');
         }
+    });
+
+    $("#music-modal").draggable({
+        containment: "body",
+        scroll: false
+    });
+
+    $("#fixed-music-close").click(function () {
+        $("#music-modal").hide();
     });
 
     lazyLoadInstance.update();
@@ -699,7 +714,10 @@ function playAudio(cid, src) {
     $("#music-play-" + cid).addClass("hidden");
     $("#music-pause-" + cid).removeClass("hidden");
 
-    $("#music-img-" + cid).addClass("rotate-animation");
+    // 显示悬浮播放器
+    if ($("#music-modal").is(":hidden")) {
+        $("#music-modal").show();
+    }
 }
 
 function printCopyright() {

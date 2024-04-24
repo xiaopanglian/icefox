@@ -26,6 +26,13 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <?php
                     }
                     ?>
+                    <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
+                        class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
+                        id="top-play-light" />
+                    <img width="24" height="24"
+                        src="<?php $this->options->themeUrl('assets/svgs/btn-play.dark.svg'); ?>"
+                        class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>" 
+                        id="top-play-dark"/>
                 </span>
             </div>
             <div class="flex items-center">
@@ -44,7 +51,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </div>
     <div class="absolute right-6 bottom-[-40] flex flex-col items-end w-90%">
         <div class="flex flex-row items-end">
-            <span class="text-white mr-5 mb-6"><a href="<?php echo $this->options->about; ?>" class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>
+            <span class="text-white mr-5 mb-6"><a href="<?php echo $this->options->about; ?>"
+                    class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>
             <div class="w-15 h-15 rounded-lg overflow-hidden">
                 <a href="/" class="cursor-pointer w-full h-full"><img src="<?php echo $this->options->userAvatarUrl ?>"
                         class="w-15 h-15 object-cover cursor-pointer" /></a>

@@ -119,14 +119,14 @@ function themeConfig($form)
                 );
                 $form->addInput($defaultThemeColor);
 
-                $neteasyCloudMusic = new Typecho_Widget_Helper_Form_Element_Text(
-                    'neteasyCloudMusic',
+                $topMusicList = new Typecho_Widget_Helper_Form_Element_Textarea(
+                    'topMusicList',
                     null,
                     null,
-                    _t('网易云音乐歌单地址（功能开发中）'),
-                    _t('网页顶部播放器播放，目前只支持网易云音乐。')
+                    _t('顶部音乐歌曲列表'),
+                    _t('网页顶部播放器播放，每一行一首歌，格式如下<br>歌曲名称 || 专辑名称 || 播放地址 || 音乐图片')
                 );
-                $form->addInput($neteasyCloudMusic);
+                $form->addInput($topMusicList);
 
                 $friendLinks = new Typecho_Widget_Helper_Form_Element_Textarea(
                     "friendLinks",

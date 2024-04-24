@@ -5,13 +5,12 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 <!--友链弹出层-->
 <div id="friend-modal" class="fixed top-0 left-0 w-full h-full backdrop-blur-md bg-black/50 z-90 hidden">
-    <div class="fixed top-1/2 left-1/2 friend-container bg-white transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
+    <div
+        class="fixed top-1/2 left-1/2 friend-container bg-white transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
         <div class="w-full flex flex-row justify-end">
             <div class="p-2">
-            <img width="24" height="24"
-                        src="<?php $this->options->themeUrl('assets/svgs/btn-close.svg'); ?>"
-                        class="cursor-pointer"
-                        @click="closeFriendModal()" />
+                <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-close.svg'); ?>"
+                    class="cursor-pointer" @click="closeFriendModal()" />
             </div>
         </div>
         <div class="px-5 py-3">
@@ -36,6 +35,24 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                 }
             }
             ?>
+        </div>
+    </div>
+</div>
+
+<!--音乐播放器-->
+<div id="music-modal" class="fixed top-50 right-2 w-20 rounded-md overflow-hidden hidden">
+    <div class="flex flex-col">
+        <img src="https://0ru.cn/usr/uploads/2024/03/1435483458.webp" class="w-20 h-20 object-cover" />
+        <div class="bg-[#989997] flex flex-row justify-between">
+            <div>
+                <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/fixed-music-play.svg'); ?>"
+                    class="cursor-pointer " id="fixed-music-play" />
+            </div>
+            <div>
+                <img width="24" height="24"
+                    src="<?php $this->options->themeUrl('assets/svgs/fixed-music-close.svg'); ?>" class="cursor-pointer"
+                    id="fixed-music-close" />
+            </div>
         </div>
     </div>
 </div>
