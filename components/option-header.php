@@ -46,8 +46,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                             id="top-pause-dark" />
                     </div>
                     <div id="top-music-progress" class="ml-3">
-                        <div class="relative h-[3px] w-10 bg-[A2A3A1]">
-                            <div class="absolute h-[1px] w-0 left-0 top-[1px] bg-white" id="top-music-jdt"></div>
+                        <div class="relative h-[3px] w-20 bg-[A2A3A1] rounded-full overflow-hidden">
+                            <div class="absolute h-[3px] w-0 left-0 top-0 bg-white" id="top-music-jdt"></div>
                         </div>
                     </div>
                 </span>

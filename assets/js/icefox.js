@@ -53,7 +53,7 @@ window.onload = async () => {
         // 进度
         let currentTime = globalData.audio.currentTime;
         let duration = globalData.audio.duration;
-        let jdtWidth = currentTime / duration * 2.5;//这里的2.5是w-10的宽度，单位是rem
+        let jdtWidth = currentTime / duration * 5;//这里的5是w-20的宽度，单位是rem
         $("#top-music-jdt").css('width', jdtWidth + "rem");
     });
 
