@@ -16,7 +16,7 @@ let lazyLoadInstance = new LazyLoad({
 });
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.8.3 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v1.8.4 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 window.onload = async () => {
@@ -50,11 +50,13 @@ window.onload = async () => {
 
     // 歌曲播放进度
     globalData.audio.addEventListener('timeupdate', function () {
-        // 进度
-        let currentTime = globalData.audio.currentTime;
-        let duration = globalData.audio.duration;
-        let jdtWidth = currentTime / duration * 5;//这里的5是w-20的宽度，单位是rem
-        $("#top-music-jdt").css('width', jdtWidth + "rem");
+        if (globalData.isTopMusic === true) {
+            // 进度
+            let currentTime = globalData.audio.currentTime;
+            let duration = globalData.audio.duration;
+            let jdtWidth = currentTime / duration * 5;//这里的5是w-20的宽度，单位是rem
+            $("#top-music-jdt").css('width', jdtWidth + "rem");
+        }
     });
 
     printCopyright();
@@ -162,6 +164,14 @@ window.onload = async () => {
 
     $("#fixed-music-close").click(function () {
         $("#music-modal").hide();
+
+        globalData.playIndex = 0;
+        globalData.isTopMusic = false;
+
+        // 顶部音乐进度归0
+        $("#top-music-jdt").css('width', "0rem");
+
+        showTopMusicPlayUI();
 
         closeAudio();
     });
@@ -869,6 +879,9 @@ function playAudio(cid, src, cover) {
     showTopMusicPlayUI();
 
     globalData.isTopMusic = false;
+
+    // 顶部音乐进度归0
+    $("#top-music-jdt").css('width', "0rem");
 }
 
 /**

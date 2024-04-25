@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.8.3");
+    define("__THEME_VERSION__", "1.8.4");
 }
 //icefox 核心包
 include_once 'core/core.php';
