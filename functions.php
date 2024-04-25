@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.8.4");
+    define("__THEME_VERSION__", "1.8.5");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -118,6 +118,17 @@ function themeConfig($form)
                     _t('默认主题配色')
                 );
                 $form->addInput($defaultThemeColor);
+
+                $enableTopMusic = new Typecho_Widget_Helper_Form_Element_Radio(
+                    'enableTopMusic',
+                    [
+                        'yes' => _t("是"),
+                        'no' => _t("否")
+                    ],
+                    'yes',
+                    _t('是否启用顶部网易云音乐')
+                );
+                $form->addInput($enableTopMusic);
 
                 $topMusicList = new Typecho_Widget_Helper_Form_Element_Textarea(
                     'topMusicList',

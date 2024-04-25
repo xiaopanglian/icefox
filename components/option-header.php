@@ -25,31 +25,36 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         <?php
                     }
                     ?>
-                    <div id="top-play">
-                        <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
-                            class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
-                            id="top-play-light" />
-                        <img width="24" height="24"
-                            src="<?php $this->options->themeUrl('assets/svgs/btn-play.dark.svg'); ?>"
-                            class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
-                            id="top-play-dark" />
-                    </div>
-
-                    <div id="top-pause" class="hidden">
-                        <img width="24" height="24"
-                            src="<?php $this->options->themeUrl('assets/svgs/btn-pause.svg'); ?>"
-                            class="top-pause cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
-                            id="top-pause-light" />
-                        <img width="24" height="24"
-                            src="<?php $this->options->themeUrl('assets/svgs/btn-pause.dark.svg'); ?>"
-                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
-                            id="top-pause-dark" />
-                    </div>
-                    <div id="top-music-progress" class="ml-3">
-                        <div class="relative h-[3px] w-20 bg-[A2A3A1] rounded-full overflow-hidden">
-                            <div class="absolute h-[3px] w-0 left-0 top-0 bg-white" id="top-music-jdt"></div>
+                    <?php
+                    $enableTopMusic = $this->options->enableTopMusic;
+                    if ($enableTopMusic === 'yes'):
+                        ?>
+                        <div id="top-play">
+                            <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
+                                class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
+                                id="top-play-light" />
+                            <img width="24" height="24"
+                                src="<?php $this->options->themeUrl('assets/svgs/btn-play.dark.svg'); ?>"
+                                class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
+                                id="top-play-dark" />
                         </div>
-                    </div>
+
+                        <div id="top-pause" class="hidden">
+                            <img width="24" height="24"
+                                src="<?php $this->options->themeUrl('assets/svgs/btn-pause.svg'); ?>"
+                                class="top-pause cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
+                                id="top-pause-light" />
+                            <img width="24" height="24"
+                                src="<?php $this->options->themeUrl('assets/svgs/btn-pause.dark.svg'); ?>"
+                                class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
+                                id="top-pause-dark" />
+                        </div>
+                        <div id="top-music-progress" class="ml-3">
+                            <div class="relative h-[3px] w-20 bg-[A2A3A1] rounded-full overflow-hidden">
+                                <div class="absolute h-[3px] w-0 left-0 top-0 bg-white" id="top-music-jdt"></div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </span>
             </div>
             <div class="flex items-center">
