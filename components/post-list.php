@@ -40,7 +40,8 @@ foreach ($list->stack as $item) {
             class="w-full border-t-0 border-l-0 border-r-0 border-b-1 dark:border-gray-800 border-gray-100 border-solid pb-1">
             <section class="flex flex-row justify-between items-center mb-1">
                 <span class="text-color-link cursor-default text-[14px]">
-                    <a href="<?php echo $item->permalink; ?>" class="cursor-pointer text-color-link no-underline"><?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?></a>
+                    <a href="<?php echo $item->permalink; ?>"
+                        class="cursor-pointer text-color-link no-underline"><?php print_r(_getUserScreenNameByCid($item->cid)['screenName']); ?></a>
                 </span>
                 <?php
                 $advertiseData = getArticleFieldsByCid($item->cid, 'isAdvertise');
@@ -85,8 +86,7 @@ foreach ($list->stack as $item) {
                         style="background-color:#A2A3A1;">
                         <div
                             class="w-full h-full bg-cover bg-center backdrop-blur-lg backdrop-filter bg-opacity-50 flex flex-row relative">
-                            <img src="<?php echo $musicArr[3]; ?>"
-                                class="h-full w-auto aspect-square object-cover music-img"
+                            <img src="<?php echo $musicArr[3]; ?>" class="h-full w-auto aspect-square object-cover music-img"
                                 id="music-img-<?php echo $item->cid; ?>" />
                             <div class="flex flex-col text-white h-full justify-center pl-[5px]">
                                 <span class="mt-1 truncate music-card-text">
@@ -131,12 +131,12 @@ foreach ($list->stack as $item) {
                         $autoMuted = '';
                     }
                     ?>
-                    <section class="grid grid-cols-3 gap-1 multi-pictures overflow-hidden mb-3"
+                    <section class="grid grid-cols-12 gap-1 multi-pictures overflow-hidden mb-3"
                         id="preview-<?php echo $item->cid; ?>">
-                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-2">
-                            <video data-src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>             <?php echo $autoMuted; ?> loop
-                                preload="auto" controls="controls" class="w-full" data-cid="<?php echo $item->cid; ?>"
-                                data-play="">您的浏览器不支持video标签
+                        <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-10">
+                            <video data-src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>  <?php echo $autoMuted; ?> loop
+                                preload="auto" controls="controls" class="w-full js-player" data-cid="<?php echo $item->cid; ?>" data-play=""
+                                style="--plyr-color-main:#dcdfe5;" id="v-<?php echo $item->cid; ?>">您的浏览器不支持video标签
                             </video>
                         </div>
                     </section>

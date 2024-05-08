@@ -16,7 +16,7 @@ let lazyLoadInstance = new LazyLoad({
 });
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.8.5 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v1.9.0 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 window.onload = async () => {
@@ -102,6 +102,10 @@ window.onload = async () => {
                 globalData.loadMorePage += 1;
 
                 await pjax(globalData.loadMorePage, '.article-container');
+
+                resetPlayerStyle();
+
+                intersectionObserver();
             }
 
             if (globalData.loadMorePage >= globalData.totalPage) {
@@ -239,13 +243,81 @@ window.onload = async () => {
         globalData.audio.pause();
 
         showTopMusicPlayUI();
-
-
     });
 
     lazyLoadInstance.update();
+
+    resetPlayerStyle();
+
+    intersectionObserver();
 };
 
+var videoTimeOut;
+function intersectionObserver() {
+    videoTimeOut = null;
+    videoTimeOut = setTimeout(() => {
+        $("video").each((index, video) => {
+            // 创建 Intersection Observer 实例
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5, // 当视频元素至少有 50% 进入视窗时触发
+                }
+            );
+
+            // 开始观察视频元素
+            observer.observe(video);
+        });
+    }, 1000);
+
+}
+
+// 暂停所有页面上的 video 播放
+function pauseAllVideos() {
+    $('video').each(function () {
+        this.pause();
+    });
+}
+
+function resetPlayerStyle() {
+    const players = Array.from(document.querySelectorAll('.js-player')).map((p) =>
+        new Plyr(p, {
+            controls: ['play-large', 'play', 'mute', 'captions', 'fullscreen'],
+            muted: true
+        })
+    );
+    setTimeout(() => {
+        $(".js-player").each((index, item) => {
+            var src = $(item).data('src');
+            if (isM3U8Url(src)) {
+                if (Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(src);
+                    hls.attachMedia(item);
+                }
+            }
+        });
+    }, 1000);
+
+}
+function isM3U8Url(url) {
+    try {
+        const parsedUrl = new URL(url);
+        return parsedUrl.pathname.endsWith('.m3u8');
+    } catch (error) {
+        return false;
+    }
+}
 /**
  * 顶部音乐显示播放按钮
  */

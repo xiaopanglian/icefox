@@ -6,7 +6,7 @@
  *
  * @package Icefox
  * @author 小胖脸
- * @version 1.8.5
+ * @version 1.9.0
  * @link http://xiaopanglian.com/
  */
 
