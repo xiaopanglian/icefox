@@ -33,7 +33,10 @@ foreach ($list->stack as $item) {
     <article class="flex flex-row border-b borer-b-2 dark:border-gray-800 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
-                <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
+                <?php
+                $authorId = $item->authorId;
+                ?>
+                <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg" />
             </div>
         </div>
         <div
@@ -134,9 +137,9 @@ foreach ($list->stack as $item) {
                     <section class="grid grid-cols-12 gap-1 multi-pictures overflow-hidden mb-3"
                         id="preview-<?php echo $item->cid; ?>">
                         <div class="overflow-hidden rounded-lg cursor-zoom-in w-full col-span-10">
-                            <video data-src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>  <?php echo $autoMuted; ?> loop
-                                preload="auto" controls="controls" class="w-full js-player" data-cid="<?php echo $item->cid; ?>" data-play=""
-                                style="--plyr-color-main:#dcdfe5;" id="v-<?php echo $item->cid; ?>">您的浏览器不支持video标签
+                            <video data-src="<?php echo $friendVideo ?>" <?php echo $autoplay; ?>             <?php echo $autoMuted; ?> loop
+                                preload="auto" controls="controls" class="w-full js-player" data-cid="<?php echo $item->cid; ?>"
+                                data-play="" style="--plyr-color-main:#dcdfe5;" id="v-<?php echo $item->cid; ?>">您的浏览器不支持video标签
                             </video>
                         </div>
                     </section>

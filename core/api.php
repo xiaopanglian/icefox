@@ -216,4 +216,19 @@ function addAgree($self)
     //  返回点赞数量
     return $self->response->throwJson(array('status' => 1, 'agree' => $agree['agree']));
 }
+
+/**
+ * 根据用户id获取用户头像地址
+ */
+function getUserAvatar($authorId)
+{
+    $db = Typecho_Db::get();
+
+    $user = $db->fetchRow($db->select('table.users.mail')->from('table.users')->where('uid = ?', $authorId)->limit(1));
+
+    $mail = $user['mail'];
+    $gravatarUrl = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($mail))) . "?s=64&d=identicon";
+
+    return $gravatarUrl;
+}
 ?>

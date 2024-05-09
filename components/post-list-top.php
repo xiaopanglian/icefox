@@ -22,7 +22,10 @@ foreach ($topCids as $cid): ?>
     <article class="flex flex-row border-b borer-b-2 dark:border-gray-800 border-gray-200 pt-5 pl-5 pr-5">
         <div class="mr-3">
             <div class="w-9 h-9">
-                <img src="<?php echo $this->options->userAvatarUrl ?>" class="w-9 h-9 object-cover rounded-lg" />
+                <?php
+                $authorId = $item->authorId;
+                ?>
+                <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg" />
             </div>
         </div>
         <div

@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.9.0");
+    define("__THEME_VERSION__", "1.9.1");
 }
 //icefox 核心包
 include_once 'core/core.php';
@@ -43,7 +43,7 @@ function themeConfig($form)
                     'userAvatarUrl',
                     null,
                     null,
-                    _t('用户头像'),
+                    _t('站点顶部用户头像'),
                     _t('在这里填入一个图片 URL 地址')
                 );
 
@@ -93,7 +93,7 @@ function themeConfig($form)
                         'no' => _t("否")
                     ],
                     'yes',
-                    _t('是否默认播放视频')
+                    _t('是否默认播放视频<span style="color:red;">（开启可视范围内自动播放功能后，此功能失效）</span>')
                 );
                 $form->addInput($autoPlayVideo);
 
