@@ -77,7 +77,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                     class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>
             <div class="w-15 h-15 rounded-lg overflow-hidden">
                 <a href="/" class="cursor-pointer w-full h-full"><img src="<?php echo $this->options->userAvatarUrl ?>"
-                        class="w-15 h-15 object-cover cursor-pointer" /></a>
+                        class="w-15 h-15 object-cover cursor-pointer preview-image" /></a>
             </div>
         </div>
         <div class="text-[12px] mt-3 text-gray truncate w-full text-end">

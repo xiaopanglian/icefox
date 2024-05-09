@@ -65,6 +65,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </div>
     </li>
+    <input id="observAutoPlayVideo" value="<?php echo $this->options->observAutoPlayVideo; ?>" />
     <div class="animate-spin"></div>
     <?php
     // 检查用户是否登录

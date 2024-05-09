@@ -16,7 +16,7 @@ let lazyLoadInstance = new LazyLoad({
 });
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.9.1 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v1.9.2 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 window.onload = async () => {
@@ -254,32 +254,34 @@ window.onload = async () => {
 
 var videoTimeOut;
 function intersectionObserver() {
-    videoTimeOut = null;
-    videoTimeOut = setTimeout(() => {
-        $("video").each((index, video) => {
-            // 创建 Intersection Observer 实例
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
-                    });
-                },
-                {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.5, // 当视频元素至少有 50% 进入视窗时触发
-                }
-            );
-
-            // 开始观察视频元素
-            observer.observe(video);
-        });
-    }, 1000);
-
+    let observAutoPlayVideo = $("#observAutoPlayVideo").val();
+    if(observAutoPlayVideo === 'yes'){
+        videoTimeOut = null;
+        videoTimeOut = setTimeout(() => {
+            $("video").each((index, video) => {
+                // 创建 Intersection Observer 实例
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                video.play();
+                            } else {
+                                video.pause();
+                            }
+                        });
+                    },
+                    {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.5, // 当视频元素至少有 50% 进入视窗时触发
+                    }
+                );
+    
+                // 开始观察视频元素
+                observer.observe(video);
+            });
+        }, 1000);
+    }
 }
 
 // 暂停所有页面上的 video 播放

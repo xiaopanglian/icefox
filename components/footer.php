@@ -6,13 +6,20 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 ?>
 
 <div class="fixed left-10 bottom-10 text-gray-300 text-[12px] side-area side-area-left">
-    <a href="https://xiaopanglian.com" class="cursor-pointer text-gray-300" target="_blank">Icefox Theme</a> .
-    <?php
-    $beian = $this->options->beian;
-    if (isset($beian)) {
-        echo '<a href="https://beian.miit.gov.cn/" class="cursor-pointer text-gray-300" target="_blank">' . $beian . '</a>';
-    }
-    ?>
+    <div class="flex flex-col"><div>Powered By <a href="https://xiaopanglian.com" class="cursor-pointer text-gray-300"
+            target="_blank">Icefox Theme</a></div>
+        <?php
+        $beian = $this->options->beian;
+        if (!empty($beian)) {
+            echo '<a href="https://beian.miit.gov.cn/" class="cursor-pointer text-gray-300" target="_blank">' . $beian . '</a>';
+        }
+        $policeBeian = $this->options->policeBeian;
+        if (!empty($policeBeian)) {
+            $wbh = explode('||', $policeBeian);
+            echo '<a href="' . $wbh[1] . '" class="cursor-pointer text-gray-300" target="_blank">' . $wbh[0] . '</a>';
+        }
+        ?>
+    </div>
 </div>
 <div class="fixed right-10 bottom-10 side-area">
     <div
@@ -75,6 +82,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </div>
     </li>
+    <input id="observAutoPlayVideo" value="<?php echo $this->options->observAutoPlayVideo; ?>" />
     <div class="animate-spin"></div>
     <?php
     // 检查用户是否登录

@@ -7,8 +7,12 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "1.9.1");
+    define("__THEME_VERSION__", "1.9.2");
 }
+
+// 设置默认头像源为https://cravatar.cn/avatar/
+// define('__TYPECHO_GRAVATAR_PREFIX__', 'https://cravatar.cn/avatar/');
+
 //icefox 核心包
 include_once 'core/core.php';
 
@@ -86,6 +90,27 @@ function themeConfig($form)
                 );
                 $form->addInput($beian);
 
+                $policeBeian = new Typecho_Widget_Helper_Form_Element_Text(
+                    "policeBeian",
+                    null,
+                    null,
+                    "公安网备号",
+                    "网备号和跳转地址通过||分隔开<br>例如：川公安网备000000001号 || http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=00000001"
+                );
+                $form->addInput($policeBeian);
+
+                $observAutoPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
+                    'observAutoPlayVideo',
+                    [
+                        'yes' => _t("是"),
+                        'no' => _t("否")
+                    ],
+                    'yes',
+                    _t('是否开启可视范围内视频自动播放'),
+                    _t('默认开启')
+                );
+                $form->addInput($observAutoPlayVideo);
+
                 $autoPlayVideo = new Typecho_Widget_Helper_Form_Element_Radio(
                     'autoPlayVideo',
                     [
@@ -107,6 +132,15 @@ function themeConfig($form)
                     _t('是否默认静音播放视频')
                 );
                 $form->addInput($autoMutedPlayVideo);
+
+                $avatarSource = new Typecho_Widget_Helper_Form_Element_Text(
+                    "avatarSource",
+                    null,
+                    null,
+                    "主题左侧头像源",
+                    "不填则默认为https://cravatar.cn/avatar/"
+                );
+                $form->addInput($avatarSource);
 
                 $defaultThemeColor = new Typecho_Widget_Helper_Form_Element_Radio(
                     'defaultThemeColor',

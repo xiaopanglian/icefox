@@ -223,11 +223,18 @@ function addAgree($self)
 function getUserAvatar($authorId)
 {
     $db = Typecho_Db::get();
+    $options = Helper::options();
 
     $user = $db->fetchRow($db->select('table.users.mail')->from('table.users')->where('uid = ?', $authorId)->limit(1));
 
     $mail = $user['mail'];
-    $gravatarUrl = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($mail))) . "?s=64&d=identicon";
+
+    $avatarSource = "https://cravatar.cn/avatar/";
+    if (!empty($options->avatarSource)) {
+        $avatarSource = $options->avatarSource;
+    }
+
+    $gravatarUrl = $avatarSource . md5(strtolower(trim($mail))) . "?s=64&d=identicon";
 
     return $gravatarUrl;
 }

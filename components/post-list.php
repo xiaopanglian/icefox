@@ -36,7 +36,7 @@ foreach ($list->stack as $item) {
                 <?php
                 $authorId = $item->authorId;
                 ?>
-                <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg" />
+                <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg preview-image" />
             </div>
         </div>
         <div
