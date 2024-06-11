@@ -53,6 +53,16 @@ function themeConfig($form)
 
                 $form->addInput($userAvatarUrl);
 
+                $archiveUserAvatarUrl = new Typecho_Widget_Helper_Form_Element_Text(
+                    'archiveUserAvatarUrl',
+                    null,
+                    null,
+                    _t('文章侧用户头像<span style="color:red;">(如果不设置，默认使用头像源地址的头像)</span>'),
+                    _t('在这里填入一个图片 URL 地址')
+                );
+
+                $form->addInput($archiveUserAvatarUrl);
+
                 $avatarTitle = new Typecho_Widget_Helper_Form_Element_Text(
                     'avatarTitle',
                     null,
@@ -181,6 +191,15 @@ function themeConfig($form)
                     "使用||分隔，每一行一个友情链接。格式如下<br>logo || 名称 || 链接"
                 );
                 $form->addInput($friendLinks);
+
+                $publishPageUrl = new Typecho_Widget_Helper_Form_Element_Text(
+                    "publishPageUrl",
+                    null,
+                    null,
+                    "前端发布页地址",
+                    "后台新建独立页面地址对应页面"
+                );
+                $form->addInput($publishPageUrl);
 
                 $script = new Typecho_Widget_Helper_Form_Element_Textarea(
                     "script",

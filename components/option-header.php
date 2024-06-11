@@ -68,6 +68,17 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                         class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
                         @click="showFriendModal()" id="friend-dark" />
                 </span>
+                <span class="h-full px-5 flex items-center">
+                    <a href="<?php echo $this->options->publishPageUrl; ?>">
+                        <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-edit.svg'); ?>"
+                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?> text-[#ffffff]"
+                            @click="showEdit()" id="edit-light" />
+                        <img width="24" height="24"
+                            src="<?php $this->options->themeUrl('assets/svgs/btn-edit-dark.svg'); ?>"
+                            class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
+                            @click="showEdit()" id="edit-dark" />
+                    </a>
+                </span>
             </div>
         </div>
     </div>

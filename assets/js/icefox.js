@@ -135,6 +135,8 @@ window.onload = async () => {
             $('#top-fixed').addClass('backdrop-blur-md');
             $("#friend-light").addClass('hidden');
             $("#friend-dark").removeClass('hidden');
+            $("#edit-light").addClass('hidden');
+            $("#edit-dark").removeClass('hidden');
             $("#back-light").addClass('hidden');
             $("#back-dark").removeClass('hidden');
             $("#top-play-light").addClass('hidden');
@@ -150,6 +152,8 @@ window.onload = async () => {
             $('#top-fixed').removeClass('backdrop-blur-md');
             $("#friend-light").removeClass('hidden');
             $("#friend-dark").addClass('hidden');
+            $("#edit-light").removeClass('hidden');
+            $("#edit-dark").addClass('hidden');
             $("#back-light").removeClass('hidden');
             $("#back-dark").addClass('hidden');
             $("#top-play-light").removeClass('hidden');
