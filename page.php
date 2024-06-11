@@ -17,7 +17,19 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
         <article class="flex flex-row border-b borer-b-2 dark:border-gray-600 border-gray-200 p-5">
             <div class="mr-3">
                 <div class="w-9 h-9">
-                    <img src="<?php echo $this->options->userAvatarUrl; ?>" class="w-9 h-9 object-cover rounded-lg" />
+                    <?php
+                    $archiveUserAvatarUrl = $this->options->archiveUserAvatarUrl;
+                    if (!empty($archiveUserAvatarUrl)) {
+                        ?>
+                        <img src="<?php echo $archiveUserAvatarUrl; ?>"
+                            class="w-9 h-9 object-cover rounded-lg preview-image" />
+                        <?php
+                    } else {
+                        ?>
+                        <img src="<?php echo $this->options->userAvatarUrl; ?>" class="w-9 h-9 object-cover rounded-lg" />
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div
