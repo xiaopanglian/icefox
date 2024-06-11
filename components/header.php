@@ -24,7 +24,8 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     </style>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/jquery.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/jqueryui.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/jquery.ui.touch.punch.min.js'); ?>"></script>
+    <script type="text/javascript"
+        src="<?php $this->options->themeUrl('assets/js/jquery.ui.touch.punch.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/axios.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/viewer.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/scrollload.min.js'); ?>"></script>
@@ -33,10 +34,14 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/lazyload.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/anime.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/hls.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/intersection-observer.min.js'); ?>"></script>
+    <script type="text/javascript"
+        src="<?php $this->options->themeUrl('assets/js/intersection-observer.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/plyr.js'); ?>"></script>
+    <script type="text/javascript" src="<?php $this->options->themeUrl('assets/js/Sortable.min.js'); ?>"></script>
     <script type="text/javascript"
         src="<?php $this->options->themeUrl('assets/js/icefox.js'); ?>?v=<?php echo __THEME_VERSION__; ?>"></script>
+    <script type="text/javascript"
+        src="<?php $this->options->themeUrl('assets/js/edit.js'); ?>?v=<?php echo __THEME_VERSION__; ?>"></script>
     <script type="text/javascript">
         <?php echo $this->options->script; ?>
     </script> <!-- 通过自有函数输出HTML头部信息 -->

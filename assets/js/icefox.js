@@ -16,12 +16,12 @@ let lazyLoadInstance = new LazyLoad({
 });
 
 function printCopyright() {
-    console.log('%cIcefox主题 By xiaopanglian v1.9.2 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
+    console.log('%cIcefox主题 By xiaopanglian v2.0.0 beta %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
 window.onload = async () => {
     // 网站接口请求地址前缀
-    globalData.webSiteHomeUrl = document.querySelector('.webSiteHomeUrl').value;
+    globalData.webSiteHomeUrl = document.querySelector('.webSiteHomeUrl')?.value;
     if (document.querySelector('._currentPage')) {
         globalData.loadMorePage = parseInt(document.querySelector('._currentPage').value);
     }

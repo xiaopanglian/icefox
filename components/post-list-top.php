@@ -24,8 +24,17 @@ foreach ($topCids as $cid): ?>
             <div class="w-9 h-9">
                 <?php
                 $authorId = $item->authorId;
+                $archiveUserAvatarUrl = $this->options->archiveUserAvatarUrl;
+                if (!empty($archiveUserAvatarUrl)) {
+                    ?>
+                    <img src="<?php echo $archiveUserAvatarUrl; ?>" class="w-9 h-9 object-cover rounded-lg preview-image" />
+                    <?php
+                } else {
+                    ?>
+                    <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg preview-image" />
+                    <?php
+                }
                 ?>
-                <img src="<?php echo getUserAvatar($authorId); ?>" class="w-9 h-9 object-cover rounded-lg preview-image" />
             </div>
         </div>
         <div
