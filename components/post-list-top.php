@@ -219,12 +219,22 @@ foreach ($topCids as $cid): ?>
             <section class="mb-1">
                 <?php
                 $position = getArticleFieldsByCid($item->cid, 'position');
-                if (count($position) > 0) {
-                    ?>
-                    <span class="text-color-link text-xs cursor-default">
-                        <?php echo $position[0]['str_value'] ?>
-                    </span>
+                $positionUrl = getArticleFieldsByCid($item->cid, 'positionUrl');
+                if (!empty($position)) {
+                    if (!empty($positionUrl)) {
+                ?>
+                        <a href="<?php echo $positionUrl[0]['str_value']; ?>" class=" text-color-link text-xs cursor-pointer">
+                            <img src="<?php $this->options->themeUrl('assets/svgs/position-link.svg'); ?>" class="w-[12px] h-[12px] text-color-link" />
+                            <?php echo $position[0]['str_value'] ?>
+                        </a>
                     <?php
+                    } else {
+                    ?>
+                        <span class="text-color-link text-xs cursor-default">
+                            <?php echo $position[0]['str_value'] ?>
+                        </span>
+                <?php
+                    }
                 }
                 ?>
 

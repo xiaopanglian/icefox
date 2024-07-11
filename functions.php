@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "2.0.0 beta");
+    define("__THEME_VERSION__", "2.0.0");
 }
 
 // 设置默认头像源为https://cravatar.cn/avatar/
@@ -272,6 +272,15 @@ function themeFields($layout)
     );
     $position->input->setAttribute('class', 't-default-find');
     $layout->addItem($position);
+
+    $positionUrl = new Typecho_Widget_Helper_Form_Element_Text(
+        'positionUrl',
+        null,
+        null,
+        _t('定位跳转地址')
+    );
+    $positionUrl->input->setAttribute('class', 't-default-find');
+    $layout->addItem($positionUrl);
 
     $isAdvertise = new Typecho_Widget_Helper_Form_Element_Radio(
         "isAdvertise",
