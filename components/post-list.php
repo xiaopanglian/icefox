@@ -207,7 +207,7 @@ foreach ($list->stack as $item) {
                 if (!empty($position)) {
                     if (!empty($positionUrl)) {
                 ?>
-                        <a href="<?php echo $positionUrl[0]['str_value']; ?>" class=" text-color-link text-xs cursor-pointer">
+                        <a href="<?php echo $positionUrl[0]['str_value']; ?>" class=" text-color-link text-xs cursor-pointer no-underline">
                             <img src="<?php $this->options->themeUrl('assets/svgs/position-link.svg'); ?>" class="w-[12px] h-[12px] text-color-link" />
                             <?php echo $position[0]['str_value'] ?>
                         </a>
