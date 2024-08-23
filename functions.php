@@ -68,7 +68,7 @@ function themeConfig($form)
                     null,
                     null,
                     _t('顶部用户头像旁名称'),
-                    _t('在这里填入顶部用户头像胖展示的名称')
+                    _t('在这里填入顶部用户头像旁展示的名称')
                 );
 
                 $form->addInput($avatarTitle);

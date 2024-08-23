@@ -6,7 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 <!--友链弹出层-->
 <div id="friend-modal" class="fixed top-0 left-0 w-full h-full backdrop-blur-md bg-black/50 z-90 hidden">
     <div
-        class="fixed top-1/2 left-1/2 friend-container bg-white transform -translate-x-1/2 -translate-y-1/2 overflow-y-scroll">
+        class="fixed top-1/2 left-1/2 friend-container bg-white transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
         <div class="w-full flex flex-row justify-end">
             <div class="p-2">
                 <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-close.svg'); ?>"
