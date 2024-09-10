@@ -19,6 +19,10 @@ function printCopyright() {
     console.log('%cIcefox主题 By xiaopanglian v2.0.2 %chttps://0ru.cn', 'color: white;  background-color: #99cc99; padding: 10px;', 'color: white; background-color: #ff6666; padding: 10px;');
 }
 
+setInterval(() => {
+    loadTopMusicList();
+}, 30000);
+
 window.onload = async () => {
     // 网站接口请求地址前缀
     globalData.webSiteHomeUrl = document.querySelector('.webSiteHomeUrl')?.value;
@@ -33,15 +37,15 @@ window.onload = async () => {
     globalData.audio.addEventListener('ended', function () {
         refreshAudioUI();
 
-        // 如果是列表播放，则继续播放下一首歌
+        // 如果是列表播放，则自动加载下一首歌
         if (globalData.isTopMusic === true) {
-            if (globalData.playIndex + 1 < globalData.topMusicList.length) {
-                globalData.playIndex = globalData.playIndex + 1;
-            } else {
-                globalData.playIndex = 0;
-            }
+            // if (globalData.playIndex + 1 < globalData.topMusicList.length) {
+            //     globalData.playIndex = globalData.playIndex + 1;
+            // } else {
+            //     globalData.playIndex = 0;
+            // }
 
-            let src = globalData.topMusicList[globalData.playIndex];
+            let src = globalData.topMusicList.shift();
             loadAudio(src.url);
             globalData.audio.play();
             showFixedMusicPlayer(src.cover);
@@ -259,7 +263,7 @@ window.onload = async () => {
 var videoTimeOut;
 function intersectionObserver() {
     let observAutoPlayVideo = $("#observAutoPlayVideo").val();
-    if(observAutoPlayVideo === 'yes'){
+    if (observAutoPlayVideo === 'yes') {
         videoTimeOut = null;
         videoTimeOut = setTimeout(() => {
             $("video").each((index, video) => {
@@ -280,7 +284,7 @@ function intersectionObserver() {
                         threshold: 0.5, // 当视频元素至少有 50% 进入视窗时触发
                     }
                 );
-    
+
                 // 开始观察视频元素
                 observer.observe(video);
             });
@@ -341,17 +345,17 @@ function showTopMusicPauseUI() {
 }
 
 /**
- * 加载顶部音乐列表
+ * 加载顶部音乐
  */
 function loadTopMusicList() {
-    $("#top-music-container > div").each(function (e, elem) {
-        let id = $.trim($(elem).data('id'));
-        let cover = $.trim($(elem).data('cover'));
-        globalData.topMusicList.push({
-            url: `http://music.163.com/song/media/outer/url?id=${id}.mp3`,
-            cover: cover
-        });
-    });
+    // 默认使用https://api.vvhan.com/api/wyMusic/%E7%83%AD%E6%AD%8C%E6%A6%9C?type=json源
+    // 获取音乐链接
+    globalData.topMusicList = []
+    $.get('/api/music', function (res) {
+        let mp3Url = `https://api.injahow.cn/meting/?type=url&id=${res.data.info.id}`;
+        globalData.topMusicList.push({ url: mp3Url, cover: res.data.info.pic_url })
+        //loadAudio(mp3Url)
+    })
 }
 
 /**

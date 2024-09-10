@@ -23,6 +23,12 @@ function themeInit($self)
                 break;
         }
     }
+
+    switch ($route) {
+        case '/api/music':
+            getMusicUrl($self);
+            break;
+    }
 }
 
 /**

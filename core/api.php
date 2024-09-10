@@ -238,4 +238,16 @@ function getUserAvatar($authorId)
 
     return $gravatarUrl;
 }
+
+/**
+ * 获取音乐地址
+ */
+function getMusicUrl($self){
+    $self->response->setStatus(200);
+    
+header('Content-Type: application/json; charset=utf-8');
+    $response = file_get_contents('https://api.vvhan.com/api/wyMusic/%E7%83%AD%E6%AD%8C%E6%A6%9C?type=json');
+        
+    return $self->response->throwJson(array('status' => 1, 'data' => json_decode($response)));
+}
 ?>
