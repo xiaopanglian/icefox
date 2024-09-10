@@ -6,7 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 ?>
 <header class="h-77 w-full bg-cover relative mb-12"
     style="background-image: url('<?php echo $this->options->backgroundImageUrl ?>');background-position: center;">
-    <video autoplay muted loop id="bg-video" class="w-full">
+    <video autoplay muted loop id="bg-video" class="w-full h-full object-cover">
         <source src="<?php echo $this->options->backgroundImageUrl ?>" type="video/mp4">
     </video>
     <div class="fixed top-0 left-0 w-full h-14 z-9">
@@ -88,7 +88,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </div>
     </div>
-    <div class="absolute right-6 bottom-[-40] flex flex-col items-end w-90%">
+    <div class="absolute right-6 bottom-[-45] flex flex-col items-end w-90%">
         <div class="flex flex-row items-end">
             <span class="text-white mr-5 mb-6"><a href="<?php echo $this->options->about; ?>"
                     class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>
