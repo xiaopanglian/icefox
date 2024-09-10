@@ -7,7 +7,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 
 // 设置版本号
 if (!defined("__THEME_VERSION__")) {
-    define("__THEME_VERSION__", "2.0.1");
+    define("__THEME_VERSION__", "2.0.2");
 }
 
 // 设置默认头像源为https://cravatar.cn/avatar/
