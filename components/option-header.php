@@ -6,6 +6,9 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 ?>
 <header class="h-77 w-full bg-cover relative mb-12"
     style="background-image: url('<?php echo $this->options->backgroundImageUrl ?>');background-position: center;">
+    <video autoplay muted loop id="bg-video" class="w-full">
+        <source src="<?php echo $this->options->backgroundImageUrl ?>" type="video/mp4">
+    </video>
     <div class="fixed top-0 left-0 w-full h-14 z-9">
         <div class="main-container mx-auto flex flex-row justify-between h-full transition-all duration-300"
             id="top-fixed">
@@ -13,7 +16,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                 <span class="h-full px-5 flex items-center">
                     <?php
                     if ($this->is('single')) {
-                        ?>
+                    ?>
                         <img width="24" height="24"
                             src="<?php $this->options->themeUrl('assets/svgs/post.top.back.svg'); ?>"
                             class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?> go-back mr-3"
@@ -22,13 +25,13 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                             src="<?php $this->options->themeUrl('assets/svgs/post.top.back.dark.svg'); ?>"
                             class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?> go-back mr-3"
                             id="back-dark" />
-                        <?php
+                    <?php
                     }
                     ?>
                     <?php
                     $enableTopMusic = $this->options->enableTopMusic;
                     if ($enableTopMusic === 'yes'):
-                        ?>
+                    ?>
                         <div id="top-play">
                             <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
                                 class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
