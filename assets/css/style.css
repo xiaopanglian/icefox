@@ -1,9 +1,8 @@
 @unocss all;
 
-@font-face {
-    font-display: swap;
-    font-family: HarmonyOS-Sans;
-    src: url('../fonts/HarmonyOS-Sans.woff2') format("truetype");
+* {
+    cursor: default;
+    font-family: "Microsoft Yahei", "微软雅黑", sans-serif;
 }
 
 @keyframes rotate {
@@ -62,17 +61,11 @@
     background-color: #f7f7f7;
 }
 
-* {
-    cursor: default;
-    font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
-}
-
 body {
     cursor: default;
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    font-family: 'HarmonyOS-Sans', '微软雅黑', "Microsoft Yahei";
 }
 
 input::placeholder {

@@ -63,4 +63,32 @@ function getTimeFormatStr($time)
     }
     return $str;
 }
+/**
+ * 移除 <img> 和 <video> 标签
+ */
+function removeImgAndVideoTags($html) {
+    $dom = new DOMDocument();
+    $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')); // 处理中文编码
+
+    // 移除 <img> 标签
+    $images = $dom->getElementsByTagName('img');
+    while ($img = $images->item(0)) {
+        $img->parentNode->removeChild($img); // 移除图片节点
+    }
+
+    // 移除 <video> 标签
+    $videos = $dom->getElementsByTagName('video');
+    while ($video = $videos->item(0)) {
+        $video->parentNode->removeChild($video); // 移除视频节点
+    }
+
+    // 将处理后的 DOM 转换回 HTML
+    $body = $dom->getElementsByTagName('body')->item(0);
+    $result = '';
+    foreach ($body->childNodes as $node) {
+        $result .= $dom->saveHTML($node);
+    }
+
+    return $result;
+}
 ?>
