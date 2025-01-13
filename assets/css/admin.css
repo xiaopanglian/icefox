@@ -1,10 +1,42 @@
-.admin-title {
-    color: white;
-    font-size: 24px;
-    background-color: #33CCFF;
-    border-radius: 6px;
+.icefox-config {
+    background-color: #ffffff;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.icefox-nav {
+    color: #333;
+    font-size: 13px;
+    background-color: #fff;
     text-align: center;
-    padding: 3px 0;
+    width: 200px;
+    border-right: 1px solid #f1f1f1;
+}
+.icefox-nav-title {
+    color: #ffffff;
+    background-color: #EBBA66;
+    font-size: 20px;
+    padding-top: 1rem;
+}
+.icefox-nav-sub-title > a{
+    color:#ffffff;
+    text-decoration: none;
+}
+.icefox-nav-sub-title > a:hover{
+    text-decoration: underline;
+}
+.icefox-nav-sub-title {
+    color: #f1f1f1;
+    background-color: #EBBA66;
+    font-size: 12px;
+    padding-bottom: 1rem;
+}
+.icefox-config-form {
+    width: 100%;
+    padding: 3rem;
+}
+.icefox-nav-backup {
+    font-size: 12px;
+    padding: 1rem 0;
 }
 
 .col-mb-12,
@@ -14,7 +46,62 @@
     width: 100%;
 }
 
-.text-xs{
+.text-xs {
     font-size: .9rem;
     margin: 1rem 0;
+}
+
+.flex {
+    display: flex;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-1 {
+    flex: 1;
+}
+
+.icefox-nav-ul {
+    width: 100%;
+    padding: 0;
+    border-top: 1px solid #f1f1f1;
+}
+.icefox-nav-ul > li {
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.icefox-nav-ul > li:hover {
+    background-color: #f1f1f1;
+}
+.icefox-nav-ul > li.active {
+    background-color: #f1f1f1;
+}
+.icefox-content {
+    padding: 0;
+    display: none;
+    width: 100%;
+}
+.icefox-content > li {
+    list-style: none;
+    padding: 0;
+}
+.icefox-content > li > label {
+    display: block;
+    font-weight: bold;
+}
+.icefox-content input[type=text] {
+    width: 100%;
+}
+.icefox-content > li > .description {
+    font-size: 12px;
+    color: #666;
+}
+.icefox-content textarea {
+    width: 100%;
+    min-height: 100px;
 }

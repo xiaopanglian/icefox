@@ -20,15 +20,15 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             } else {
                 ?>
                 <span class="text-color-link text-xs cursor-default">
-                                <?php echo $position[0]['str_value'] ?>
-                            </span>
+                    <?php echo $position[0]['str_value'] ?>
+                </span>
                 <?php
             }
         } else {
             ?>
             <span class="text-color-link text-xs cursor-default">
-                                <?php echo $position[0]['str_value'] ?>
-                            </span>
+                <?php echo $position[0]['str_value'] ?>
+            </span>
             <?php
         }
     }
