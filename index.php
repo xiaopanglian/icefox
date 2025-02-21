@@ -1,12 +1,12 @@
 <?php
 /**
  * 朋友圈Icefox主题
- * 全新V2版本，前端发布功能已上线，欢迎体验使用
+ * 全新V2.2重构版本，前端发布功能已上线，欢迎体验使用
  * 示例站：<a href="http://0ru.cn" target="_blank">http://0ru.cn/</a>
  *
  * @package icefox
  * @author 小胖脸
- * @version 2.1.0
+ * @version 2.2.0 beta
  * @link http://xiaopanglian.com/
  */
 

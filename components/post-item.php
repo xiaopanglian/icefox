@@ -52,9 +52,6 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             data-cid="<?php echo $article->cid; ?>">
             <?php
             echo removeImgAndVideoTags($this::markdown($article->text));
-//            $clearContent = preg_replace('/<img[^>]+>/i', '', $this::markdown($article->text));
-//            $clearContent = preg_replace('/<br><br>/i', '', $clearContent);
-//            echo $this::markdown($clearContent);
             ?>
         </section>
         <?php
