@@ -185,27 +185,27 @@ function themeConfig($form)
                 $defaultThemeColor->setAttribute('class', 'icefox-content icefox-global');
                 $form->addInput($defaultThemeColor);
 
-                $enableTopMusic = new Typecho_Widget_Helper_Form_Element_Radio(
-                    'enableTopMusic',
-                    [
-                        'yes' => _t("是"),
-                        'no' => _t("否")
-                    ],
-                    'yes',
-                    _t('是否启用顶部网易云音乐')
-                );
-                $enableTopMusic->setAttribute('class', 'icefox-content icefox-media');
-                $form->addInput($enableTopMusic);
+//                $enableTopMusic = new Typecho_Widget_Helper_Form_Element_Radio(
+//                    'enableTopMusic',
+//                    [
+//                        'yes' => _t("是"),
+//                        'no' => _t("否")
+//                    ],
+//                    'yes',
+//                    _t('是否启用顶部网易云音乐')
+//                );
+//                $enableTopMusic->setAttribute('class', 'icefox-content icefox-media');
+//                $form->addInput($enableTopMusic);
 
-                $topMusicList = new Typecho_Widget_Helper_Form_Element_Textarea(
-                    'topMusicList',
-                    null,
-                    null,
-                    _t('顶部网易云音乐歌曲列表'),
-                    _t('网页顶部播放器播放，每一行一首歌，格式如下<br>网易云音乐id || 音乐封面图')
-                );
-                $topMusicList->setAttribute('class', 'icefox-content icefox-media');
-                $form->addInput($topMusicList);
+//                $topMusicList = new Typecho_Widget_Helper_Form_Element_Textarea(
+//                    'topMusicList',
+//                    null,
+//                    null,
+//                    _t('顶部网易云音乐歌曲列表'),
+//                    _t('网页顶部播放器播放，每一行一首歌，格式如下<br>网易云音乐id || 音乐封面图')
+//                );
+//                $topMusicList->setAttribute('class', 'icefox-content icefox-media');
+//                $form->addInput($topMusicList);
 
                 $friendLinks = new Typecho_Widget_Helper_Form_Element_Textarea(
                     "friendLinks",
