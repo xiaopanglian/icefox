@@ -2,7 +2,13 @@
 
 * {
     cursor: default;
-    font-family: "Microsoft Yahei", "微软雅黑", sans-serif;
+    font-family: "HarmonyOS-Sans", "Microsoft Yahei", "微软雅黑", sans-serif;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: HarmonyOS-Sans;
+    src: url('../fonts/HarmonyOS-Sans.woff2') format("truetype");
 }
 
 @keyframes rotate {

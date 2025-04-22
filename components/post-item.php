@@ -65,8 +65,6 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
             <?php
         }
-
-
         ?>
         <!--音乐卡片-->
         <?php include 'post-item-music.php'; ?>
