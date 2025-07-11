@@ -15,7 +15,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 ?>
 
 <?php $this->need('/components/header.php'); ?>
-    <div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container" :class="{'dark':darkMode}">
+    <div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container">
         <?php $this->need('/components/option-header.php'); ?>
 
         <?php $this->need('/components/post-list.php'); ?>

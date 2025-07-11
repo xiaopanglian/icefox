@@ -6,7 +6,8 @@ let globalData = {
     audio: new Audio(),
     topMusicList: [],
     playIndex: 0,
-    isTopMusic: false
+    isTopMusic: false,
+    isDark: false
 };
 
 let lazyLoadInstance = new LazyLoad({
@@ -20,7 +21,7 @@ function printCopyright() {
 }
 
 setInterval(() => {
-    loadTopMusicList();
+    //    loadTopMusicList();
 }, 30000);
 
 window.onload = async () => {
@@ -34,34 +35,34 @@ window.onload = async () => {
     }
 
     // 歌曲播放完毕
-    globalData.audio.addEventListener('ended', function () {
-        refreshAudioUI();
-
-        // 如果是列表播放，则自动加载下一首歌
-        if (globalData.isTopMusic === true) {
-            // if (globalData.playIndex + 1 < globalData.topMusicList.length) {
-            //     globalData.playIndex = globalData.playIndex + 1;
-            // } else {
-            //     globalData.playIndex = 0;
-            // }
-
-            let src = globalData.topMusicList.shift();
-            loadAudio(src.url);
-            globalData.audio.play();
-            showFixedMusicPlayer(src.cover);
-        }
-    });
+    //    globalData.audio.addEventListener('ended', function () {
+    //        refreshAudioUI();
+    //
+    //        // 如果是列表播放，则自动加载下一首歌
+    //        if (globalData.isTopMusic === true) {
+    //            // if (globalData.playIndex + 1 < globalData.topMusicList.length) {
+    //            //     globalData.playIndex = globalData.playIndex + 1;
+    //            // } else {
+    //            //     globalData.playIndex = 0;
+    //            // }
+    //
+    //            let src = globalData.topMusicList.shift();
+    //            loadAudio(src.url);
+    //            globalData.audio.play();
+    //            showFixedMusicPlayer(src.cover);
+    //        }
+    //    });
 
     // 歌曲播放进度
-    globalData.audio.addEventListener('timeupdate', function () {
-        if (globalData.isTopMusic === true) {
-            // 进度
-            let currentTime = globalData.audio.currentTime;
-            let duration = globalData.audio.duration;
-            let jdtWidth = currentTime / duration * 5;//这里的5是w-20的宽度，单位是rem
-            $("#top-music-jdt").css('width', jdtWidth + "rem");
-        }
-    });
+    //    globalData.audio.addEventListener('timeupdate', function () {
+    //        if (globalData.isTopMusic === true) {
+    //            // 进度
+    //            let currentTime = globalData.audio.currentTime;
+    //            let duration = globalData.audio.duration;
+    //            let jdtWidth = currentTime / duration * 5;//这里的5是w-20的宽度，单位是rem
+    //            $("#top-music-jdt").css('width', jdtWidth + "rem");
+    //        }
+    //    });
 
     printCopyright();
     loadQW();
@@ -81,7 +82,7 @@ window.onload = async () => {
     clickEmoji();
 
     // 加载顶部音乐
-    loadTopMusicList();
+    //    loadTopMusicList();
 
     // 大图预览
     let previewImages = document.querySelectorAll('.preview-image');
@@ -258,6 +259,12 @@ window.onload = async () => {
     resetPlayerStyle();
 
     intersectionObserver();
+
+    initDarkMode();
+
+    $(".darkMode").click(function () {
+        toggleDarkMode();
+    });
 };
 
 var videoTimeOut;
@@ -347,16 +354,17 @@ function showTopMusicPauseUI() {
 /**
  * 加载顶部音乐
  */
-function loadTopMusicList() {
-    // 默认使用https://api.vvhan.com/api/wyMusic/%E7%83%AD%E6%AD%8C%E6%A6%9C?type=json源
-    // 获取音乐链接
-    globalData.topMusicList = []
-    $.get('/api/music', function (res) {
-        let mp3Url = `https://api.injahow.cn/meting/?type=url&id=${res.data.info.id}`;
-        globalData.topMusicList.push({ url: mp3Url, cover: res.data.info.pic_url })
-        //loadAudio(mp3Url)
-    })
-}
+//function loadTopMusicList() {
+//    // 默认使用https://api.vvhan.com/api/wyMusic/%E7%83%AD%E6%AD%8C%E6%A6%9C?type=json源
+//    // 获取音乐链接
+//    globalData.topMusicList = []
+//    $.get('/api/music', function (res) {
+//        console.log(res);
+////        let mp3Url = `https://api.injahow.cn/meting/?type=url&id=${res.data.info.id}`;
+////        globalData.topMusicList.push({ url: mp3Url, cover: res.data.info.pic_url })
+//        //loadAudio(mp3Url)
+//    })
+//}
 
 /**
  * 加载文章是否需要全文按钮
@@ -1048,4 +1056,46 @@ function showFriendModal() {
 function closeFriendModal() {
     $("#friend-modal").hide();
     $("body").removeClass("overflow-hidden");
+}
+
+/**
+ * 切换暗黑模式
+ */
+function toggleDarkMode() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+
+    // 保存用户偏好到本地存储
+    const isDark = html.classList.contains('dark');
+    localStorage.setItem('darkMode', isDark);
+
+    globalData.isDark = isDark;
+
+    if(isDark){
+        $(".btn-moon").hide();
+        $(".btn-sun").show();
+    }else{
+        $(".btn-moon").show();
+        $(".btn-sun").hide();
+    }
+}
+
+/**
+ * 初始化暗黑模式
+ */
+function initDarkMode() {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+
+    }
+    globalData.isDark = isDarkMode;
+    
+    if(isDarkMode){
+        $(".btn-moon").hide();
+        $(".btn-sun").show();
+    }else{
+        $(".btn-moon").show();
+        $(".btn-sun").hide();
+    }
 }

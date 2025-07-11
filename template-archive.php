@@ -10,7 +10,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('/components/header.php'); ?>
 
 
-<div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container" :class="{'dark':darkMode}">
+<div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container">
     <?php $this->need('/components/option-header.php'); ?>
 
     <div class="col-md-12 text-center">

@@ -52,11 +52,11 @@ $security = $this->widget('Widget_Security');
     <?php $this->header(); ?>
 </head>
 
-<body :class="{'dark':darkMode}" x-data="{darkMode:<?php echo $this->options->defaultThemeColor == 'yes' ? 'true' : 'false'; ?>}">
+<body>
     <div class="bg-[#f0f0f0] dark:bg-[#262626]">
         <div style="min-height:100%">
             <form action="<?php $security->index('/action/contents-post-edit'); ?>" method="post" name="write_post">
-                <div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container" :class="{'dark':darkMode}">
+                <div class="bg-white dark:bg-[#323232] dark:text-[#cccccc] mx-auto main-container">
                     <div class="h-14 bg-[#f0f0f0] flex flex-row justify-between items-center px-5">
                         <div class="">
                             <a href="/"><img src="<?php $this->options->themeUrl('assets/svgs/btn-left.svg'); ?>" class="w-[24px] h-[24px]" /></a>
