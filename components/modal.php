@@ -10,7 +10,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
         <div class="w-full flex flex-row justify-end">
             <div class="p-2">
                 <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-close.svg'); ?>"
-                    class="cursor-pointer" @click="closeFriendModal()" />
+                    class="cursor-pointer" onclick="closeFriendModal()" />
             </div>
         </div>
         <div class="px-5 py-3">

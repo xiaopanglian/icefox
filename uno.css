@@ -5,7 +5,7 @@
 .fixed{position:fixed;}
 .relative{position:relative;}
 .static{position:static;}
-.bottom-\[-45\]{bottom:-45;}
+.bottom-\[-3rem\]{bottom:-3rem;}
 .bottom-10{bottom:2.5rem;}
 .left-0{left:0;}
 .left-1\/2{left:50%;}
@@ -63,6 +63,12 @@
 .h-77{height:19.25rem;}
 .h-9{height:2.25rem;}
 .h-full{height:100%;}
+.h1{height:0.25rem;}
+.h2{height:0.5rem;}
+.h3{height:0.75rem;}
+.h4{height:1rem;}
+.h5{height:1.25rem;}
+.h6{height:1.5rem;}
 .max-h-64{max-height:16rem;}
 .max-w-full{max-width:100%;}
 .w-\[10px\]{width:10px;}

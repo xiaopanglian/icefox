@@ -30,9 +30,9 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                     ?>
                     <?php
                     $enableTopMusic = $this->options->enableTopMusic;
-//                    if ($enableTopMusic === 'yes'):
+                    //                    if ($enableTopMusic === 'yes'):
                     ?>
-                        <!--<div id="top-play">
+                    <!--<div id="top-play">
                             <img width="24" height="24" src="<?php $this->options->themeUrl('assets/svgs/btn-play.svg'); ?>"
                                 class="top-play cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?>"
                                 id="top-play-light" />
@@ -57,19 +57,20 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                                 <div class="absolute h-[3px] w-0 left-0 top-0 bg-white" id="top-music-jdt"></div>
                             </div>
                         </div>-->
-                    <?php // endif; ?>
+                    <?php // endif; 
+                    ?>
                 </span>
             </div>
             <div class="flex items-center">
-                <span class="h-full px-5 flex items-center">
+                <span class="h-full px-5 flex items-center" onclick="showFriendModal()">
                     <img width="24" height="24"
                         src="<?php $this->options->themeUrl('assets/svgs/header.friend.svg'); ?>"
                         class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "hidden" : ""; ?> "
-                        @click="showFriendModal()" id="friend-light" />
+                        id="friend-light" />
                     <img width="24" height="24"
                         src="<?php $this->options->themeUrl('assets/svgs/header.friend.dark.svg'); ?>"
                         class="cursor-pointer <?php echo $this->options->defaultThemeColor == 'yes' ? "" : "hidden"; ?>"
-                        @click="showFriendModal()" id="friend-dark" />
+                        id="friend-dark" />
                 </span>
                 <?php if ($this->user->hasLogin()): ?>
                     <span class="h-full px-5 flex items-center">
@@ -88,7 +89,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
         </div>
     </div>
-    <div class="absolute right-6 bottom-[-45] flex flex-col items-end w-90%">
+    <div class="absolute right-6 bottom-[-3rem] flex flex-col items-end w-90%">
         <div class="flex flex-row items-end">
             <span class="text-white mr-5 mb-6"><a href="<?php echo $this->options->about; ?>"
                     class="text-white cursor-pointer no-underline"><?php echo $this->options->avatarTitle; ?></a></span>

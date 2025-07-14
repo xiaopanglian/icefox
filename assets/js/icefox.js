@@ -110,7 +110,7 @@ window.onload = async () => {
 
                 resetPlayerStyle();
 
-                intersectionObserver();
+                // intersectionObserver();
             }
 
             if (globalData.loadMorePage >= globalData.totalPage) {
@@ -258,7 +258,7 @@ window.onload = async () => {
 
     resetPlayerStyle();
 
-    intersectionObserver();
+    // intersectionObserver();
 
     initDarkMode();
 
@@ -564,7 +564,7 @@ function clickComment() {
             window.localStorage.setItem('mail', mail);
             window.localStorage.setItem('url', url);
 
-            axios.post(globalData.webSiteHomeUrl + '/api/comment', param,
+            axios.post(globalData.webSiteHomeUrl + 'api/comment', param,
                 { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(function (response) {
                     if (response.data.status == 1) {
@@ -634,7 +634,7 @@ function clickLike() {
         }
 
         let param = { cid: cid, agree: agree };
-        axios.post(globalData.webSiteHomeUrl + '/api/like', param, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+        axios.post(globalData.webSiteHomeUrl + 'api/like', param, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
             .then(function (response) {
                 console.log(response);
                 if (response.data.status == 1) {
@@ -877,7 +877,7 @@ function imagePreviewRemoveAllEventListener() {
  * pjax请求，追加列表分页
  */
 async function pjax(pageIndex, container) {
-    let url = globalData.webSiteHomeUrl + '/page/' + pageIndex;
+    let url = globalData.webSiteHomeUrl + 'page/' + pageIndex;
     await axios.get(url).then(async (e) => {
         // 获取新内容
         var domParser = new DOMParser();

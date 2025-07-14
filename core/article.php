@@ -97,6 +97,7 @@ function removeImgAndVideoTags($html)
     getTagText($dom, 'ul');
     getTagText($dom, 'li');
     getTagText($dom, 'blockquote');
+    getTagText($dom, 'br');
 
     // 移除 <img>, <video> 标签
     removeTag($dom, 'img');

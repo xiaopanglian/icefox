@@ -39,7 +39,7 @@ function getWebsiteHomeUrl()
     $rewrite = Helper::options()->rewrite;
     $tmpUrl = Helper::options()->siteUrl;
     if (!$rewrite) {
-        $tmpUrl = $tmpUrl . 'index.php';
+        $tmpUrl = $tmpUrl . 'index.php/';
     }
     return $tmpUrl;
 }
