@@ -36,39 +36,42 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
         </div>
     </div>
 </div>
+<!-- 音乐播放器数据容器 -->
 <div class="hidden" id="top-music-container">
     <?php
     $topMusics = $this->options->topMusicList;
     if ($topMusics) {
         $topMusic_arr = preg_split('/\r\n|\n/', $topMusics);
         foreach ($topMusic_arr as $row) {
-            $fl = explode('||', $row);
-    ?>
-            <div data-id="<?php echo $fl[0]; ?>" data-cover="<?php echo $fl[1]; ?>"></div>
-    <?php
+            $musicData = explode('||', trim($row));
+            if (count($musicData) >= 2) {
+                echo '<div data-id="' . htmlspecialchars($musicData[0]) . '" data-cover="' . htmlspecialchars($musicData[1]) . '"></div>';
+            }
         }
     }
     ?>
 </div>
 
+<!-- 页面数据容器 -->
 <div class="hidden px-2 py-2 first-of-type:pt-2">
+    <!-- 基础数据 -->
     <div class="bg-white dark:bg-black/30 backdrop-blur-md"></div>
     <input class="webSiteHomeUrl" value="<?php echo getWebsiteHomeUrl(); ?>" />
-    <input class="_currentPage" value="<?php if ($this->_currentPage > 1)
-                                            echo $this->_currentPage;
-                                        else
-                                            echo 1; ?>" />
+    <input class="_currentPage" value="<?php echo max(1, $this->_currentPage); ?>" />
     <input class="_totalPage" value="<?php echo ceil($this->getTotal() / $this->parameter->pageSize); ?>" />
     <input id="commentsRequireMail" value="<?php echo $this->options->commentsRequireMail; ?>" />
     <input id="commentsRequireURL" value="<?php echo $this->options->commentsRequireURL; ?>" />
+    <input id="observAutoPlayVideo" value="<?php echo $this->options->observAutoPlayVideo; ?>" />
+    
+    <!-- 评论表单模板 -->
     <li>
         <div class="bg-white dark:bg-[#262626] p-2 rounded-sm border-1 border-solid border-[#07c160]">
             <div class="grid grid-cols-3 gap-2">
-                <input placeholder="昵称"
+                <input placeholder="昵称" 
                     class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
-                <input placeholder="网址"
+                <input placeholder="网址" 
                     class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
-                <input placeholder="邮箱"
+                <input placeholder="邮箱" 
                     class="border-0 outline-none bg-color-primary p-1 rounded-sm dark:bg-[#323232] dark:text-[#cccccc]" />
             </div>
             <div class="mt-2">
@@ -76,36 +79,30 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
             </div>
             <div class="flex justify-end mt-2">
                 <div class="face mr-2 cursor-pointer"></div>
-                <button
-                    class="btn-comment bg-[#07c160] border-0 outline-none text-white cursor-pointer rounded-sm">回复</button>
+                <button class="btn-comment bg-[#07c160] border-0 outline-none text-white cursor-pointer rounded-sm">回复</button>
             </div>
         </div>
     </li>
-    <input id="observAutoPlayVideo" value="<?php echo $this->options->observAutoPlayVideo; ?>" />
+    
+    <!-- 加载动画容器 -->
     <div class="animate-spin"></div>
-    <?php
-    // 检查用户是否登录
-    if ($this->user->hasLogin()) {
-        // 用户已登录，获取用户信息
+    
+    <!-- 用户登录状态 -->
+    <?php if ($this->user->hasLogin()): ?>
+        <?php 
         $user = $this->user;
-        $screenName = $user->screenName; // 用户昵称
-        $mail = $user->mail; // 用户邮箱
-        $url = $user->url; // 用户网址
-
-    ?>
-        <div id="login-is">1</div>
-        <div id="login-screenName">
-            <?php echo $screenName; ?>
-        </div>
-        <div id="login-mail">
-            <?php echo $mail; ?>
-        </div>
-        <div id="login-url">
-            <?php echo $url; ?>
-        </div>
-    <?php
-    }
-    ?>
+        $userData = [
+            'is_logged_in' => 1,
+            'screen_name' => $user->screenName,
+            'mail' => $user->mail,
+            'url' => $user->url
+        ];
+        ?>
+        <div id="login-is"><?php echo $userData['is_logged_in']; ?></div>
+        <div id="login-screenName"><?php echo htmlspecialchars($userData['screen_name']); ?></div>
+        <div id="login-mail"><?php echo htmlspecialchars($userData['mail']); ?></div>
+        <div id="login-url"><?php echo htmlspecialchars($userData['url']); ?></div>
+    <?php endif; ?>
 </div>
 </div>
 </body>

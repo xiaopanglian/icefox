@@ -16,6 +16,42 @@ if (!defined("__THEME_VERSION__")) {
 //icefox 核心包
 include_once 'core/core.php';
 
+// 主题初始化
+function themeInit($archive)
+{
+    // 强制用户关闭反垃圾保护
+    Helper::options()->commentsAntiSpam = false;
+    // 强制用户关闭检查来源URL
+    Helper::options()->commentsCheckReferer = false;
+    // 强制用户强制要求填写邮箱
+    Helper::options()->commentsRequireMail = true;
+    // 强制用户强制要求无需填写url
+    Helper::options()->commentsRequireURL = false;
+    Helper::options()->commentsMaxNestingLevels = '5'; //最大嵌套层数
+    Helper::options()->commentsOrder = 'DESC'; //将最新的评论展示在前
+    Helper::options()->commentsHTMLTagAllowed = '<a href=""> <img src=""> <img src="" class=""> <code> <del>';
+
+    $route = $archive->request->getPathInfo();
+
+    /* 主题开放API 路由规则 */
+    if ($archive->request->isPost()) {
+        switch ($route) {
+            case '/api/comment':
+                addComment($archive);
+                exit;
+            case '/api/like':
+                addAgree($archive);
+                exit;
+        }
+    }
+
+    // switch ($route) {
+    //     case '/api/music':
+    //         getMusicUrl($archive);
+    //         exit;
+    // }
+}
+
 function themeConfig($form)
 {
     ?>

@@ -7,29 +7,7 @@ include_once 'article.php';
 // 评论方法
 include_once 'comment.php';
 
-// 主题初始化
-function themeInit($self)
-{
-    $route = $self->request->getPathInfo();
 
-    /* 主题开放API 路由规则 */
-    if ($self->request->isPost()) {
-        switch ($route) {
-            case '/api/comment':
-                addComment($self);
-                break;
-            case '/api/like':
-                addAgree($self);
-                break;
-        }
-    }
-
-    switch ($route) {
-        case '/api/music':
-            getMusicUrl($self);
-            break;
-    }
-}
 
 /**
  * 获取网站首页地址。

@@ -67,16 +67,16 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
         }
         ?>
         <!--音乐卡片-->
-        <?php include 'post-item-music.php'; ?>
+        <?php include 'post-items/post-item-music.php'; ?>
         <!--视频-->
-        <?php include 'post-item-video.php'; ?>
+        <?php include 'post-items/post-item-video.php'; ?>
         <!--图片-->
-        <?php include 'post-item-images.php'; ?>
+        <?php include 'post-items/post-item-images.php'; ?>
         <!--定位-->
-        <?php include 'post-item-position.php'; ?>
+        <?php include 'post-items/post-item-position.php'; ?>
         <!--时间-->
-        <?php include 'post-item-line-time.php'; ?>
+        <?php include 'post-items/post-item-line-time.php'; ?>
         <!--评论列表-->
-        <?php include 'post-item-comment.php'; ?>
+        <?php include 'post-items/post-item-comment.php'; ?>
     </div>
 </article>
